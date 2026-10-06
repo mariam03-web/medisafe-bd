@@ -80,7 +80,6 @@
 
         .menu-card:hover {
             transform: translateY(-4px);
-            box-shadow: 0 6px 18px rgba(0,0,0,0.12);
         }
 
         .menu-card h3 {
@@ -129,7 +128,7 @@
         }
 
         textarea {
-            min-height: 120px;
+            min-height: 100px;
             resize: vertical;
         }
 
@@ -143,8 +142,22 @@
             font-weight: bold;
         }
 
-        .primary-btn:hover {
-            background: #084298;
+        .danger-btn {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 8px 13px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .edit-btn {
+            background: #198754;
+            color: white;
+            border: none;
+            padding: 8px 13px;
+            border-radius: 6px;
+            cursor: pointer;
         }
 
         .patient-result {
@@ -182,10 +195,6 @@
             font-weight: bold;
         }
 
-        .record-btn:hover {
-            background: #d5e6ff;
-        }
-
         .record-box {
             background: #f7f9fc;
             border: 1px solid #ddd;
@@ -194,39 +203,51 @@
             margin-top: 15px;
         }
 
-        .record-box h3 {
+        .antibiotic-card {
+            background: white;
+            border: 1px solid #d9e2ef;
+            border-left: 5px solid #0b5ed7;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+
+        .antibiotic-card h3 {
             color: #0b5ed7;
             margin-bottom: 12px;
         }
 
-        .readonly-box {
-            background: #f8f9fa;
-            padding: 18px;
-            border-radius: 8px;
-            border-left: 4px solid #0b5ed7;
+        .antibiotic-actions {
             margin-top: 15px;
-            line-height: 1.7;
+            display: flex;
+            gap: 10px;
+        }
+
+        .form-box {
+            background: #f8fbff;
+            border: 1px solid #d7e5f5;
+            padding: 22px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+        }
+
+        .form-box h3 {
+            color: #0b5ed7;
+            margin-bottom: 15px;
         }
 
         .note-box {
-            background: #fff;
+            background: white;
             border: 1px solid #ddd;
             border-radius: 10px;
             padding: 20px;
             margin-top: 15px;
+            line-height: 1.7;
         }
 
         .empty-message {
             color: #777;
             font-style: italic;
-        }
-
-        .alert-box {
-            background: #fff3cd;
-            border: 1px solid #ffe69c;
-            padding: 20px;
-            border-radius: 10px;
-            line-height: 1.7;
         }
 
     </style>
@@ -265,7 +286,7 @@
     </div>
 
 
-    <!-- DASHBOARD MENU -->
+    <!-- DASHBOARD -->
 
     <div id="dashboard">
 
@@ -276,48 +297,40 @@
                 <p>Search and access registered patient information.</p>
             </div>
 
-
             <div class="menu-card" onclick="showSection('patientRecords')">
                 <h3>Patient Records</h3>
                 <p>View complete patient records.</p>
             </div>
-
 
             <div class="menu-card" onclick="showSection('medicalHistory')">
                 <h3>Medical History</h3>
                 <p>View patient's diseases and medical history.</p>
             </div>
 
-
             <div class="menu-card" onclick="showSection('antibioticHistory')">
                 <h3>Antibiotic History</h3>
-                <p>Manage patient's antibiotic usage history.</p>
+                <p>Add, edit and manage antibiotic records.</p>
             </div>
-
 
             <div class="menu-card" onclick="showSection('prescription')">
                 <h3>Prescription</h3>
                 <p>Manage patient prescriptions.</p>
             </div>
 
-
             <div class="menu-card" onclick="showSection('testReports')">
                 <h3>Test Reports</h3>
                 <p>View and manage patient test reports.</p>
             </div>
-
 
             <div class="menu-card" onclick="showSection('patientNotes')">
                 <h3>Patient Notes</h3>
                 <p>View symptoms and problems submitted by the patient.</p>
             </div>
 
-
             <div class="menu-card" onclick="showSection('fullPatientProfile')">
                 <h3>Full Patient Profile</h3>
                 <p>View complete patient information.</p>
             </div>
-
 
             <div class="menu-card" onclick="showSection('antibioticAlert')">
                 <h3>Antibiotic Safety Alert</h3>
@@ -343,24 +356,12 @@
 
         <select id="searchType">
 
-            <option value="patientID">
-                Patient ID
-            </option>
-
-            <option value="nid">
-                NID
-            </option>
-
-            <option value="birthCertificate">
-                Birth Certificate
-            </option>
-
-            <option value="temporaryID">
-                Temporary ID
-            </option>
+            <option value="patientID">Patient ID</option>
+            <option value="nid">NID</option>
+            <option value="birthCertificate">Birth Certificate</option>
+            <option value="temporaryID">Temporary ID</option>
 
         </select>
-
 
         <label>Search Value</label>
 
@@ -370,22 +371,14 @@
             placeholder="Enter patient information"
         >
 
-
-        <button
-            class="primary-btn"
-            onclick="searchPatient()"
-        >
+        <button class="primary-btn" onclick="searchPatient()">
             Search Patient
         </button>
 
 
-        <div
-            id="patientResult"
-            class="patient-result"
-        >
+        <div id="patientResult" class="patient-result">
 
             <h3>Patient Found</h3>
-
 
             <div class="patient-details">
 
@@ -421,7 +414,6 @@
 
             </div>
 
-
             <button
                 class="primary-btn"
                 onclick="openPatientProfile()"
@@ -430,50 +422,34 @@
                 Open Full Patient Profile
             </button>
 
-
             <div class="record-buttons">
 
-                <button
-                    class="record-btn"
-                    onclick="showPatientRecord('medicalRecord')"
-                >
+                <button class="record-btn"
+                    onclick="showPatientRecord('medicalRecord')">
                     Medical History
                 </button>
 
-
-                <button
-                    class="record-btn"
-                    onclick="showPatientRecord('antibioticRecord')"
-                >
+                <button class="record-btn"
+                    onclick="showPatientRecord('antibioticRecord')">
                     Antibiotic History
                 </button>
 
-
-                <button
-                    class="record-btn"
-                    onclick="showPatientRecord('prescriptionRecord')"
-                >
+                <button class="record-btn"
+                    onclick="showPatientRecord('prescriptionRecord')">
                     Prescriptions
                 </button>
 
-
-                <button
-                    class="record-btn"
-                    onclick="showPatientRecord('testRecord')"
-                >
+                <button class="record-btn"
+                    onclick="showPatientRecord('testRecord')">
                     Test Reports
                 </button>
 
-
-                <button
-                    class="record-btn"
-                    onclick="showPatientRecord('notesRecord')"
-                >
+                <button class="record-btn"
+                    onclick="showPatientRecord('notesRecord')">
                     Patient Notes
                 </button>
 
             </div>
-
 
             <div
                 id="patientRecordContent"
@@ -496,19 +472,10 @@
 
         <h2>Patient Records</h2>
 
-        <div class="readonly-box">
+        <div class="record-box">
 
             <p>
-                Complete patient records will be available here
-                after selecting a patient.
-            </p>
-
-            <br>
-
-            <p>
-                This section will contain medical history,
-                antibiotic history, prescriptions, test reports
-                and patient-submitted health information.
+                Complete patient records will be available here.
             </p>
 
         </div>
@@ -537,8 +504,8 @@
             <br>
 
             <p>
-                Doctors will be able to add and update
-                disease, condition and treatment history.
+                Doctors will be able to add and update disease,
+                condition and treatment history.
             </p>
 
         </div>
@@ -556,31 +523,136 @@
 
         <h2>Antibiotic History</h2>
 
+
+        <!-- ADD / EDIT FORM -->
+
+        <div class="form-box">
+
+            <h3 id="antibioticFormTitle">
+                Add Antibiotic Record
+            </h3>
+
+            <input
+                type="hidden"
+                id="editAntibioticIndex"
+            >
+
+
+            <label>Antibiotic Name</label>
+
+            <input
+                type="text"
+                id="antibioticName"
+                placeholder="Enter antibiotic name"
+            >
+
+
+            <label>Dose</label>
+
+            <input
+                type="text"
+                id="antibioticDose"
+                placeholder="Example: 500 mg"
+            >
+
+
+            <label>Frequency</label>
+
+            <input
+                type="text"
+                id="antibioticFrequency"
+                placeholder="Example: 2 times daily"
+            >
+
+
+            <label>Start Date</label>
+
+            <input
+                type="date"
+                id="antibioticStartDate"
+            >
+
+
+            <label>End Date</label>
+
+            <input
+                type="date"
+                id="antibioticEndDate"
+            >
+
+
+            <label>Reason / Condition</label>
+
+            <input
+                type="text"
+                id="antibioticReason"
+                placeholder="Reason for antibiotic use"
+            >
+
+
+            <label>Prescribing Doctor</label>
+
+            <input
+                type="text"
+                id="prescribingDoctor"
+                placeholder="Doctor name"
+            >
+
+
+            <label>Status</label>
+
+            <select id="antibioticStatus">
+
+                <option value="Completed">
+                    Completed
+                </option>
+
+                <option value="Ongoing">
+                    Ongoing
+                </option>
+
+                <option value="Stopped">
+                    Stopped
+                </option>
+
+            </select>
+
+
+            <label>Doctor's Notes</label>
+
+            <textarea
+                id="antibioticNotes"
+                placeholder="Additional notes..."
+            ></textarea>
+
+
+            <button
+                class="primary-btn"
+                onclick="saveAntibioticRecord()"
+                id="saveAntibioticBtn"
+            >
+                Add Antibiotic Record
+            </button>
+
+
+            <button
+                class="back-btn"
+                onclick="clearAntibioticForm()"
+                style="margin-left:10px;"
+            >
+                Clear
+            </button>
+
+        </div>
+
+
+        <!-- HISTORY LIST -->
+
         <div class="record-box">
 
-            <h3>Patient Antibiotic History</h3>
+            <h3>Complete Antibiotic History</h3>
 
-            <p>
-                This section will contain the patient's
-                complete antibiotic usage history.
-            </p>
-
-            <div class="readonly-box">
-
-                <p>
-                    <strong>Access Control:</strong>
-                </p>
-
-                <p>
-                    Only authorized doctors can add or edit
-                    antibiotic records.
-                </p>
-
-                <p>
-                    Patients can only view their antibiotic history.
-                </p>
-
-            </div>
+            <div id="antibioticList"></div>
 
         </div>
 
@@ -605,13 +677,6 @@
                 Prescription records will be displayed here.
             </p>
 
-            <br>
-
-            <p>
-                Authorized doctors will be able to add or update
-                prescriptions.
-            </p>
-
         </div>
 
     </section>
@@ -633,13 +698,6 @@
 
             <p class="empty-message">
                 Test reports will be displayed here.
-            </p>
-
-            <br>
-
-            <p>
-                Doctors will be able to view and manage
-                patient test reports.
             </p>
 
         </div>
@@ -672,11 +730,9 @@
 
             <hr style="margin:20px 0;">
 
-
             <h3>
                 Symptoms / Problems Reported by Patient
             </h3>
-
 
             <div
                 id="doctorHealthNote"
@@ -686,7 +742,6 @@
                     No health note submitted by the patient yet.
                 </p>
             </div>
-
 
             <p
                 id="healthNoteDate"
@@ -709,8 +764,6 @@
         <h2>Full Patient Profile</h2>
 
         <div class="record-box">
-
-            <h3>Patient Information</h3>
 
             <p>
                 <strong>Name:</strong>
@@ -772,7 +825,7 @@
     </section>
 
 
-    <!-- ANTIBIOTIC SAFETY ALERT -->
+    <!-- ANTIBIOTIC ALERT -->
 
     <section id="antibioticAlert" class="section">
 
@@ -780,9 +833,11 @@
             ← Back to Dashboard
         </button>
 
-        <h2>Antibiotic Resistance & Prescription Safety Alert</h2>
+        <h2>
+            Antibiotic Resistance & Prescription Safety Alert
+        </h2>
 
-        <div class="alert-box">
+        <div class="record-box">
 
             <h3>Antibiotic Safety Monitoring</h3>
 
@@ -792,18 +847,9 @@
                 safety concerns.
             </p>
 
-            <br>
-
-            <p>
-                Possible alerts may include repeated antibiotic use,
-                inappropriate prescription patterns and potential
-                antibiotic resistance risks.
-            </p>
-
         </div>
 
     </section>
-
 
 </div>
 
@@ -815,10 +861,7 @@
     // DOCTOR LOGIN CHECK
     // ==============================
 
-    const doctorLoggedIn =
-        localStorage.getItem("doctorLoggedIn");
-
-    if (doctorLoggedIn !== "true") {
+    if (localStorage.getItem("doctorLoggedIn") !== "true") {
 
         window.location.href = "doctor-login.html";
 
@@ -826,7 +869,7 @@
 
 
     // ==============================
-    // LOAD DOCTOR INFORMATION
+    // DOCTOR INFORMATION
     // ==============================
 
     document.getElementById("doctorName").innerText =
@@ -844,30 +887,29 @@
 
         document.querySelectorAll(".section").forEach(
             function(section) {
-
                 section.style.display = "none";
-
             }
         );
 
+        document.getElementById("dashboard").style.display =
+            "none";
 
-        document.getElementById("dashboard").style.display = "none";
-
-
-        document.getElementById(sectionID).style.display = "block";
+        document.getElementById(sectionID).style.display =
+            "block";
 
 
         if (sectionID === "patientNotes") {
-
             loadPatientHealthNote();
-
         }
 
 
         if (sectionID === "fullPatientProfile") {
-
             loadFullPatientProfile();
+        }
 
+
+        if (sectionID === "antibioticHistory") {
+            loadAntibioticHistory();
         }
 
     }
@@ -881,12 +923,9 @@
 
         document.querySelectorAll(".section").forEach(
             function(section) {
-
                 section.style.display = "none";
-
             }
         );
-
 
         document.getElementById("dashboard").style.display =
             "block";
@@ -911,12 +950,6 @@
             return;
 
         }
-
-
-        /*
-         Demo patient search.
-         Later this will be connected to a real database.
-        */
 
 
         const demoPatient = {
@@ -945,8 +978,6 @@
 
         };
 
-
-        // Save patient information
 
         localStorage.setItem(
             "patientName",
@@ -1004,8 +1035,6 @@
         );
 
 
-        // Display result
-
         document.getElementById("resultName").innerText =
             demoPatient.patientName;
 
@@ -1032,7 +1061,7 @@
 
 
     // ==============================
-    // OPEN FULL PATIENT PROFILE
+    // PATIENT PROFILE
     // ==============================
 
     function openPatientProfile() {
@@ -1043,7 +1072,7 @@
 
 
     // ==============================
-    // SHOW PATIENT RECORD
+    // PATIENT RECORD BUTTONS
     // ==============================
 
     function showPatientRecord(recordId) {
@@ -1051,25 +1080,14 @@
         const content =
             document.getElementById("patientRecordContent");
 
-
         content.style.display = "block";
 
 
         if (recordId === "medicalRecord") {
 
             content.innerHTML = `
-
                 <h3>Medical History</h3>
-
-                <p>
-                    Medical history records will appear here.
-                </p>
-
-                <p>
-                    Doctors will manage disease and condition
-                    information from this module.
-                </p>
-
+                <p>Medical history records will appear here.</p>
             `;
 
         }
@@ -1077,24 +1095,12 @@
 
         else if (recordId === "antibioticRecord") {
 
+            loadAntibioticHistory();
+
             content.innerHTML = `
-
                 <h3>Antibiotic History</h3>
-
-                <p>
-                    Patient's complete antibiotic history will
-                    appear here.
-                </p>
-
-                <br>
-
-                <p>
-                    <strong>
-                        Only authorized doctors can add or edit
-                        antibiotic records.
-                    </strong>
-                </p>
-
+                <p>Open the Antibiotic History module
+                to manage antibiotic records.</p>
             `;
 
         }
@@ -1103,13 +1109,8 @@
         else if (recordId === "prescriptionRecord") {
 
             content.innerHTML = `
-
                 <h3>Prescription History</h3>
-
-                <p>
-                    Patient prescriptions will appear here.
-                </p>
-
+                <p>Patient prescriptions will appear here.</p>
             `;
 
         }
@@ -1118,13 +1119,8 @@
         else if (recordId === "testRecord") {
 
             content.innerHTML = `
-
                 <h3>Test Reports</h3>
-
-                <p>
-                    Patient test reports will appear here.
-                </p>
-
+                <p>Patient test reports will appear here.</p>
             `;
 
         }
@@ -1139,27 +1135,19 @@
             if (note && note.trim() !== "") {
 
                 content.innerHTML = `
-
                     <h3>Patient Health Note</h3>
-
                     <div class="note-box">
                         ${escapeHTML(note)}
                     </div>
-
                 `;
 
-            }
-
-            else {
+            } else {
 
                 content.innerHTML = `
-
                     <h3>Patient Health Note</h3>
-
                     <p class="empty-message">
                         No health note submitted by the patient yet.
                     </p>
-
                 `;
 
             }
@@ -1170,178 +1158,207 @@
 
 
     // ==============================
-    // LOAD PATIENT HEALTH NOTE
+    // ANTIBIOTIC HISTORY
     // ==============================
 
-    function loadPatientHealthNote() {
+    function getAntibioticHistory() {
 
-        const patientName =
-            localStorage.getItem("patientName") ||
-            "Demo Patient";
+        const saved =
+            localStorage.getItem("antibioticHistory");
 
+        if (!saved) {
+            return [];
+        }
 
-        const patientID =
-            localStorage.getItem("patientID") ||
-            "MSBD-P-10001";
+        try {
+            return JSON.parse(saved);
+        }
 
+        catch (error) {
+            return [];
+        }
 
-        const healthNote =
-            localStorage.getItem("patientHealthNote");
-
-
-        const noteDate =
-            localStorage.getItem("patientHealthNoteDate");
-
-
-        document.getElementById("notesPatientName").innerText =
-            patientName;
+    }
 
 
-        document.getElementById("notesPatientID").innerText =
-            patientID;
+    function saveAntibioticRecord() {
+
+        const name =
+            document.getElementById("antibioticName").value.trim();
+
+        const dose =
+            document.getElementById("antibioticDose").value.trim();
+
+        const frequency =
+            document.getElementById("antibioticFrequency").value.trim();
+
+        const startDate =
+            document.getElementById("antibioticStartDate").value;
+
+        const endDate =
+            document.getElementById("antibioticEndDate").value;
+
+        const reason =
+            document.getElementById("antibioticReason").value.trim();
+
+        const doctor =
+            document.getElementById("prescribingDoctor").value.trim();
+
+        const status =
+            document.getElementById("antibioticStatus").value;
+
+        const notes =
+            document.getElementById("antibioticNotes").value.trim();
 
 
-        const noteContainer =
-            document.getElementById("doctorHealthNote");
+        if (
+            name === "" ||
+            dose === "" ||
+            frequency === "" ||
+            startDate === "" ||
+            endDate === "" ||
+            reason === "" ||
+            doctor === ""
+        ) {
+
+            alert("Please fill in all required fields.");
+
+            return;
+
+        }
 
 
-        if (healthNote && healthNote.trim() !== "") {
-
-            noteContainer.innerHTML = `
-                <p>${escapeHTML(healthNote)}</p>
-            `;
+        let history = getAntibioticHistory();
 
 
-            if (noteDate) {
+        const editIndex =
+            document.getElementById("editAntibioticIndex").value;
 
-                document.getElementById("healthNoteDate").innerText =
-                    "Last updated: " + noteDate;
 
-            }
+        const record = {
 
-            else {
+            name: name,
 
-                document.getElementById("healthNoteDate").innerText =
-                    "";
+            dose: dose,
 
-            }
+            frequency: frequency,
+
+            startDate: startDate,
+
+            endDate: endDate,
+
+            reason: reason,
+
+            doctor: doctor,
+
+            status: status,
+
+            notes: notes
+
+        };
+
+
+        if (editIndex !== "") {
+
+            history[Number(editIndex)] = record;
+
+            alert("Antibiotic record updated successfully.");
 
         }
 
         else {
 
-            noteContainer.innerHTML = `
-                <p class="empty-message">
-                    No health note submitted by the patient yet.
-                </p>
-            `;
+            history.push(record);
 
-
-            document.getElementById("healthNoteDate").innerText =
-                "";
+            alert("Antibiotic record added successfully.");
 
         }
 
-    }
+
+        localStorage.setItem(
+            "antibioticHistory",
+            JSON.stringify(history)
+        );
 
 
-    // ==============================
-    // LOAD FULL PATIENT PROFILE
-    // ==============================
+        clearAntibioticForm();
 
-    function loadFullPatientProfile() {
-
-        document.getElementById("fullName").innerText =
-            localStorage.getItem("patientName") ||
-            "Not available";
-
-
-        document.getElementById("fullID").innerText =
-            localStorage.getItem("patientID") ||
-            "Not available";
-
-
-        document.getElementById("fullDOB").innerText =
-            localStorage.getItem("patientDOB") ||
-            "Not available";
-
-
-        document.getElementById("fullGender").innerText =
-            localStorage.getItem("patientGender") ||
-            "Not available";
-
-
-        document.getElementById("fullPhone").innerText =
-            localStorage.getItem("patientPhone") ||
-            "Not available";
-
-
-        document.getElementById("fullNID").innerText =
-            localStorage.getItem("patientNID") ||
-            "Not available";
-
-
-        document.getElementById("fullBirthCertificate").innerText =
-            localStorage.getItem("patientBirthCertificate") ||
-            "Not available";
-
-
-        document.getElementById("fullTemporaryID").innerText =
-            localStorage.getItem("patientTemporaryID") ||
-            "Not available";
-
-
-        document.getElementById("fullEmail").innerText =
-            localStorage.getItem("patientEmail") ||
-            "Not available";
-
-
-        document.getElementById("fullEmergency").innerText =
-            localStorage.getItem("patientEmergency") ||
-            "Not available";
-
-
-        document.getElementById("fullAddress").innerText =
-            localStorage.getItem("patientAddress") ||
-            "Not available";
+        loadAntibioticHistory();
 
     }
 
 
-    // ==============================
-    // SAFE TEXT DISPLAY
-    // ==============================
+    function loadAntibioticHistory() {
 
-    function escapeHTML(text) {
+        const history =
+            getAntibioticHistory();
 
-        const div = document.createElement("div");
-
-        div.textContent = text;
-
-        return div.innerHTML;
-
-    }
+        const list =
+            document.getElementById("antibioticList");
 
 
-    // ==============================
-    // LOGOUT
-    // ==============================
+        if (history.length === 0) {
 
-    function logout() {
+            list.innerHTML = `
+                <p class="empty-message">
+                    No antibiotic records added yet.
+                </p>
+            `;
 
-        localStorage.removeItem("doctorLoggedIn");
+            return;
 
-        localStorage.removeItem("doctorName");
-
-        localStorage.removeItem("doctorBMDC");
-
-        window.location.href = "../index.html";
-
-    }
-
-</script>
+        }
 
 
-</body>
+        list.innerHTML = "";
 
-</html>
+
+        history.forEach(
+            function(record, index) {
+
+                const card =
+                    document.createElement("div");
+
+                card.className =
+                    "antibiotic-card";
+
+
+                card.innerHTML = `
+
+                    <h3>
+                        ${escapeHTML(record.name)}
+                    </h3>
+
+                    <p>
+                        <strong>Dose:</strong>
+                        ${escapeHTML(record.dose)}
+                    </p>
+
+                    <p>
+                        <strong>Frequency:</strong>
+                        ${escapeHTML(record.frequency)}
+                    </p>
+
+                    <p>
+                        <strong>Start Date:</strong>
+                        ${escapeHTML(record.startDate)}
+                    </p>
+
+                    <p>
+                        <strong>End Date:</strong>
+                        ${escapeHTML(record.endDate)}
+                    </p>
+
+                    <p>
+                        <strong>Reason:</strong>
+                        ${escapeHTML(record.reason)}
+                    </p>
+
+                    <p>
+                        <strong>Prescribing Doctor:</strong>
+                        ${escapeHTML(record.doctor)}
+                    </p>
+
+                    <p>
+                        <strong>Status:</strong>
+                       
