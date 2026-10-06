@@ -1,447 +1,56 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>MediSafe BD - Doctor Portal</title>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Doctor Portal - MediSafe BD</title>
 <style>
-*{box-sizing:border-box}
-body{margin:0;font-family:Arial;background:#f4f7fb;color:#222}
-header{background:#0b5ed7;color:#fff;padding:18px 6%;display:flex;justify-content:space-between;align-items:center}
-header h2{margin:0;color:#fff}
-main{max-width:1050px;margin:25px auto;padding:0 20px}
-.box,.card,.record{background:#fff;padding:18px;border-radius:10px;box-shadow:0 2px 10px #ddd;margin-bottom:15px}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:15px}
-.card{cursor:pointer}.card:hover{transform:translateY(-2px)}
-input,textarea{width:100%;padding:10px;margin:7px 0 12px;border:1px solid #ccc;border-radius:6px}
-textarea{min-height:90px}
-button{border:0;padding:10px 15px;border-radius:6px;background:#0b5ed7;color:#fff;cursor:pointer;margin:3px}
-.logout,.delete{background:#dc3545}.edit{background:#198754}.back{background:#777}
-.section{display:none}
-h2,h3{color:#0b5ed7}
-header h2{color:#fff}
-</style>
-</head>
-
-<body>
-
-<header>
-<h2>MediSafe BD | Doctor Portal</h2>
-<button class="logout" onclick="logout()">Logout</button>
-</header>
-
+*{box-sizing:border-box}body{margin:0;font-family:Arial;background:#f4f7fb;color:#222}header{background:#0b5ed7;color:#fff;padding:18px 6%;display:flex;justify-content:space-between;align-items:center}header h2{margin:0;color:#fff}main{max-width:1100px;margin:25px auto;padding:0 20px}.box,.card,.record{background:#fff;padding:18px;border-radius:10px;box-shadow:0 2px 10px #ddd;margin-bottom:15px}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px}.card{cursor:pointer}.card:hover{transform:translateY(-2px)}input,textarea{width:100%;padding:10px;margin:7px 0 12px;border:1px solid #ccc;border-radius:6px}textarea{min-height:90px}button{border:0;padding:10px 15px;border-radius:6px;background:#0b5ed7;color:#fff;cursor:pointer;margin:3px}.logout,.delete{background:#dc3545}.edit{background:#198754}.back{background:#777}.section{display:none}h2,h3{color:#0b5ed7}header h2{color:#fff}
+</style></head><body>
+<header><h2>MediSafe BD | Doctor Portal</h2><button class="logout" onclick="logout()">Logout</button></header>
 <main>
-
-<div id="home">
-
-<div class="box">
-<h3>Doctor Information</h3>
-<p><b>Doctor Name:</b> <span id="doctorName"></span></p>
-<p><b>BMDC Registration:</b> <span id="doctorBMDC"></span></p>
-</div>
-
-<div class="box">
-<h3>Search Patient</h3>
-<input id="patientId" placeholder="Enter Patient ID">
-<button onclick="searchPatient()">Search Patient</button>
-<p id="searchMsg"></p>
-</div>
-
-<div id="patientArea" style="display:none">
-
-<div class="box">
-<h3>Patient Information</h3>
-<p><b>Name:</b> Demo Patient</p>
-<p><b>Patient ID:</b> MSBD-P-10001</p>
-<p><b>DOB:</b> 01 January 2000</p>
-<p><b>Gender:</b> Female</p>
-<p><b>Phone:</b> 01XXXXXXXXX</p>
-</div>
-
+<div id="home"><div class="box"><h3>Doctor Information</h3><p><b>Doctor Name:</b> <span id="dn"></span></p><p><b>BMDC Registration:</b> <span id="db"></span></p></div>
+<div class="box"><h3>Search Patient</h3><input id="pid" placeholder="Patient ID"><button onclick="searchPatient()">Search Patient</button><p id="msg"></p></div>
+<div id="patientArea" style="display:none"><div class="box"><h3>Patient Information</h3><p><b>Name:</b> Demo Patient</p><p><b>Patient ID:</b> MSBD-P-10001</p><p><b>DOB:</b> 01 January 2000</p><p><b>Gender:</b> Female</p><p><b>Phone:</b> 01XXXXXXXXX</p></div>
 <div class="cards">
 <div class="card" onclick="openPage('medical')"><h3>Medical History</h3><p>Manage medical history.</p></div>
 <div class="card" onclick="openPage('antibiotic')"><h3>Antibiotic History</h3><p>Manage antibiotic records.</p></div>
 <div class="card" onclick="openPage('prescription')"><h3>Prescription</h3><p>Create prescription.</p></div>
-<div class="card" onclick="openPage('reports')"><h3>Test Reports</h3><p>View uploaded reports.</p></div>
-<div class="card" onclick="openPage('problem')"><h3>Patient Health Problem</h3><p>View patient's problem.</p></div>
-<div class="card" onclick="openPage('profile')"><h3>Full Patient Profile</h3><p>View full profile.</p></div>
+<div class="card" onclick="openPage('reports')"><h3>Test Reports</h3><p>View patient reports.</p></div>
+<div class="card" onclick="openPage('problem')"><h3>Patient Health Problem</h3><p>View patient's submission.</p></div>
+<div class="card" onclick="openPage('profile')"><h3>Full Patient Profile</h3><p>View complete profile.</p></div>
 <div class="card" onclick="openPage('alert')"><h3>Antibiotic Resistance & Prescription Safety Alert</h3><p>Review safety.</p></div>
-</div>
-</div>
-</div>
+</div></div></div>
 
+<section id="medical" class="section"><button class="back" onclick="back()">← Back</button><h2>Medical History</h2><div class="box"><input id="condition" placeholder="Condition"><input id="diag" type="date"><input id="status" placeholder="Status"><input id="treatment" placeholder="Treatment"><textarea id="mnotes" placeholder="Notes"></textarea><button onclick="saveMedical()">Save Medical History</button></div><div id="mlist"></div></section>
 
-<!-- Medical History -->
-<section id="medical" class="section">
-<button class="back" onclick="back()">← Back</button>
-<h2>Medical History</h2>
+<section id="antibiotic" class="section"><button class="back" onclick="back()">← Back</button><h2>Antibiotic History</h2><div class="box"><input id="aname" placeholder="Antibiotic Name"><input id="adose" placeholder="Dose"><input id="afreq" placeholder="Frequency"><input id="astart" type="date"><input id="aend" type="date"><input id="areason" placeholder="Reason"><input id="astatus" placeholder="Status"><textarea id="anotes" placeholder="Notes"></textarea><button onclick="saveAB()">Save Antibiotic Record</button></div><div id="alist"></div></section>
 
-<div class="box">
-<input id="condition" placeholder="Condition">
-<input id="diagnosisDate" type="date">
-<input id="status" placeholder="Status">
-<input id="treatment" placeholder="Treatment">
-<textarea id="medicalNotes" placeholder="Notes"></textarea>
-<button onclick="saveMedical()">Save Medical History</button>
-</div>
+<section id="prescription" class="section"><button class="back" onclick="back()">← Back</button><h2>Create Prescription</h2><div class="box"><input id="med" placeholder="Medicine"><input id="dose" placeholder="Dose"><input id="freq" placeholder="Frequency"><input id="dur" placeholder="Duration"><textarea id="pnotes" placeholder="Instructions"></textarea><button onclick="addPrescription()">Save Prescription</button></div><div id="plist"></div></section>
 
-<div id="medicalList"></div>
-</section>
+<section id="reports" class="section"><button class="back" onclick="back()">← Back</button><h2>Patient Test Reports</h2><div id="rlist"></div></section>
 
+<section id="problem" class="section"><button class="back" onclick="back()">← Back</button><h2>Patient Health Problem</h2><div class="box"><p id="prob">No health problem submitted.</p><p id="pdate"></p></div></section>
 
-<!-- Antibiotic -->
-<section id="antibiotic" class="section">
-<button class="back" onclick="back()">← Back</button>
-<h2>Antibiotic History</h2>
+<section id="profile" class="section"><button class="back" onclick="back()">← Back</button><h2>Full Patient Profile</h2><div class="box"><p><b>Name:</b> Demo Patient</p><p><b>Patient ID:</b> MSBD-P-10001</p><p><b>DOB:</b> 01 January 2000</p><p><b>Gender:</b> Female</p><p><b>Phone:</b> 01XXXXXXXXX</p><p><b>NID:</b> 199XXXXXXXXXX</p><p><b>Birth Certificate:</b> 2000XXXXXXXX</p><p><b>Temporary ID:</b> TEMP-10001</p><p><b>Email:</b> demo@example.com</p><p><b>Emergency Contact:</b> 01XXXXXXXXX</p><p><b>Address:</b> Dhaka, Bangladesh</p></div></section>
 
-<div class="box">
-<input id="abName" placeholder="Antibiotic Name">
-<input id="abDose" placeholder="Dose">
-<input id="abFrequency" placeholder="Frequency">
-<input id="abStart" type="date">
-<input id="abEnd" type="date">
-<input id="abReason" placeholder="Reason">
-<input id="abStatus" placeholder="Status">
-<textarea id="abNotes" placeholder="Notes"></textarea>
-<button onclick="saveAntibiotic()">Save Antibiotic Record</button>
-</div>
-
-<div id="antibioticList"></div>
-</section>
-
-
-<!-- Prescription -->
-<section id="prescription" class="section">
-<button class="back" onclick="back()">← Back</button>
-<h2>Create Prescription</h2>
-
-<div class="box">
-<input id="medicine" placeholder="Medicine">
-<input id="dose" placeholder="Dose">
-<input id="frequency" placeholder="Frequency">
-<input id="duration" placeholder="Duration">
-<textarea id="prescriptionNotes" placeholder="Instructions"></textarea>
-<button onclick="addPrescription()">Save Prescription</button>
-</div>
-
-<div id="prescriptionList"></div>
-</section>
-
-
-<!-- Reports -->
-<section id="reports" class="section">
-<button class="back" onclick="back()">← Back</button>
-<h2>Patient Test Reports</h2>
-<div id="reportList"></div>
-</section>
-
-
-<!-- Health Problem -->
-<section id="problem" class="section">
-<button class="back" onclick="back()">← Back</button>
-<h2>Patient Health Problem</h2>
-<div class="box">
-<p id="problemText">No health problem submitted.</p>
-<p id="problemDate"></p>
-</div>
-</section>
-
-
-<!-- Profile -->
-<section id="profile" class="section">
-<button class="back" onclick="back()">← Back</button>
-<h2>Full Patient Profile</h2>
-
-<div class="box">
-<p><b>Name:</b> Demo Patient</p>
-<p><b>Patient ID:</b> MSBD-P-10001</p>
-<p><b>DOB:</b> 01 January 2000</p>
-<p><b>Gender:</b> Female</p>
-<p><b>Phone:</b> 01XXXXXXXXX</p>
-<p><b>NID:</b> 199XXXXXXXXXX</p>
-<p><b>Birth Certificate:</b> 2000XXXXXXXX</p>
-<p><b>Temporary ID:</b> TEMP-10001</p>
-<p><b>Email:</b> demo@example.com</p>
-<p><b>Emergency Contact:</b> 01XXXXXXXXX</p>
-<p><b>Address:</b> Dhaka, Bangladesh</p>
-</div>
-</section>
-
-
-<!-- Alert -->
-<section id="alert" class="section">
-<button class="back" onclick="back()">← Back</button>
-<h2>Antibiotic Resistance & Prescription Safety Alert</h2>
-<div class="box" id="alertBox"></div>
-</section>
-
+<section id="alert" class="section"><button class="back" onclick="back()">← Back</button><h2>Antibiotic Resistance & Prescription Safety Alert</h2><div class="box" id="alertBox"></div></section>
 </main>
-
 <script>
-
-if(localStorage.getItem("doctorLoggedIn")!=="true")
-location.href="doctor-login.html";
-
-doctorName.innerText=localStorage.getItem("doctorName")||"Doctor";
-doctorBMDC.innerText=localStorage.getItem("doctorBMDC")||"Not Available";
-
-let medicalEdit=-1, antibioticEdit=-1;
-
-
-function searchPatient(){
-if(patientId.value.trim()!=="MSBD-P-10001"){
-patientArea.style.display="none";
-searchMsg.innerText="Patient not found.";
-return;
-}
-patientArea.style.display="block";
-searchMsg.innerText="Patient found.";
-}
-
-
-function openPage(p){
-home.style.display="none";
-document.querySelectorAll(".section").forEach(x=>x.style.display="none");
-document.getElementById(p).style.display="block";
-if(p==="medical")loadMedical();
-if(p==="antibiotic")loadAntibiotic();
-if(p==="prescription")loadPrescription();
-if(p==="reports")loadReports();
-if(p==="problem")loadProblem();
-if(p==="alert")loadAlert();
-}
-
-
-function back(){
-document.querySelectorAll(".section").forEach(x=>x.style.display="none");
-home.style.display="block";
-}
-
-
-/* Medical History */
-function saveMedical(){
-let a=JSON.parse(localStorage.getItem("medicalHistory")||"[]");
-
-let x={
-condition:condition.value,
-diagnosisDate:diagnosisDate.value,
-status:status.value,
-treatment:treatment.value,
-doctor:doctorName.innerText,
-notes:medicalNotes.value
-};
-
-if(!condition.value)return alert("Enter condition.");
-
-if(medicalEdit<0)a.push(x);
-else{a[medicalEdit]=x;medicalEdit=-1}
-
-localStorage.setItem("medicalHistory",JSON.stringify(a));
-clearMedical();
-loadMedical();
-}
-
-function loadMedical(){
-let a=JSON.parse(localStorage.getItem("medicalHistory")||"[]");
-
-medicalList.innerHTML=a.length?a.map((x,i)=>`
-<div class="record">
-<h3>${x.condition}</h3>
-<p>Diagnosis Date: ${x.diagnosisDate}</p>
-<p>Status: ${x.status}</p>
-<p>Treatment: ${x.treatment}</p>
-<p>Doctor: ${x.doctor}</p>
-<p>Notes: ${x.notes}</p>
-<button class="edit" onclick="editMedical(${i})">Edit</button>
-<button class="delete" onclick="deleteMedical(${i})">Delete</button>
-</div>`).join(""):"<div class='box'>No medical history.</div>";
-}
-
-function editMedical(i){
-let x=JSON.parse(localStorage.getItem("medicalHistory"))[i];
-condition.value=x.condition;
-diagnosisDate.value=x.diagnosisDate;
-status.value=x.status;
-treatment.value=x.treatment;
-medicalNotes.value=x.notes;
-medicalEdit=i;
-}
-
-function deleteMedical(i){
-if(confirm("Delete this medical record?")){
-let a=JSON.parse(localStorage.getItem("medicalHistory"));
-a.splice(i,1);
-localStorage.setItem("medicalHistory",JSON.stringify(a));
-loadMedical();
-}
-}
-
-function clearMedical(){
-condition.value="";
-diagnosisDate.value="";
-status.value="";
-treatment.value="";
-medicalNotes.value="";
-}
-
-
-/* Antibiotic History */
-function saveAntibiotic(){
-let a=JSON.parse(localStorage.getItem("antibioticHistory")||"[]");
-
-let x={
-name:abName.value,
-dose:abDose.value,
-frequency:abFrequency.value,
-startDate:abStart.value,
-endDate:abEnd.value,
-reason:abReason.value,
-doctor:doctorName.innerText,
-status:abStatus.value,
-notes:abNotes.value
-};
-
-if(!abName.value)return alert("Enter antibiotic name.");
-
-if(antibioticEdit<0)a.push(x);
-else{a[antibioticEdit]=x;antibioticEdit=-1}
-
-localStorage.setItem("antibioticHistory",JSON.stringify(a));
-clearAntibiotic();
-loadAntibiotic();
-}
-
-function loadAntibiotic(){
-let a=JSON.parse(localStorage.getItem("antibioticHistory")||"[]");
-
-antibioticList.innerHTML=a.length?a.map((x,i)=>`
-<div class="record">
-<h3>${x.name}</h3>
-<p>Dose: ${x.dose}</p>
-<p>Frequency: ${x.frequency}</p>
-<p>Start: ${x.startDate}</p>
-<p>End: ${x.endDate}</p>
-<p>Reason: ${x.reason}</p>
-<p>Doctor: ${x.doctor}</p>
-<p>Status: ${x.status}</p>
-<p>Notes: ${x.notes}</p>
-<button class="edit" onclick="editAntibiotic(${i})">Edit</button>
-<button class="delete" onclick="deleteAntibiotic(${i})">Delete</button>
-</div>`).join(""):"<div class='box'>No antibiotic history.</div>";
-}
-
-function editAntibiotic(i){
-let x=JSON.parse(localStorage.getItem("antibioticHistory"))[i];
-abName.value=x.name;
-abDose.value=x.dose;
-abFrequency.value=x.frequency;
-abStart.value=x.startDate;
-abEnd.value=x.endDate;
-abReason.value=x.reason;
-abStatus.value=x.status;
-abNotes.value=x.notes;
-antibioticEdit=i;
-}
-
-function deleteAntibiotic(i){
-if(confirm("Delete this antibiotic record?")){
-let a=JSON.parse(localStorage.getItem("antibioticHistory"));
-a.splice(i,1);
-localStorage.setItem("antibioticHistory",JSON.stringify(a));
-loadAntibiotic();
-}
-}
-
-function clearAntibiotic(){
-abName.value="";
-abDose.value="";
-abFrequency.value="";
-abStart.value="";
-abEnd.value="";
-abReason.value="";
-abStatus.value="";
-abNotes.value="";
-}
-
-
-/* Prescription */
-function addPrescription(){
-if(!medicine.value||!dose.value||!frequency.value||!duration.value)
-return alert("Complete prescription information.");
-
-let a=JSON.parse(localStorage.getItem("prescriptions")||"[]");
-
-a.push({
-medicine:medicine.value,
-dose:dose.value,
-frequency:frequency.value,
-duration:duration.value,
-notes:prescriptionNotes.value,
-doctor:doctorName.innerText,
-date:new Date().toLocaleDateString()
-});
-
-localStorage.setItem("prescriptions",JSON.stringify(a));
-
-medicine.value=dose.value=frequency.value=duration.value=prescriptionNotes.value="";
-loadPrescription();
-alert("Prescription saved successfully.");
-}
-
-function loadPrescription(){
-let a=JSON.parse(localStorage.getItem("prescriptions")||"[]");
-
-prescriptionList.innerHTML=a.length?a.map(x=>`
-<div class="record">
-<h3>${x.medicine}</h3>
-<p>Dose: ${x.dose}</p>
-<p>Frequency: ${x.frequency}</p>
-<p>Duration: ${x.duration}</p>
-<p>Instructions: ${x.notes||"N/A"}</p>
-<p>Doctor: ${x.doctor}</p>
-<p>Date: ${x.date}</p>
-</div>`).join(""):"<div class='box'>No prescriptions.</div>";
-}
-
-
-/* Reports */
-function loadReports(){
-let a=JSON.parse(localStorage.getItem("testReports")||"[]");
-
-reportList.innerHTML=a.length?a.map(x=>`
-<div class="record">
-<p><b>Date:</b> ${x.date}</p>
-<p><b>Report:</b> ${x.name}</p>
-<a href="${x.file}" target="_blank">View Report</a>
-</div>`).join(""):"<div class='box'>No test reports uploaded.</div>";
-}
-
-
-/* Health Problem */
-function loadProblem(){
-problemText.innerText=localStorage.getItem("patientHealthProblem")||"No health problem submitted.";
-problemDate.innerText=localStorage.getItem("patientHealthProblemDate")||"";
-}
-
-
-/* Safety Alert */
-function loadAlert(){
-let a=JSON.parse(localStorage.getItem("antibioticHistory")||"[]");
-
-alertBox.innerHTML=a.length?
-"<h3>⚠ Antibiotic Safety Review</h3><p>Previous antibiotic records exist. Review antibiotic name, dose, duration and reason before creating a new prescription.</p><p><b>Total Records:</b> "+a.length+"</p>":
-"<h3>✓ No Previous Antibiotic Record</h3><p>No previous antibiotic history is available.</p>";
-}
-
-
-/* Logout */
-function logout(){
-localStorage.removeItem("doctorLoggedIn");
-localStorage.removeItem("doctorName");
-localStorage.removeItem("doctorBMDC");
-location.href="doctor-login.html";
-}
-
-</script>
-</body>
-</html>
+if(localStorage.getItem("doctorLoggedIn")!=="true")location.href="doctor-login.html";
+dn.innerText=localStorage.getItem("doctorName")||"Doctor";db.innerText=localStorage.getItem("doctorBMDC")||"Not Available";let me=-1,ae=-1;
+function searchPatient(){if(pid.value.trim()!=="MSBD-P-10001"){patientArea.style.display="none";msg.innerText="Patient not found.";return}patientArea.style.display="block";msg.innerText="Patient found."}
+function openPage(p){home.style.display="none";document.querySelectorAll(".section").forEach(x=>x.style.display="none");document.getElementById(p).style.display="block";if(p==="medical")loadM();if(p==="antibiotic")loadA();if(p==="prescription")loadP();if(p==="reports")loadR();if(p==="problem")loadH();if(p==="alert")loadAlert()}
+function back(){document.querySelectorAll(".section").forEach(x=>x.style.display="none");home.style.display="block"}
+function saveMedical(){let a=JSON.parse(localStorage.getItem("medicalHistory")||"[]"),x={condition:condition.value,diagnosisDate:diag.value,status:status.value,treatment:treatment.value,doctor:dn.innerText,notes:mnotes.value};if(!condition.value)return alert("Enter condition.");me<0?a.push(x):a[me]=x;me=-1;localStorage.setItem("medicalHistory",JSON.stringify(a));condition.value=diag.value=status.value=treatment.value=mnotes.value="";loadM()}
+function loadM(){let a=JSON.parse(localStorage.getItem("medicalHistory")||"[]");mlist.innerHTML=a.length?a.map((x,i)=>`<div class="record"><h3>${x.condition}</h3><p>Diagnosis Date: ${x.diagnosisDate}</p><p>Status: ${x.status}</p><p>Treatment: ${x.treatment}</p><p>Doctor: ${x.doctor}</p><p>Notes: ${x.notes}</p><button class="edit" onclick="editM(${i})">Edit</button><button class="delete" onclick="delM(${i})">Delete</button></div>`).join(""):"<div class='box'>No medical history.</div>"}
+function editM(i){let x=JSON.parse(localStorage.getItem("medicalHistory"))[i];condition.value=x.condition;diag.value=x.diagnosisDate;status.value=x.status;treatment.value=x.treatment;mnotes.value=x.notes;me=i}
+function delM(i){if(confirm("Delete this medical record?")){let a=JSON.parse(localStorage.getItem("medicalHistory"));a.splice(i,1);localStorage.setItem("medicalHistory",JSON.stringify(a));loadM()}}
+function saveAB(){let a=JSON.parse(localStorage.getItem("antibioticHistory")||"[]"),x={name:aname.value,dose:adose.value,frequency:afreq.value,startDate:astart.value,endDate:aend.value,reason:areason.value,doctor:dn.innerText,status:astatus.value,notes:anotes.value};if(!aname.value)return alert("Enter antibiotic name.");ae<0?a.push(x):a[ae]=x;ae=-1;localStorage.setItem("antibioticHistory",JSON.stringify(a));aname.value=adose.value=afreq.value=astart.value=aend.value=areason.value=astatus.value=anotes.value="";loadA()}
+function loadA(){let a=JSON.parse(localStorage.getItem("antibioticHistory")||"[]");alist.innerHTML=a.length?a.map((x,i)=>`<div class="record"><h3>${x.name}</h3><p>Dose: ${x.dose}</p><p>Frequency: ${x.frequency}</p><p>Start: ${x.startDate}</p><p>End: ${x.endDate}</p><p>Reason: ${x.reason}</p><p>Doctor: ${x.doctor}</p><p>Status: ${x.status}</p><p>Notes: ${x.notes}</p><button class="edit" onclick="editA(${i})">Edit</button><button class="delete" onclick="delA(${i})">Delete</button></div>`).join(""):"<div class='box'>No antibiotic history.</div>"}
+function editA(i){let x=JSON.parse(localStorage.getItem("antibioticHistory"))[i];aname.value=x.name;adose.value=x.dose;afreq.value=x.frequency;astart.value=x.startDate;aend.value=x.endDate;areason.value=x.reason;astatus.value=x.status;anotes.value=x.notes;ae=i}
+function delA(i){if(confirm("Delete this antibiotic record?")){let a=JSON.parse(localStorage.getItem("antibioticHistory"));a.splice(i,1);localStorage.setItem("antibioticHistory",JSON.stringify(a));loadA()}}
+function addPrescription(){if(!med.value||!dose.value||!freq.value||!dur.value)return alert("Complete prescription information.");let a=JSON.parse(localStorage.getItem("prescriptions")||"[]");a.push({medicine:med.value,dose:dose.value,frequency:freq.value,duration:dur.value,notes:pnotes.value,doctor:dn.innerText,date:new Date().toLocaleDateString()});localStorage.setItem("prescriptions",JSON.stringify(a));med.value=dose.value=freq.value=dur.value=pnotes.value="";loadP();alert("Prescription saved.")}
+function loadP(){let a=JSON.parse(localStorage.getItem("prescriptions")||"[]");plist.innerHTML=a.length?a.map(x=>`<div class="record"><h3>${x.medicine}</h3><p>Dose: ${x.dose}</p><p>Frequency: ${x.frequency}</p><p>Duration: ${x.duration}</p><p>Instructions: ${x.notes||"N/A"}</p><p>Doctor: ${x.doctor}</p><p>Date: ${x.date}</p></div>`).join(""):"<div class='box'>No prescriptions.</div>"}
+function loadR(){let a=JSON.parse(localStorage.getItem("testReports")||"[]");rlist.innerHTML=a.length?a.map(x=>`<div class="record"><p><b>Date:</b> ${x.date}</p><p><b>Report:</b> ${x.name}</p><a href="${x.file}" target="_blank">View Report</a></div>`).join(""):"<div class='box'>No test reports uploaded.</div>"}
+function loadH(){prob.innerText=localStorage.getItem("patientHealthProblem")||"No health problem submitted.";pdate.innerText=localStorage.getItem("patientHealthProblemDate")||""}
+function loadAlert(){let a=JSON.parse(localStorage.getItem("antibioticHistory")||"[]");alertBox.innerHTML=a.length?`<h3>⚠ Safety Review Required</h3><p>Previous antibiotic records found. Review antibiotic name, dose, duration and reason before prescribing.</p><p><b>Previous Records:</b> ${a.length}</p>`:`<h3>✓ No Previous Antibiotic Record</h3><p>No previous antibiotic history is available.</p>`}
+function logout(){localStorage.removeItem("doctorLoggedIn");localStorage.removeItem("doctorName");localStorage.removeItem("doctorBMDC");location.href="doctor-login.html"}
+</script></body></html>
