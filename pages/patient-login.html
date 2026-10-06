@@ -2,78 +2,279 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Patient Login - MediSafe BD</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>MediSafe BD - Patient Login</title>
+
 <style>
-*{box-sizing:border-box}body{margin:0;font-family:Arial;background:#f4f7fb}
-.box{width:420px;max-width:90%;margin:80px auto;background:white;padding:30px;border-radius:12px;box-shadow:0 4px 18px #ddd}
-h1,h2{color:#0b5ed7;text-align:center}input,select{width:100%;padding:12px;margin:8px 0 15px;border:1px solid #ccd5df;border-radius:6px}
-button{width:100%;padding:12px;background:#0b5ed7;color:white;border:0;border-radius:6px;cursor:pointer;font-weight:bold}
-.verify{display:none}.back{background:#6c757d;margin-top:10px}
+
+*{
+    box-sizing:border-box;
+}
+
+html,body{
+    margin:0;
+    width:100%;
+    min-height:100%;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    background:#f4f7fb;
+    display:flex;
+    align-items:flex-start;
+    justify-content:center;
+    padding:40px 0;
+    overflow-y:auto;
+}
+
+.box{
+    width:390px;
+    max-width:90%;
+    background:white;
+    padding:28px;
+    border-radius:12px;
+    box-shadow:0 4px 20px #ddd;
+}
+
+h1{
+    text-align:center;
+    color:#0b5ed7;
+    margin-bottom:5px;
+}
+
+h2{
+    text-align:center;
+    color:#0b5ed7;
+    margin-top:5px;
+}
+
+h3{
+    color:#333;
+}
+
+label{
+    display:block;
+    margin-top:10px;
+}
+
+input,select{
+    width:100%;
+    padding:12px;
+    margin:7px 0 14px;
+    border:1px solid #ccc;
+    border-radius:6px;
+    font-size:15px;
+}
+
+button{
+    width:100%;
+    padding:12px;
+    border:0;
+    border-radius:6px;
+    background:#0b5ed7;
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.back{
+    background:#777;
+    margin-top:10px;
+}
+
+#verify{
+    display:none;
+}
+
 </style>
 </head>
+
 <body>
 
 <div class="box">
 
-<h1>MediSafe BD</h1>
-<h2>Patient Portal</h2>
+    <h1>MediSafe BD</h1>
 
-<div id="login">
+    <h2>Patient Portal</h2>
 
-<label>Patient Name</label>
-<input id="name" placeholder="Enter your name">
 
-<label>Patient ID</label>
-<input id="id" placeholder="Enter Patient ID">
+    <!-- STEP 1 -->
 
-<button onclick="verify()">Continue</button>
+    <div id="login">
+
+        <label>Patient Name</label>
+
+        <input
+            type="text"
+            id="name"
+            placeholder="Enter your name"
+        >
+
+
+        <label>Patient ID</label>
+
+        <input
+            type="text"
+            id="patientId"
+            placeholder="Enter Patient ID"
+        >
+
+
+        <button onclick="nextStep()">
+            Continue
+        </button>
+
+    </div>
+
+
+    <!-- STEP 2 -->
+
+    <div id="verify">
+
+        <h3>Patient Verification</h3>
+
+
+        <label>Identification Type</label>
+
+        <select id="idType">
+
+            <option value="nid">
+                NID
+            </option>
+
+            <option value="birth">
+                Birth Registration
+            </option>
+
+            <option value="temporary">
+                Temporary ID for Newborn Child
+            </option>
+
+        </select>
+
+
+        <label>Identification Number</label>
+
+        <input
+            type="text"
+            id="verifyId"
+            placeholder="Enter identification number"
+        >
+
+
+        <button onclick="login()">
+            Login
+        </button>
+
+
+        <button
+            class="back"
+            onclick="back()"
+        >
+            Back
+        </button>
+
+    </div>
 
 </div>
 
-<div id="verify" class="verify">
-
-<h3>Verify Patient ID</h3>
-
-<p>Select the identification method used during registration:</p>
-
-<select id="type">
-<option value="nid">NID</option>
-<option value="birth">Birth Registration</option>
-<option value="temporary">Temporary ID for Newborn Child</option>
-</select>
-
-<input id="verifyId" placeholder="Enter selected ID">
-
-<button onclick="login()">Login to Patient Portal</button>
-
-<button class="back" onclick="back()">Back</button>
-
-</div>
-
-</div>
 
 <script>
-function verify(){
-if(!name.value.trim()||!id.value.trim())return alert("Enter Name and Patient ID.");
-localStorage.setItem("patientName",name.value.trim());
-localStorage.setItem("patientID",id.value.trim());
-document.getElementById("login").style.display="none";
-document.getElementById("verify").style.display="block";
+
+function nextStep(){
+
+    const name =
+        document.getElementById("name").value.trim();
+
+    const patientId =
+        document.getElementById("patientId").value.trim();
+
+
+    if(!name || !patientId){
+
+        alert(
+            "Please enter your name and Patient ID."
+        );
+
+        return;
+    }
+
+
+    document.getElementById("login").style.display =
+        "none";
+
+    document.getElementById("verify").style.display =
+        "block";
 }
 
-function login(){
-if(!verifyId.value.trim())return alert("Enter your ID.");
-localStorage.setItem("patientLoggedIn","true");
-localStorage.setItem("patientVerificationType",type.value);
-localStorage.setItem("patientVerificationId",verifyId.value.trim());
-location.href="../patient-dashboard.html";
-}
 
 function back(){
-document.getElementById("verify").style.display="none";
-document.getElementById("login").style.display="block";
+
+    document.getElementById("verify").style.display =
+        "none";
+
+    document.getElementById("login").style.display =
+        "block";
 }
+
+
+function login(){
+
+    const verifyId =
+        document.getElementById("verifyId").value.trim();
+
+
+    if(!verifyId){
+
+        alert(
+            "Please enter your identification number."
+        );
+
+        return;
+    }
+
+
+    const name =
+        document.getElementById("name").value.trim();
+
+    const patientId =
+        document.getElementById("patientId").value.trim();
+
+    const idType =
+        document.getElementById("idType").value;
+
+
+    localStorage.setItem(
+        "patientName",
+        name
+    );
+
+    localStorage.setItem(
+        "patientID",
+        patientId
+    );
+
+    localStorage.setItem(
+        "patientLoggedIn",
+        "true"
+    );
+
+    localStorage.setItem(
+        "patientVerificationType",
+        idType
+    );
+
+    localStorage.setItem(
+        "patientVerificationId",
+        verifyId
+    );
+
+
+    window.location.href =
+        "../patient-dashboard.html";
+}
+
 </script>
 
 </body>
