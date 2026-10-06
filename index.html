@@ -3,964 +3,1064 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HealthCare Bangladesh</title>
+
+<title>MediSafe BD - স্বাস্থ্য সুরক্ষা সিস্টেম</title>
 
 <style>
+
 *{
+    box-sizing:border-box;
     margin:0;
     padding:0;
-    box-sizing:border-box;
-    font-family:Arial, sans-serif;
 }
 
 body{
-    background:#f5f9fc;
-    color:#18323d;
+    font-family:Arial,"Noto Sans Bengali",sans-serif;
+    background:#f4f8f8;
+    color:#18332d;
+}
+
+/* TOP WARNING */
+
+.warning{
+    background:#d52626;
+    color:white;
+    text-align:center;
+    padding:9px;
+    font-size:14px;
 }
 
 /* HEADER */
+
 header{
-    background:#087f8c;
-    color:white;
-    padding:18px 6%;
+    background:#292b2d;
+    padding:15px 5%;
     display:flex;
-    justify-content:space-between;
     align-items:center;
+    gap:35px;
     flex-wrap:wrap;
-    box-shadow:0 3px 10px rgba(0,0,0,.15);
 }
 
 .logo{
-    font-size:25px;
+    color:#168066;
+    font-size:23px;
     font-weight:bold;
 }
 
 nav{
     display:flex;
-    align-items:center;
-    gap:8px;
+    gap:10px;
     flex-wrap:wrap;
 }
 
-nav a,
-.dropbtn{
+nav button{
+    background:#292b2d;
     color:white;
-    text-decoration:none;
-    padding:10px 13px;
-    border-radius:7px;
+    border:2px solid #73787a;
+    border-radius:20px;
+    padding:10px 22px;
     cursor:pointer;
-    border:none;
-    background:transparent;
-    font-size:15px;
+    font-weight:bold;
 }
 
-nav a:hover,
-.dropbtn:hover{
-    background:rgba(255,255,255,.15);
+nav button:hover{
+    background:#145c4c;
 }
 
-/* DROPDOWN */
-.dropdown{
-    position:relative;
+/* MAIN */
+
+.container{
+    width:90%;
+    max-width:1050px;
+    margin:auto;
+    padding:25px 0 60px;
 }
 
-.dropdown-content{
-    display:none;
-    position:absolute;
-    top:45px;
-    right:0;
-    min-width:230px;
-    background:white;
-    border-radius:10px;
-    box-shadow:0 7px 20px rgba(0,0,0,.18);
-    overflow:hidden;
-    z-index:1000;
+/* AI */
+
+.ai-box{
+    background:linear-gradient(100deg,#075941,#126850);
+    color:white;
+    padding:22px;
+    border-radius:18px;
+    margin-bottom:20px;
 }
 
-.dropdown-content a{
-    display:block;
-    color:#18323d;
-    padding:13px 17px;
-    text-decoration:none;
-    border-bottom:1px solid #eee;
+.ai-box h2{
+    margin-bottom:8px;
 }
 
-.dropdown-content a:hover{
-    background:#eaf8fa;
-    color:#087f8c;
-}
-
-.dropdown:hover .dropdown-content{
-    display:block;
-}
-
-/* HERO */
-.hero{
-    text-align:center;
-    padding:65px 20px;
-    background:linear-gradient(135deg,#e6f8fa,#ffffff);
-}
-
-.hero h1{
-    font-size:40px;
-    color:#087f8c;
+.ai-box p{
+    font-size:14px;
     margin-bottom:15px;
 }
 
-.hero p{
-    font-size:18px;
-    max-width:750px;
-    margin:auto;
-    line-height:1.7;
+.ai-search{
+    display:flex;
+    gap:10px;
 }
 
-.hero button{
-    margin-top:25px;
-    padding:13px 25px;
+.ai-search input{
+    flex:1;
+    padding:13px;
     border:none;
-    border-radius:8px;
-    background:#087f8c;
+    border-radius:9px;
+}
+
+.red-btn{
+    background:#dc3030;
     color:white;
-    font-size:16px;
+    border:none;
+    padding:12px 20px;
+    border-radius:9px;
+    font-weight:bold;
     cursor:pointer;
 }
 
-/* PORTAL */
-.portal-section{
-    padding:40px 6%;
+/* TITLE */
+
+.title{
+    text-align:center;
+    margin:20px 0 25px;
 }
 
-.portal-container{
+.title h1{
+    color:#145e4d;
+    font-size:32px;
+}
+
+.title p{
+    color:#74848a;
+    margin-top:7px;
+}
+
+/* PORTALS */
+
+.portal-grid{
     display:grid;
     grid-template-columns:1fr 1fr;
-    gap:25px;
-    max-width:1000px;
-    margin:auto;
+    gap:20px;
 }
 
 .portal{
     background:white;
-    border-radius:15px;
-    padding:30px;
-    text-align:center;
-    box-shadow:0 4px 15px rgba(0,0,0,.08);
-    border:1px solid #e2eeee;
+    padding:22px;
+    border-radius:17px;
+    box-shadow:0 4px 18px rgba(0,0,0,.10);
+}
+
+.doctor{
+    border-top:5px solid #23885f;
+}
+
+.patient{
+    border-top:5px solid #2779c8;
 }
 
 .portal h2{
-    color:#087f8c;
-    margin-bottom:12px;
+    margin-bottom:15px;
 }
 
 .portal p{
-    line-height:1.6;
-    color:#52666e;
+    color:#66767b;
+    line-height:1.7;
+    margin-bottom:18px;
 }
 
-.portal button{
-    margin-top:20px;
-    padding:11px 22px;
-    border:0;
-    border-radius:7px;
-    background:#087f8c;
-    color:white;
+.green-btn,
+.blue-btn{
+    border:none;
+    padding:12px 17px;
+    border-radius:8px;
+    font-weight:bold;
     cursor:pointer;
 }
 
-/* SERVICE BOXES */
-.services{
-    padding:30px 6% 55px;
+.green-btn{
+    background:#087458;
+    color:white;
 }
 
-.services h2,
-.health-section h2{
+.blue-btn{
+    background:#dcecf7;
+    color:#1e557b;
+}
+
+/* SERVICES */
+
+.section-title{
     text-align:center;
-    color:#087f8c;
-    margin-bottom:25px;
+    color:#145e4d;
+    margin:35px 0 5px;
+}
+
+.section-subtitle{
+    text-align:center;
+    color:#77858a;
+    margin-bottom:20px;
 }
 
 .service-grid{
     display:grid;
-    grid-template-columns:repeat(4,1fr);
+    grid-template-columns:repeat(3,1fr);
     gap:18px;
-    max-width:1200px;
-    margin:auto;
 }
 
-.service-box{
+.service{
     background:white;
-    padding:25px 15px;
-    text-align:center;
-    border-radius:15px;
-    border:1px solid #e2eeee;
-    box-shadow:0 4px 12px rgba(0,0,0,.07);
-    cursor:pointer;
-    transition:.2s;
+    padding:20px;
+    border-radius:17px;
+    box-shadow:0 3px 15px rgba(0,0,0,.08);
 }
 
-.service-box:hover{
-    transform:translateY(-4px);
-    box-shadow:0 7px 18px rgba(0,0,0,.12);
+.service h3{
+    margin-bottom:10px;
 }
 
-.service-icon{
-    font-size:38px;
-    margin-bottom:12px;
+.service p{
+    color:#748187;
+    line-height:1.6;
 }
 
-.service-box h3{
-    color:#087f8c;
-    margin-bottom:8px;
-}
-
-.service-box p{
-    font-size:14px;
-    color:#63767c;
-    line-height:1.5;
-}
-
-/* HEALTH INFORMATION */
-.health-section{
-    padding:50px 6%;
-    background:#edf8fa;
-}
-
-.health-container{
-    max-width:1100px;
-    margin:auto;
-}
-
-.health-category{
-    background:white;
-    margin-bottom:15px;
-    border-radius:12px;
-    overflow:hidden;
-    box-shadow:0 3px 10px rgba(0,0,0,.07);
-}
-
-.health-title{
-    padding:18px 22px;
-    font-size:18px;
+.service button{
+    margin-top:15px;
+    padding:10px 15px;
+    border:none;
+    border-radius:8px;
+    background:#e8f0f2;
     font-weight:bold;
-    color:#087f8c;
     cursor:pointer;
+}
+
+/* EMERGENCY */
+
+.emergency{
+    margin-top:22px;
+    background:linear-gradient(100deg,#d52323,#ffad26,#1975bd);
+    color:white;
+    padding:20px;
+    border-radius:18px;
+
     display:flex;
     justify-content:space-between;
     align-items:center;
+    gap:15px;
 }
 
-.health-content{
-    display:none;
-    padding:5px 22px 22px;
-}
-
-.health-content.open{
-    display:block;
-}
-
-.topic{
-    border:1px solid #dcebed;
+.emergency button{
+    background:white;
+    border:none;
+    padding:12px 18px;
     border-radius:9px;
-    margin-top:10px;
-    overflow:hidden;
-}
-
-.topic-title{
-    padding:14px;
-    background:#f6fbfc;
-    cursor:pointer;
     font-weight:bold;
-    color:#24505a;
-}
-
-.topic-content{
-    display:none;
-    padding:15px;
-    line-height:1.7;
-    color:#52666e;
-}
-
-.topic-content.open{
-    display:block;
-}
-
-.topic-content ul{
-    margin-left:20px;
-    margin-top:8px;
-}
-
-.topic-content li{
-    margin-bottom:5px;
-}
-
-/* VIDEO */
-.video-box{
-    margin-top:12px;
-    padding:18px;
-    background:#eef9fb;
-    border-radius:10px;
-}
-
-.video-box iframe{
-    width:100%;
-    height:250px;
-    border:0;
-    border-radius:8px;
-    margin-top:12px;
+    cursor:pointer;
 }
 
 /* FOOTER */
+
 footer{
-    background:#073f48;
+    background:#07503d;
     color:white;
     text-align:center;
-    padding:25px;
-    margin-top:20px;
+    padding:28px;
 }
 
-footer p{
-    margin:5px;
+footer small{
+    display:block;
+    margin-top:8px;
+}
+
+/* LOGIN */
+
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.65);
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+.modal-box{
+    background:white;
+    width:100%;
+    max-width:480px;
+    padding:25px;
+    border-radius:18px;
+}
+
+.modal-box h2{
+    color:#125d4b;
+    margin-bottom:20px;
+}
+
+.modal-box input,
+.modal-box select{
+    width:100%;
+    padding:12px;
+    margin:7px 0;
+    border:1px solid #ccd5d5;
+    border-radius:8px;
+}
+
+.close{
+    float:right;
+    font-size:25px;
+    cursor:pointer;
+}
+
+.submit{
+    width:100%;
+    padding:13px;
+    margin-top:12px;
+    border:none;
+    border-radius:8px;
+    background:#087458;
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+/* DASHBOARD */
+
+.dashboard{
+    display:none;
+    background:white;
+    padding:25px;
+    border-radius:18px;
+    margin-top:20px;
+    box-shadow:0 4px 18px rgba(0,0,0,.1);
+}
+
+.dashboard-card{
+    background:#f4f8f8;
+    padding:18px;
+    margin-top:15px;
+    border-radius:12px;
+}
+
+.logout{
+    background:#d52b2b;
+    color:white;
+    border:none;
+    padding:10px 18px;
+    border-radius:7px;
+    cursor:pointer;
 }
 
 /* MOBILE */
-@media(max-width:850px){
-    .service-grid{
-        grid-template-columns:repeat(2,1fr);
-    }
 
-    .portal-container{
+@media(max-width:750px){
+
+    .portal-grid{
         grid-template-columns:1fr;
     }
 
-    header{
-        justify-content:center;
-        gap:15px;
-    }
-}
-
-@media(max-width:550px){
     .service-grid{
         grid-template-columns:1fr;
     }
 
-    .hero h1{
-        font-size:30px;
+    .emergency{
+        display:block;
     }
 
-    nav{
-        justify-content:center;
+    .emergency button{
+        margin-top:12px;
     }
 
-    .dropdown-content{
-        right:auto;
-        left:0;
+    .ai-search{
+        display:block;
     }
+
+    .ai-search button{
+        margin-top:8px;
+        width:100%;
+    }
+
 }
+
 </style>
 </head>
 
 <body>
 
+<!-- WARNING -->
+
+<div class="warning">
+⚠️ Antibiotic নিজে থেকে শুরু করবেন না — প্রয়োজন হলে নিবন্ধিত চিকিৎসকের পরামর্শ নিন।
+</div>
+
+
 <!-- HEADER -->
+
 <header>
 
 <div class="logo">
-    🏥 HealthCare Bangladesh
+🛡️ MediSafe BD
 </div>
 
 <nav>
 
-<a href="#home">Home</a>
+<button onclick="home()">হোম</button>
 
-<a href="#portals">Portals</a>
+<button onclick="doctorLogin()">
+ডাক্তার
+</button>
 
-<div class="dropdown">
-    <button class="dropbtn">স্বাস্থ্য তথ্য ▾</button>
+<button onclick="patientLogin()">
+রোগী
+</button>
 
-    <div class="dropdown-content">
-        <a href="#healthy">সুস্থ থাকা</a>
-        <a href="#child">শিশু স্বাস্থ্য</a>
-        <a href="#pregnancy">গর্ভবতী ও প্রসূতি</a>
-        <a href="#autism">অটিজম ও প্রতিবন্ধিতা</a>
-        <a href="#mental">মানসিক স্বাস্থ্য</a>
-    </div>
-</div>
+<button onclick="doctorSearch()">
+ডাক্তার খুঁজুন
+</button>
 
-<a href="#services">Services</a>
+<button onclick="healthInfo()">
+স্বাস্থ্য তথ্য ▼
+</button>
+
+<button onclick="hospitalSearch()">
+আমাদের সেবা
+</button>
 
 </nav>
+
 </header>
 
 
-<!-- HERO -->
-<section class="hero" id="home">
+<div class="container">
 
-<h1>আপনার স্বাস্থ্য, আমাদের অগ্রাধিকার</h1>
+
+<!-- AI -->
+
+<div class="ai-box">
+
+<h2>🤖 AI — যেকোনো কিছু জিজ্ঞাসা করুন</h2>
 
 <p>
-একটি সহজ ও ব্যবহারবান্ধব স্বাস্থ্যসেবা প্ল্যাটফর্ম,
-যেখানে প্রয়োজনীয় স্বাস্থ্য তথ্য ও বিভিন্ন স্বাস্থ্যসেবা
-এক জায়গায় পাওয়া যাবে।
+আপনার স্বাস্থ্য-সম্পর্কিত প্রশ্ন দিন। AI সাধারণ তথ্য,
+সম্ভাব্য specialist-এর দিকে যাওয়ার ইঙ্গিত এবং warning sign
+সম্পর্কে প্রাথমিক guidance দেখাবে।
 </p>
 
-<button onclick="document.getElementById('services').scrollIntoView()">
-সেবা দেখুন
+<div class="ai-search">
+
+<input
+id="aiQuestion"
+placeholder="যেমন: চোখ ঝাপসা দেখলে কোন ডাক্তার দেখাবো?"
+>
+
+<button class="red-btn" onclick="askAI()">
+জিজ্ঞাসা করুন
 </button>
 
-</section>
+</div>
+
+<p id="aiAnswer"></p>
+
+</div>
+
+
+<!-- TITLE -->
+
+<div class="title">
+
+<h1>স্বাস্থ্য সুরক্ষা সিস্টেম</h1>
+
+<p>
+MediSafe BD — রোগী, ডাক্তার, রক্তদাতা,
+হাসপাতাল ও স্বাস্থ্যসেবার তথ্য এক জায়গায়
+</p>
+
+</div>
 
 
 <!-- PORTALS -->
-<section class="portal-section" id="portals">
 
-<div class="portal-container">
+<div class="portal-grid">
 
-<div class="portal">
-    <h2>👨‍⚕️ Doctor Portal</h2>
-    <p>
-        ডাক্তারদের জন্য আলাদা পোর্টাল।
-        রোগীর তথ্য দেখা, রোগীর সাথে যোগাযোগ
-        এবং প্রয়োজনীয় স্বাস্থ্যসেবা পরিচালনার জন্য।
-    </p>
-    <button onclick="doctorPortal()">Doctor Portal</button>
+
+<div class="portal doctor">
+
+<h2>👨‍⚕️ Doctor Portal</h2>
+
+<p>
+Verified doctor ID দিয়ে patient record,
+patient-এর বাসায় থেকে লেখা concern,
+medical information ও prescription workflow
+দেখা যাবে।
+</p>
+
+<button class="green-btn"
+onclick="doctorLogin()">
+🔐 Doctor Login
+</button>
+
+<button class="blue-btn"
+onclick="doctorRegister()">
+＋ Doctor Registration
+</button>
+
 </div>
 
-<div class="portal">
-    <h2>🧑‍🦽 Patient Portal</h2>
-    <p>
-        রোগীদের জন্য সহজ পোর্টাল।
-        স্বাস্থ্যসেবা খোঁজা এবং প্রয়োজনীয়
-        সেবা গ্রহণের জন্য ব্যবহার করা যাবে।
-    </p>
-    <button onclick="patientPortal()">Patient Portal</button>
-</div>
+
+<div class="portal patient">
+
+<h2>👤 Patient Portal</h2>
+
+<p>
+Patient Login করে নিজের health dashboard-এর
+তথ্য দেখতে, symptoms ও গুরুত্বপূর্ণ কথা
+লিখে রাখতে পারবেন।
+</p>
+
+<button class="green-btn"
+onclick="patientLogin()">
+🔐 Patient Login
+</button>
+
+<button class="blue-btn"
+onclick="patientRegister()">
+＋ Patient Registration
+</button>
 
 </div>
 
-</section>
+</div>
 
 
 <!-- SERVICES -->
-<section class="services" id="services">
 
-<h2>প্রধান সেবা</h2>
+<h2 class="section-title">
+আজ আপনার কী প্রয়োজন?
+</h2>
+
+<p class="section-subtitle">
+ওয়েবসাইট থেকেই দ্রুত প্রয়োজনীয় স্বাস্থ্যসেবা খুঁজে নিন
+</p>
+
 
 <div class="service-grid">
 
-<div class="service-box" onclick="findBloodDonor()">
-    <div class="service-icon">🩸</div>
-    <h3>ব্লাড ডোনার খুঁজুন</h3>
-    <p>প্রয়োজনীয় রক্তের গ্রুপের ডোনার খুঁজে পাওয়ার সুবিধা।</p>
-</div>
 
-<div class="service-box" onclick="liveTracking()">
-    <div class="service-icon">📍</div>
-    <h3>লাইভ ট্র্যাকিং সিস্টেম</h3>
-    <p>রক্ত, অ্যাম্বুলেন্স ও অন্যান্য জরুরি সেবার অবস্থান ট্র্যাক করার ব্যবস্থা।</p>
-</div>
+<div class="service">
 
-<div class="service-box" onclick="freeTicket()">
-    <div class="service-icon">🎫</div>
-    <h3>ফ্রি টিকিট</h3>
-    <p>স্বাস্থ্যসেবা গ্রহণের জন্য প্রয়োজনীয় টিকিট বা সহায়তা।</p>
-</div>
-
-<div class="service-box" onclick="ambulance()">
-    <div class="service-icon">🚑</div>
-    <h3>অ্যাম্বুলেন্স</h3>
-    <p>জরুরি প্রয়োজনে অ্যাম্বুলেন্স সেবা খুঁজে পাওয়ার ব্যবস্থা।</p>
-</div>
-
-</div>
-
-</section>
-
-
-<!-- HEALTH INFORMATION -->
-<section class="health-section">
-
-<h2>স্বাস্থ্য তথ্য</h2>
-
-<div class="health-container">
-
-
-<!-- 1 HEALTHY -->
-<div class="health-category" id="healthy">
-
-<div class="health-title" onclick="toggleHealth('healthyContent')">
-    <span>🌿 সুস্থ থাকা</span>
-    <span>＋</span>
-</div>
-
-<div class="health-content" id="healthyContent">
-
-<div class="topic">
-<div class="topic-title" onclick="toggleTopic(this)">
-    স্বাস্থ্যকর জীবনযাপন
-</div>
-
-<div class="topic-content">
-<p>
-সুস্থ থাকার জন্য নিয়মিত ঘুম, সুষম খাবার,
-পর্যাপ্ত পানি পান এবং নিয়মিত শারীরিক কার্যক্রম গুরুত্বপূর্ণ।
-</p>
-
-<ul>
-<li>সুষম খাদ্য গ্রহণ</li>
-<li>পর্যাপ্ত পানি পান</li>
-<li>নিয়মিত হাঁটা বা ব্যায়াম</li>
-<li>পর্যাপ্ত ঘুম</li>
-<li>পরিচ্ছন্নতা বজায় রাখা</li>
-</ul>
-</div>
-</div>
-
-
-<div class="topic">
-<div class="topic-title" onclick="toggleTopic(this)">
-    খাবার ও পুষ্টি
-</div>
-
-<div class="topic-content">
-<p>
-শরীরের প্রয়োজন অনুযায়ী বিভিন্ন ধরনের পুষ্টিকর খাবার
-গ্রহণ করা গুরুত্বপূর্ণ।
-</p>
-
-<ul>
-<li>প্রোটিন</li>
-<li>কার্বোহাইড্রেট</li>
-<li>ভিটামিন ও মিনারেল</li>
-<li>পানি</li>
-<li>সুষম খাদ্য পরিকল্পনা</li>
-</ul>
-</div>
-</div>
-
-
-<div class="topic">
-<div class="topic-title" onclick="toggleTopic(this)">
-    ব্যায়াম ও শারীরিক সুস্থতা
-</div>
-
-<div class="topic-content">
-<p>
-নিয়মিত শারীরিক কার্যক্রম শরীরকে সক্রিয় রাখতে সাহায্য করে।
-</p>
-
-<ul>
-<li>হাঁটা</li>
-<li>স্ট্রেচিং</li>
-<li>হালকা ব্যায়াম</li>
-<li>দৈনন্দিন শারীরিক কার্যক্রম</li>
-</ul>
-</div>
-</div>
-
-</div>
-</div>
-
-
-<!-- 2 CHILD -->
-<div class="health-category" id="child">
-
-<div class="health-title" onclick="toggleHealth('childContent')">
-    <span>👶 শিশু স্বাস্থ্য</span>
-    <span>＋</span>
-</div>
-
-<div class="health-content" id="childContent">
-
-<div class="topic">
-<div class="topic-title" onclick="toggleTopic(this)">
-    👨‍👩‍👧 শিশু লালন-পালন
-</div>
-
-<div class="topic-content">
+<h3>🩸 Live Blood Donor খুঁজুন</h3>
 
 <p>
-শিশুর বয়স অনুযায়ী যত্ন, খাবার, ঘুম, পরিচ্ছন্নতা,
-নিরাপত্তা, মানসিক বিকাশ ও পারিবারিক পরিবেশ সম্পর্কে
-বিস্তারিত তথ্য এখানে রাখা যাবে।
+রক্তের গ্রুপ ও location দিয়ে
+available donor খুঁজুন এবং এক জায়গা
+থেকে রক্তদাতা নির্বাচন করুন।
 </p>
 
-<ul>
-<li>নবজাতকের যত্ন</li>
-<li>শিশুকে খাওয়ানোর নিয়ম</li>
-<li>শিশুর ঘুম</li>
-<li>শিশুর পরিচ্ছন্নতা</li>
-<li>শিশুর নিরাপত্তা</li>
-<li>শিশুর আচরণ ও বিকাশ</li>
-<li>বয়স অনুযায়ী শিশুর যত্ন</li>
-<li>অভিভাবকের করণীয়</li>
-</ul>
+<button onclick="bloodDonor()">
+Donor খুঁজুন
+</button>
 
-<div class="video-box">
+</div>
 
-<strong>🎥 শিশু লালন-পালনের ভিডিও</strong>
+
+<div class="service">
+
+<h3>💉 ফ্রি টিকা কোথায়?</h3>
 
 <p>
-শিশুর যত্ন ও লালন-পালন সম্পর্কে ভিডিও
-এই অংশের মধ্যেই থাকবে।
+এলাকা অনুযায়ী free vaccination centre,
+campaign ও vaccination information
+দেখা যাবে।
 </p>
 
-<!-- এখানে ভবিষ্যতে আসল ভিডিওর YouTube embed বসানো যাবে -->
+<button onclick="healthInfo()">
+তথ্য দেখুন
+</button>
 
-<iframe
-src="https://www.youtube.com/embed/ScMzIvxBSi4"
-title="শিশু লালন-পালনের ভিডিও"
-allowfullscreen>
-</iframe>
+</div>
+
+
+<div class="service">
+
+<h3>🏥 হাসপাতাল ও সেবা খুঁজুন</h3>
+
+<p>
+কোন হাসপাতালে কোন doctor,
+department, test, treatment বা procedure
+আছে তা খুঁজে পাওয়া যাবে।
+</p>
+
+<button onclick="hospitalSearch()">
+খুঁজুন
+</button>
 
 </div>
 
 </div>
+
+
+<!-- EMERGENCY -->
+
+<div class="emergency">
+
+<div>
+
+<h2>🚑 জরুরী অ্যাম্বুলেন্স খুঁজুন</h2>
+
+<p>
+আপনার কাছাকাছি available ambulance ও
+জরুরি সেবার তথ্য দেখুন।
+</p>
+
+</div>
+
+<button onclick="ambulance()">
+🚑 এখনই অ্যাম্বুলেন্স খুঁজুন
+</button>
+
 </div>
 
 
-<div class="topic">
-<div class="topic-title" onclick="toggleTopic(this)">
-    🍼 শিশুর খাবার ও পুষ্টি
-</div>
+<!-- DASHBOARD -->
 
-<div class="topic-content">
-<ul>
-<li>বয়স অনুযায়ী খাবার</li>
-<li>শিশুর পুষ্টি</li>
-<li>খাবার দেওয়ার নিয়ম</li>
-<li>পুষ্টির ঘাটতি</li>
-<li>স্বাস্থ্যকর খাবারের অভ্যাস</li>
-</ul>
-</div>
-</div>
+<div id="dashboard" class="dashboard">
 
+<button class="logout" onclick="logout()">
+Logout
+</button>
 
-<div class="topic">
-<div class="topic-title" onclick="toggleTopic(this)">
-    💉 টিকা
-</div>
+<h2 id="dashboardTitle">
+Dashboard
+</h2>
 
-<div class="topic-content">
-<ul>
-<li>শিশুর টিকা</li>
-<li>টিকার সময়সূচি</li>
-<li>টিকার প্রয়োজনীয়তা</li>
-<li>টিকার পর সাধারণ যত্ন</li>
-</ul>
-</div>
+<div class="dashboard-card">
+
+<h3>🪪 Identity Information</h3>
+
+<p id="identityInfo"></p>
+
 </div>
 
 
-<div class="topic">
-<div class="topic-title" onclick="toggleTopic(this)">
-    📈 শিশুর বৃদ্ধি ও বিকাশ
-</div>
+<div class="dashboard-card">
 
-<div class="topic-content">
-<ul>
-<li>শারীরিক বৃদ্ধি</li>
-<li>মানসিক বিকাশ</li>
-<li>ভাষার বিকাশ</li>
-<li>সামাজিক বিকাশ</li>
-<li>বয়স অনুযায়ী developmental milestones</li>
-</ul>
-</div>
-</div>
+<h3>📝 Patient Health Information</h3>
 
+<textarea
+style="width:100%;height:120px;padding:10px"
+placeholder="আপনার সমস্যা / symptoms / health information এখানে লিখুন..."
+></textarea>
 
-<div class="topic">
-<div class="topic-title" onclick="toggleTopic(this)">
-    🩺 শিশুর সাধারণ স্বাস্থ্য সমস্যা
-</div>
+<br><br>
 
-<div class="topic-content">
-<ul>
-<li>জ্বর</li>
-<li>সর্দি-কাশি</li>
-<li>ডায়রিয়া</li>
-<li>পেটের সমস্যা</li>
-<li>শ্বাসকষ্ট</li>
-<li>কখন চিকিৎসকের পরামর্শ প্রয়োজন</li>
-</ul>
-</div>
-</div>
+<button class="green-btn"
+onclick="saveDemo()">
+Save Information
+</button>
 
-</div>
 </div>
 
 
-<!-- 3 PREGNANCY -->
-<div class="health-category" id="pregnancy">
+<div class="dashboard-card">
 
-<div class="health-title" onclick="toggleHealth('pregnancyContent')">
-    <span>🤰 গর্ভবতী ও প্রসূতি</span>
-    <span>＋</span>
+<h3>💊 Antibiotic History</h3>
+
+<p>
+এখানে patient-এর পূর্বের antibiotic course
+ও doctor prescription পরবর্তীতে database
+থেকে দেখানো হবে।
+</p>
+
 </div>
 
-<div class="health-content" id="pregnancyContent">
 
-<div class="topic">
-<div class="topic-title" onclick="toggleTopic(this)">
-    গর্ভাবস্থার যত্ন
-</div>
+<div class="dashboard-card">
 
-<div class="topic-content">
-<ul>
-<li>গর্ভাবস্থায় স্বাস্থ্যকর খাবার</li>
-<li>নিয়মিত চিকিৎসা পরীক্ষা</li>
-<li>বিশ্রাম ও ঘুম</li>
-<li>শারীরিক কার্যক্রম</li>
-<li>গর্ভাবস্থায় সতর্কতা</li>
-</ul>
-</div>
+<h3>📄 Test Report</h3>
+
+<input type="file">
+
 </div>
 
 
-<div class="topic">
-<div class="topic-title" onclick="toggleTopic(this)">
-    গর্ভাবস্থার বিভিন্ন পর্যায়
-</div>
+<div class="dashboard-card">
 
-<div class="topic-content">
-<ul>
-<li>প্রথম পর্যায়</li>
-<li>দ্বিতীয় পর্যায়</li>
-<li>তৃতীয় পর্যায়</li>
-<li>প্রতিটি পর্যায়ের প্রয়োজনীয় যত্ন</li>
-</ul>
-</div>
-</div>
+<h3>🤖 AI Specialist Guide</h3>
 
+<p>
+আপনার সমস্যার ভিত্তিতে সম্ভাব্য specialist
+সম্পর্কে প্রাথমিক guidance এখানে পাওয়া যাবে।
+</p>
 
-<div class="topic">
-<div class="topic-title" onclick="toggleTopic(this)">
-    প্রসবের প্রস্তুতি
-</div>
+<button class="green-btn"
+onclick="doctorSearch()">
+Specialist খুঁজুন
+</button>
 
-<div class="topic-content">
-<ul>
-<li>হাসপাতাল প্রস্তুতি</li>
-<li>প্রয়োজনীয় জিনিসপত্র</li>
-<li>জরুরি পরিস্থিতির প্রস্তুতি</li>
-<li>প্রসবের পরের যত্ন</li>
-</ul>
-</div>
-</div>
-
-
-<div class="topic">
-<div class="topic-title" onclick="toggleTopic(this)">
-    প্রসবের পর মায়ের যত্ন
-</div>
-
-<div class="topic-content">
-<ul>
-<li>পুষ্টি</li>
-<li>বিশ্রাম</li>
-<li>শারীরিক যত্ন</li>
-<li>মানসিক সুস্থতা</li>
-<li>শিশুকে বুকের দুধ খাওয়ানো</li>
-</ul>
-</div>
 </div>
 
 </div>
-</div>
 
-
-<!-- 4 AUTISM -->
-<div class="health-category" id="autism">
-
-<div class="health-title" onclick="toggleHealth('autismContent')">
-    <span>🧩 অটিজম ও প্রতিবন্ধিতা</span>
-    <span>＋</span>
-</div>
-
-<div class="health-content" id="autismContent">
-
-<div class="topic">
-<div class="topic-title" onclick="toggleTopic(this)">
-    অটিজম সম্পর্কে জানা
-</div>
-
-<div class="topic-content">
-<ul>
-<li>অটিজম কী</li>
-<li>শিশুর আচরণ ও বিকাশ</li>
-<li>প্রাথমিক লক্ষণ</li>
-<li>মূল্যায়ন ও বিশেষজ্ঞের পরামর্শ</li>
-</ul>
-</div>
-</div>
-
-
-<div class="topic">
-<div class="topic-title" onclick="toggleTopic(this)">
-    শিশুর বিকাশ ও সহায়তা
-</div>
-
-<div class="topic-content">
-<ul>
-<li>যোগাযোগের দক্ষতা</li>
-<li>সামাজিক দক্ষতা</li>
-<li>দৈনন্দিন কাজ শেখানো</li>
-<li>অভিভাবকের ভূমিকা</li>
-</ul>
-</div>
-</div>
-
-
-<div class="topic">
-<div class="topic-title" onclick="toggleTopic(this)">
-    প্রতিবন্ধিতা ও সহায়তা
-</div>
-
-<div class="topic-content">
-<ul>
-<li>শারীরিক প্রতিবন্ধিতা</li>
-<li>দৃষ্টিজনিত প্রতিবন্ধিতা</li>
-<li>শ্রবণজনিত প্রতিবন্ধিতা</li>
-<li>শিক্ষা ও পুনর্বাসন</li>
-<li>পরিবারের সহায়তা</li>
-</ul>
-</div>
-</div>
 
 </div>
-</div>
-
-
-<!-- 5 MENTAL -->
-<div class="health-category" id="mental">
-
-<div class="health-title" onclick="toggleHealth('mentalContent')">
-    <span>🧠 মানসিক স্বাস্থ্য</span>
-    <span>＋</span>
-</div>
-
-<div class="health-content" id="mentalContent">
-
-<div class="topic">
-<div class="topic-title" onclick="toggleTopic(this)">
-    মানসিক সুস্থতা
-</div>
-
-<div class="topic-content">
-<ul>
-<li>মানসিক সুস্থতা কী</li>
-<li>নিজের যত্ন</li>
-<li>স্বাস্থ্যকর দৈনন্দিন অভ্যাস</li>
-<li>সামাজিক যোগাযোগ</li>
-</ul>
-</div>
-</div>
-
-
-<div class="topic">
-<div class="topic-title" onclick="toggleTopic(this)">
-    স্ট্রেস ও উদ্বেগ
-</div>
-
-<div class="topic-content">
-<ul>
-<li>স্ট্রেস কী</li>
-<li>উদ্বেগের সাধারণ লক্ষণ</li>
-<li>স্ট্রেস ব্যবস্থাপনা</li>
-<li>বিশ্রাম ও relaxation</li>
-<li>কখন বিশেষজ্ঞের সাহায্য নেওয়া উচিত</li>
-</ul>
-</div>
-</div>
-
-
-<div class="topic">
-<div class="topic-title" onclick="toggleTopic(this)">
-    মানসিক স্বাস্থ্য সহায়তা
-</div>
-
-<div class="topic-content">
-<ul>
-<li>কাউন্সেলিং</li>
-<li>মানসিক স্বাস্থ্য বিশেষজ্ঞ</li>
-<li>পরিবারের সহায়তা</li>
-<li>জরুরি সহায়তার প্রয়োজন হলে করণীয়</li>
-</ul>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-</section>
 
 
 <!-- FOOTER -->
+
 <footer>
 
-<p>🏥 HealthCare Bangladesh</p>
-<p>স্বাস্থ্যসেবা ও স্বাস্থ্য তথ্য মানুষের কাছে সহজভাবে পৌঁছে দেওয়ার একটি প্ল্যাটফর্ম।</p>
+<strong>
+🛡️ MediSafe BD — স্বাস্থ্য সুরক্ষা সিস্টেম
+</strong>
+
+<small>
+Prototype • Patient Record • Doctor Portal • Blood Donor • Vaccination • Hospital Service Directory • AI Decision Support
+</small>
 
 </footer>
 
 
+<!-- LOGIN / REGISTER MODAL -->
+
+<div id="modal" class="modal">
+
+<div class="modal-box">
+
+<span class="close"
+onclick="closeModal()">×</span>
+
+<h2 id="modalTitle">
+Login
+</h2>
+
+<form onsubmit="demoLogin(event)">
+
+<input
+id="fullName"
+placeholder="পূর্ণ নাম"
+required
+>
+
+<select id="userType">
+
+<option value="patient">
+Patient
+</option>
+
+<option value="doctor">
+Doctor
+</option>
+
+</select>
+
+
+<!-- ID OPTIONS -->
+
+<label>
+NID
+</label>
+
+<input
+id="nid"
+placeholder="NID Number"
+>
+
+
+<label>
+Birth Certificate
+</label>
+
+<input
+id="birth"
+placeholder="Birth Certificate Number"
+>
+
+
+<label>
+Temporary ID
+</label>
+
+<input
+id="temporary"
+placeholder="Newborn Temporary ID"
+>
+
+
+<!-- DOCTOR -->
+
+<label>
+BM&DC Registration Number
+</label>
+
+<input
+id="bmdc"
+placeholder="BM&DC Registration Number"
+>
+
+
+<input
+id="password"
+type="password"
+placeholder="Password"
+required
+>
+
+<button class="submit">
+Continue Demo
+</button>
+
+</form>
+
+<p style="margin-top:15px;color:#777;font-size:13px">
+
+⚠️ DEMO MODE: বর্তমানে কোনো সরকারি
+verification করা হচ্ছে না। যেকোনো valid-looking
+information দিয়ে demonstration login করা যাবে।
+পরবর্তীতে official verification যুক্ত করা হবে।
+
+</p>
+
+</div>
+
+</div>
+
+
 <script>
 
-/* HEALTH CATEGORY OPEN/CLOSE */
 
-function toggleHealth(id){
+/* HOME */
 
-    const content = document.getElementById(id);
+function home(){
 
-    content.classList.toggle("open");
+    document.getElementById("dashboard").style.display="none";
 
-}
-
-
-/* INNER TOPIC OPEN/CLOSE */
-
-function toggleTopic(element){
-
-    const content = element.nextElementSibling;
-
-    content.classList.toggle("open");
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
 
 }
 
 
-/* PORTALS */
+/* LOGIN */
 
-function doctorPortal(){
+function doctorLogin(){
 
-    alert("Doctor Portal শীঘ্রই চালু হবে।");
-
-}
-
-function patientPortal(){
-
-    alert("Patient Portal শীঘ্রই চালু হবে।");
+    openModal("Doctor Login","doctor");
 
 }
 
 
-/* SERVICES */
+function patientLogin(){
 
-function findBloodDonor(){
-
-    alert("Blood Donor Search চালু হবে।");
+    openModal("Patient Login","patient");
 
 }
 
 
-function freeTicket(){
+function doctorRegister(){
 
-    alert("Free Ticket Service চালু হবে।");
+    openModal("Doctor Registration","doctor");
 
 }
+
+
+function patientRegister(){
+
+    openModal("Patient Registration","patient");
+
+}
+
+
+/* MODAL */
+
+function openModal(title,type){
+
+    document.getElementById("modal").style.display="flex";
+
+    document.getElementById("modalTitle").innerText=title;
+
+    document.getElementById("userType").value=type;
+
+}
+
+
+function closeModal(){
+
+    document.getElementById("modal").style.display="none";
+
+}
+
+
+/* DEMO LOGIN */
+
+function demoLogin(event){
+
+    event.preventDefault();
+
+
+    const name =
+    document.getElementById("fullName").value;
+
+    const type =
+    document.getElementById("userType").value;
+
+    const nid =
+    document.getElementById("nid").value;
+
+    const birth =
+    document.getElementById("birth").value;
+
+    const temporary =
+    document.getElementById("temporary").value;
+
+    const bmdc =
+    document.getElementById("bmdc").value;
+
+
+    closeModal();
+
+
+    document.getElementById("dashboard").style.display="block";
+
+
+    if(type==="doctor"){
+
+        document.getElementById("dashboardTitle")
+        .innerText=
+        "👨‍⚕️ Doctor Dashboard";
+
+        document.getElementById("identityInfo")
+        .innerHTML=
+        `
+        Doctor Name: <b>${name}</b><br>
+        BM&DC Registration No:
+        <b>${bmdc || "Demo Number"}</b>
+        `;
+
+    }
+
+    else{
+
+        document.getElementById("dashboardTitle")
+        .innerText=
+        "👤 Patient Dashboard";
+
+        document.getElementById("identityInfo")
+        .innerHTML=
+        `
+        Patient Name: <b>${name}</b><br>
+        NID: <b>${nid || "Not provided"}</b><br>
+        Birth Certificate:
+        <b>${birth || "Not provided"}</b><br>
+        Temporary ID:
+        <b>${temporary || "Not provided"}</b>
+        `;
+
+    }
+
+
+    document.getElementById("dashboard")
+    .scrollIntoView({
+        behavior:"smooth"
+    });
+
+}
+
+
+/* LOGOUT */
+
+function logout(){
+
+    document.getElementById("dashboard").style.display="none";
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+
+/* AI DEMO */
+
+function askAI(){
+
+    const q =
+    document.getElementById("aiQuestion").value;
+
+    if(!q){
+
+        alert("প্রথমে আপনার প্রশ্ন লিখুন।");
+
+        return;
+
+    }
+
+
+    document.getElementById("aiAnswer")
+    .innerHTML=
+    `
+    <br>
+    <b>🤖 AI Demo:</b>
+    আপনার প্রশ্নের জন্য উপযুক্ত specialist
+    নির্বাচন করতে Doctor Search ব্যবহার করুন।
+    এটি diagnosis নয়।
+    `;
+
+}
+
+
+/* OTHER DEMO PAGES */
+
+function doctorSearch(){
+
+    alert(
+    "🔎 Doctor Search Demo\n\nপরবর্তীতে Hospital + Specialty অনুযায়ী verified doctor database এখানে যুক্ত হবে।"
+    );
+
+}
+
+
+function hospitalSearch(){
+
+    alert(
+    "🏥 Hospital & Service Search Demo\n\nপরবর্তীতে hospital, treatment, test, fee এবং availability database এখানে যুক্ত হবে।"
+    );
+
+}
+
+
+function bloodDonor(){
+
+    alert(
+    "🩸 Blood Donor Demo\n\nপরবর্তীতে Blood Group + Location অনুযায়ী live donor search যুক্ত হবে।"
+    );
+
+}
+
 
 function ambulance(){
 
-    alert("Ambulance Service চালু হবে।");
+    alert(
+    "🚑 Ambulance Demo\n\nপরবর্তীতে location-based ambulance service যুক্ত হবে।"
+    );
+
+}
+
+
+function healthInfo(){
+
+    alert(
+    "🏥 স্বাস্থ্য তথ্য\n\nসুস্থ থাকা\nশিশু স্বাস্থ্য\nগর্ভবতী ও প্রসুতি\nঅটিজম ও প্রতিবন্ধি\n\nএই বিভাগে text + video content যুক্ত হবে।"
+    );
+
+}
+
+
+function saveDemo(){
+
+    alert(
+    "✅ Demo information saved!\n\nপরবর্তীতে এটি database-এ permanently save করা হবে।"
+    );
 
 }
 
