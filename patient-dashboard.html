@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Patient Dashboard | MediSafe BD</title>
+<title>Patient Portal | MediSafe BD</title>
 
 <style>
 
@@ -22,9 +22,7 @@ body{
     color:#1d2b36;
 }
 
-/* =========================
-   HEADER
-========================= */
+/* HEADER */
 
 header{
     background:#0b6e69;
@@ -55,9 +53,7 @@ header{
 }
 
 
-/* =========================
-   MAIN
-========================= */
+/* MAIN */
 
 .container{
     width:92%;
@@ -66,9 +62,7 @@ header{
 }
 
 
-/* =========================
-   TITLE
-========================= */
+/* TITLE */
 
 .title{
     text-align:center;
@@ -86,9 +80,7 @@ header{
 }
 
 
-/* =========================
-   PATIENT HEADER INFO
-========================= */
+/* PATIENT HEADER */
 
 .patient-header{
     background:white;
@@ -110,9 +102,7 @@ header{
 }
 
 
-/* =========================
-   MENU
-========================= */
+/* MENU */
 
 .menu-grid{
     display:grid;
@@ -152,9 +142,7 @@ header{
 }
 
 
-/* =========================
-   CONTENT
-========================= */
+/* CONTENT */
 
 .content{
     display:none;
@@ -174,6 +162,9 @@ header{
     margin-bottom:20px;
 }
 
+
+/* BACK BUTTON */
+
 .back-btn{
     background:#0b6e69;
     color:white;
@@ -185,9 +176,7 @@ header{
 }
 
 
-/* =========================
-   PROFILE
-========================= */
+/* PROFILE */
 
 .profile-grid{
     display:grid;
@@ -214,29 +203,43 @@ header{
 }
 
 
-/* =========================
-   HISTORY / RECORDS
-========================= */
+/* RECORD */
 
 .record-item{
     background:#f4f8fb;
-    padding:16px;
+    padding:17px;
     border-radius:9px;
-    margin-bottom:12px;
+    margin-bottom:13px;
+    border-left:4px solid #0b6e69;
 }
 
 .record-item strong{
     color:#164e63;
 }
 
+.record-item p{
+    margin-top:8px;
+    line-height:1.6;
+}
 
-/* =========================
-   HEALTH NOTES
-========================= */
+
+/* READ ONLY NOTICE */
+
+.readonly{
+    background:#eef8f6;
+    border-left:5px solid #0b6e69;
+    padding:14px;
+    border-radius:7px;
+    margin-bottom:20px;
+    line-height:1.5;
+}
+
+
+/* SYMPTOMS */
 
 textarea{
     width:100%;
-    min-height:130px;
+    min-height:150px;
     padding:13px;
     border:1px solid #ccd6dc;
     border-radius:8px;
@@ -255,26 +258,19 @@ textarea{
     font-weight:bold;
 }
 
-
-/* =========================
-   SPECIALIST
-========================= */
-
-.specialist-box{
-    background:#eef8f6;
-    padding:20px;
-    border-radius:10px;
-}
-
-.specialist-box h3{
-    color:#075e58;
-    margin-bottom:10px;
+.save-btn:hover{
+    background:#075e58;
 }
 
 
-/* =========================
-   DEMO NOTICE
-========================= */
+/* SAVED SYMPTOM */
+
+.saved-box{
+    margin-top:20px;
+}
+
+
+/* DEMO NOTICE */
 
 .demo{
     margin-top:28px;
@@ -288,9 +284,7 @@ textarea{
 }
 
 
-/* =========================
-   MOBILE
-========================= */
+/* MOBILE */
 
 @media(max-width:750px){
 
@@ -300,6 +294,10 @@ textarea{
 
     .profile-grid{
         grid-template-columns:1fr;
+    }
+
+    .profile-item{
+        grid-column:auto !important;
     }
 
 }
@@ -312,9 +310,7 @@ textarea{
 <body>
 
 
-<!-- =========================
-     HEADER
-========================= -->
+<!-- HEADER -->
 
 <header>
 
@@ -337,27 +333,23 @@ textarea{
 <div class="container">
 
 
-<!-- =========================
-     TITLE
-========================= -->
+<!-- TITLE -->
 
 <div class="title">
 
     <h1>
-        👤 Patient Dashboard
+        👤 Patient Portal
     </h1>
 
     <p>
-        Your personal health information portal
+        View your health records and share your symptoms with your doctor
     </p>
 
 </div>
 
 
 
-<!-- =========================
-     PATIENT HEADER
-========================= -->
+<!-- PATIENT HEADER -->
 
 <div class="patient-header">
 
@@ -373,14 +365,12 @@ textarea{
 
 
 
-<!-- =========================
-     MENU
-========================= -->
+<!-- MENU -->
 
 <div class="menu-grid">
 
 
-    <!-- MY PROFILE -->
+    <!-- PROFILE -->
 
     <div
         class="menu-card"
@@ -409,7 +399,7 @@ textarea{
         onclick="showSection('medical')">
 
         <div class="icon">
-            📋
+            🏥
         </div>
 
         <h3>
@@ -417,7 +407,7 @@ textarea{
         </h3>
 
         <p>
-            View your medical history
+            View your complete medical history
         </p>
 
     </div>
@@ -435,11 +425,11 @@ textarea{
         </div>
 
         <h3>
-            Antibiotic History
+            Lifetime Antibiotic History
         </h3>
 
         <p>
-            View previous antibiotic records
+            View all antibiotic records
         </p>
 
     </div>
@@ -461,7 +451,7 @@ textarea{
         </h3>
 
         <p>
-            View your prescriptions
+            View prescriptions from doctors
         </p>
 
     </div>
@@ -483,51 +473,29 @@ textarea{
         </h3>
 
         <p>
-            View uploaded test reports
+            View your medical test reports
         </p>
 
     </div>
 
 
 
-    <!-- HEALTH NOTES -->
+    <!-- MY SYMPTOMS -->
 
     <div
         class="menu-card"
-        onclick="showSection('notes')">
+        onclick="showSection('symptoms')">
 
         <div class="icon">
             📝
         </div>
 
         <h3>
-            My Health Notes
+            My Symptoms
         </h3>
 
         <p>
-            Add symptoms or health information
-        </p>
-
-    </div>
-
-
-
-    <!-- SPECIALIST -->
-
-    <div
-        class="menu-card"
-        onclick="showSection('specialist')">
-
-        <div class="icon">
-            🤖
-        </div>
-
-        <h3>
-            Specialist Assistant
-        </h3>
-
-        <p>
-            Get general guidance about specialist type
+            Write your current health problems for your doctor
         </p>
 
     </div>
@@ -562,9 +530,7 @@ textarea{
 
         <div class="profile-item">
 
-            <span>
-                Full Name
-            </span>
+            <span>Full Name</span>
 
             <strong id="profileName">
                 Not Available
@@ -575,9 +541,7 @@ textarea{
 
         <div class="profile-item">
 
-            <span>
-                Patient ID
-            </span>
+            <span>Patient ID</span>
 
             <strong id="profileID">
                 Not Available
@@ -588,9 +552,7 @@ textarea{
 
         <div class="profile-item">
 
-            <span>
-                Date of Birth
-            </span>
+            <span>Date of Birth</span>
 
             <strong id="profileDOB">
                 Not Available
@@ -601,9 +563,7 @@ textarea{
 
         <div class="profile-item">
 
-            <span>
-                Gender
-            </span>
+            <span>Gender</span>
 
             <strong id="profileGender">
                 Not Available
@@ -614,9 +574,7 @@ textarea{
 
         <div class="profile-item">
 
-            <span>
-                Phone Number
-            </span>
+            <span>Phone Number</span>
 
             <strong id="profilePhone">
                 Not Available
@@ -627,9 +585,7 @@ textarea{
 
         <div class="profile-item">
 
-            <span>
-                NID Number
-            </span>
+            <span>NID Number</span>
 
             <strong id="profileNID">
                 Not Available
@@ -640,9 +596,7 @@ textarea{
 
         <div class="profile-item">
 
-            <span>
-                Birth Certificate
-            </span>
+            <span>Birth Certificate</span>
 
             <strong id="profileBirth">
                 Not Available
@@ -653,9 +607,7 @@ textarea{
 
         <div class="profile-item">
 
-            <span>
-                Temporary ID
-            </span>
+            <span>Temporary ID</span>
 
             <strong id="profileTemporary">
                 Not Applicable
@@ -666,9 +618,7 @@ textarea{
 
         <div class="profile-item">
 
-            <span>
-                Email
-            </span>
+            <span>Email</span>
 
             <strong id="profileEmail">
                 Not Available
@@ -679,9 +629,7 @@ textarea{
 
         <div class="profile-item">
 
-            <span>
-                Emergency Contact
-            </span>
+            <span>Emergency Contact</span>
 
             <strong id="profileEmergency">
                 Not Available
@@ -690,12 +638,11 @@ textarea{
         </div>
 
 
-        <div class="profile-item"
-             style="grid-column:1 / 3;">
+        <div
+            class="profile-item"
+            style="grid-column:1 / 3;">
 
-            <span>
-                Address
-            </span>
+            <span>Address</span>
 
             <strong id="profileAddress">
                 Not Available
@@ -727,19 +674,37 @@ textarea{
     </button>
 
     <h2>
-        📋 Medical History
+        🏥 Complete Medical History
     </h2>
 
-    <div class="record-item">
 
-        <strong>
-            Medical History
-        </strong>
+    <div class="readonly">
 
-        <p>
-            Your authorized medical records will
-            appear here when added by an authorized doctor.
-        </p>
+        🔒 <strong>Read Only:</strong>
+
+        Medical history can only be added or modified
+        by an authorized doctor. Patients cannot edit
+        these records.
+
+    </div>
+
+
+    <div id="medicalRecords">
+
+        <div class="record-item">
+
+            <strong>
+                Medical Records
+            </strong>
+
+            <p>
+                Your complete disease, diagnosis,
+                treatment and follow-up history will
+                appear here when recorded by an
+                authorized doctor.
+            </p>
+
+        </div>
 
     </div>
 
@@ -764,19 +729,36 @@ textarea{
     </button>
 
     <h2>
-        💊 Antibiotic History
+        💊 Lifetime Antibiotic History
     </h2>
 
-    <div class="record-item">
 
-        <strong>
-            Antibiotic Records
-        </strong>
+    <div class="readonly">
 
-        <p>
-            Your authorized antibiotic history will
-            appear here.
-        </p>
+        🔒 <strong>Read Only:</strong>
+
+        This record contains the patient's antibiotic
+        history. Only authorized doctors can add or
+        modify antibiotic records.
+
+    </div>
+
+
+    <div id="antibioticRecords">
+
+        <div class="record-item">
+
+            <strong>
+                Antibiotic Records
+            </strong>
+
+            <p>
+                All antibiotic medicines taken by the
+                patient throughout their medical history
+                will appear here.
+            </p>
+
+        </div>
 
     </div>
 
@@ -803,6 +785,15 @@ textarea{
     <h2>
         📄 Prescriptions
     </h2>
+
+
+    <div class="readonly">
+
+        🔒 Prescriptions are provided by authorized
+        doctors and cannot be edited by the patient.
+
+    </div>
+
 
     <div class="record-item">
 
@@ -841,14 +832,23 @@ textarea{
         🧪 Test Reports
     </h2>
 
+
+    <div class="readonly">
+
+        🔒 Test reports are protected medical records.
+        Patients can view them but cannot modify them.
+
+    </div>
+
+
     <div class="record-item">
 
         <strong>
-            Laboratory / Test Reports
+            Laboratory / Diagnostic Reports
         </strong>
 
         <p>
-            Your authorized test reports will
+            Authorized medical test reports will
             appear here.
         </p>
 
@@ -859,12 +859,12 @@ textarea{
 
 
 <!-- ==================================================
-     HEALTH NOTES
+     MY SYMPTOMS
 ================================================== -->
 
 <div
     class="content"
-    id="notes">
+    id="symptoms">
 
     <button
         class="back-btn"
@@ -875,81 +875,46 @@ textarea{
     </button>
 
     <h2>
-        📝 My Health Notes
+        📝 My Symptoms
     </h2>
 
-    <p style="margin-bottom:12px;">
 
-        Write down symptoms or information that you
-        want to share with your doctor.
+    <div class="readonly">
 
-    </p>
+        🏠 <strong>Share your problem from home:</strong>
+
+        You can write your current symptoms or health
+        problems here. Your doctor will be able to
+        review them from the Doctor Dashboard.
+
+    </div>
+
+
+    <label
+        style="display:block;margin-bottom:8px;font-weight:bold;">
+
+        Describe your problem
+
+    </label>
 
 
     <textarea
         id="healthNote"
-        placeholder="Write your symptoms or health notes here..."></textarea>
+        placeholder="Example: I have had fever and throat pain since yesterday..."></textarea>
 
 
     <button
         class="save-btn"
         onclick="saveHealthNote()">
 
-        Save Note
+        Save Symptoms
 
     </button>
 
 
     <div
-        id="savedNote"
-        style="margin-top:15px;">
-    </div>
-
-</div>
-
-
-
-<!-- ==================================================
-     SPECIALIST ASSISTANT
-================================================== -->
-
-<div
-    class="content"
-    id="specialist">
-
-    <button
-        class="back-btn"
-        onclick="backToDashboard()">
-
-        ← Back to Dashboard
-
-    </button>
-
-    <h2>
-        🤖 Specialist Assistant
-    </h2>
-
-
-    <div class="specialist-box">
-
-        <h3>
-            Describe your problem
-        </h3>
-
-        <p>
-            This future feature will help organize
-            the patient's symptoms and provide general
-            guidance about the type of specialist that
-            may be relevant.
-        </p>
-
-        <br>
-
-        <p>
-            ⚠️ This is a prototype feature and does
-            not replace professional medical diagnosis.
-        </p>
-
+        class="saved-box"
+        id="savedNote">
     </div>
 
 </div>
@@ -964,8 +929,8 @@ textarea{
 
     This Patient Portal is currently a course-project
     prototype. Real medical information will require
-    secure authentication, authorization and a
-    protected backend.
+    secure authentication, authorization and a protected
+    backend.
 
 </div>
 
@@ -995,7 +960,7 @@ if(
 
 
 /* =========================
-   GET SAVED DATA
+   GET SAVED PATIENT DATA
 ========================= */
 
 const patientName =
@@ -1162,7 +1127,7 @@ function showSection(sectionID){
 
 
 /* =========================
-   BACK
+   BACK TO DASHBOARD
 ========================= */
 
 function backToDashboard(){
@@ -1191,7 +1156,7 @@ function backToDashboard(){
 
 
 /* =========================
-   SAVE HEALTH NOTE
+   SAVE PATIENT SYMPTOMS
 ========================= */
 
 function saveHealthNote(){
@@ -1206,7 +1171,7 @@ function saveHealthNote(){
     if(note === ""){
 
         alert(
-            "Please write a health note first."
+            "Please describe your symptoms first."
         );
 
         return;
@@ -1223,14 +1188,28 @@ function saveHealthNote(){
     document
     .getElementById("savedNote")
     .innerHTML =
+
         "<div class='record-item'>" +
-        "<strong>Saved Note:</strong><br><br>" +
+
+        "<strong>Saved Symptoms:</strong>" +
+
+        "<p>" +
+
         note +
+
+        "</p>" +
+
+        "<small>" +
+
+        "This information can be reviewed by an authorized doctor." +
+
+        "</small>" +
+
         "</div>";
 
 
     alert(
-        "Your health note has been saved in Demo Mode."
+        "Your symptoms have been saved successfully."
     );
 
 }
