@@ -11,6 +11,71 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            /* HEALTH INFORMATION DROPDOWN */
+
+.health-dropdown {
+    position: relative;
+}
+
+.health-button {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.dropdown-arrow {
+    font-size: 17px;
+    line-height: 1;
+}
+
+.health-menu {
+    display: none;
+
+    position: absolute;
+
+    top: calc(100% + 7px);
+    right: 0;
+
+    min-width: 230px;
+
+    background: #ffffff;
+
+    border: 1px solid #d9d9d9;
+
+    border-radius: 10px;
+
+    padding: 7px;
+
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+
+    z-index: 1000;
+}
+
+.health-menu a {
+    display: block;
+
+    color: #222222;
+
+    text-decoration: none;
+
+    border: none;
+
+    padding: 11px 13px;
+
+    border-radius: 7px;
+
+    font-size: 14px;
+
+    white-space: nowrap;
+}
+
+.health-menu a:hover {
+    background: #f1f7f5;
+}
+
+.health-dropdown:hover .health-menu {
+    display: block;
+}
         }
 
         body {
@@ -500,7 +565,28 @@
         <a href="#">ডাক্তার</a>
         <a href="#">রোগী</a>
         <a href="#">ডাক্তার খুঁজুন</a>
-        <a href="#">স্বাস্থ্য তথ্য</a>
+       <div class="health-dropdown">
+
+    <a href="#" class="health-button">
+        স্বাস্থ্য তথ্য
+        <span class="dropdown-arrow">⌄</span>
+    </a>
+
+    <div class="health-menu">
+
+        <a href="#">সুস্থ থাকা</a>
+
+        <a href="#">শিশু স্বাস্থ্য</a>
+
+        <a href="#">গর্ভবতী ও প্রসূতি</a>
+
+        <a href="#">অটিজম ও প্রতিবন্ধিতা</a>
+
+
+
+    </div>
+
+</div>
         <a href="#">আমাদের সম্পর্কে</a>
     </nav>
 
