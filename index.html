@@ -1,654 +1,970 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HealthCare Bangladesh</title>
 
-    <title>MediSafe BD</title>
-
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            /* HEALTH INFORMATION DROPDOWN */
-
-.health-dropdown {
-    position: relative;
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
 }
 
-.health-button {
-    display: flex;
-    align-items: center;
-    gap: 6px;
+body{
+    background:#f5f9fc;
+    color:#18323d;
 }
 
-.dropdown-arrow {
-    font-size: 17px;
-    line-height: 1;
+/* HEADER */
+header{
+    background:#087f8c;
+    color:white;
+    padding:18px 6%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    box-shadow:0 3px 10px rgba(0,0,0,.15);
 }
 
-.health-menu {
-    display: none;
-
-    position: absolute;
-
-    top: calc(100% + 7px);
-    right: 0;
-
-    min-width: 230px;
-
-    background: #ffffff;
-
-    border: 1px solid #d9d9d9;
-
-    border-radius: 10px;
-
-    padding: 7px;
-
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
-
-    z-index: 1000;
+.logo{
+    font-size:25px;
+    font-weight:bold;
 }
 
-.health-menu a {
-    display: block;
-
-    color: #222222;
-
-    text-decoration: none;
-
-    border: none;
-
-    padding: 11px 13px;
-
-    border-radius: 7px;
-
-    font-size: 14px;
-
-    white-space: nowrap;
+nav{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    flex-wrap:wrap;
 }
 
-.health-menu a:hover {
-    background: #f1f7f5;
+nav a,
+.dropbtn{
+    color:white;
+    text-decoration:none;
+    padding:10px 13px;
+    border-radius:7px;
+    cursor:pointer;
+    border:none;
+    background:transparent;
+    font-size:15px;
 }
 
-.health-dropdown:hover .health-menu {
-    display: block;
+nav a:hover,
+.dropbtn:hover{
+    background:rgba(255,255,255,.15);
 }
-        }
 
-        body {
-            font-family: Arial, "Noto Sans Bengali", sans-serif;
-            background: #ffffff;
-            color: #222222;
-        }
-
-        /* =========================
-           TOP WARNING BAR
-        ========================== */
-
-        .warning {
-            width: 100%;
-            height: 36px;
-            background: #c62828;
-            color: #ffffff;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            gap: 8px;
-
-            padding: 0 12px;
-
-            font-size: 14px;
-            font-weight: 600;
-
-            white-space: nowrap;
-            overflow: hidden;
-        }
-
-        .warning-icon {
-            font-size: 16px;
-            flex-shrink: 0;
-        }
-
-        /* =========================
-           BRAND
-        ========================== */
-
-        .brand-area {
-            background: #ffffff;
-            padding: 21px 40px;
-        }
-
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 9px;
-
-            font-size: 32px;
-            font-weight: 800;
-            letter-spacing: 0.4px;
-        }
-
-        .brand-icon {
-            width: 32px;
-            height: 36px;
-
-            background: #087f5b;
-            color: #ffffff;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            border-radius: 9px 9px 11px 11px;
-
-            font-size: 18px;
-        }
-
-        .brand-text .medi {
-            color: #087f5b;
-        }
-
-        .brand-text .safe {
-            color: #16a085;
-        }
-
-        .brand-text .bd {
-            color: #087f5b;
-        }
-
-        /* =========================
-           NAVIGATION
-        ========================== */
-
-        .navigation {
-            width: 100%;
-            background: #050505;
-
-            padding: 13px 30px;
-
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-
-            gap: 9px;
-        }
-
-        .navigation a {
-            color: #ffffff;
-            text-decoration: none;
-
-            border: 1px solid #d9d9d9;
-
-            padding: 10px 16px;
-
-            border-radius: 7px;
-
-            font-size: 14px;
-            font-weight: 500;
-
-            white-space: nowrap;
-        }
-
-        .navigation a:hover {
-            background: #222222;
-        }
-
-        /* =========================
-           AI SECTION
-        ========================== */
-
-        .ai-section {
-            width: calc(100% - 40px);
-            max-width: 900px;
-
-            margin: 35px auto 0;
-
-            padding: 28px;
-
-            background: #075f4b;
-
-            border-radius: 13px;
-        }
-
-        .ai-title {
-            color: #ffffff;
-
-            font-size: 20px;
-            font-weight: 700;
-
-            text-align: center;
-
-            margin-bottom: 20px;
-        }
-
-        /* =========================
-           INPUT + ASK BUTTON
-        ========================== */
-
-        .ai-form {
-            width: 100%;
-
-            display: flex;
-            align-items: stretch;
-
-            gap: 10px;
-        }
-
-        .ai-input {
-            flex: 1;
-
-            min-height: 58px;
-
-            background: #ffffff;
-            color: #222222;
-
-            border: 1px solid #eeeeee;
-
-            border-radius: 9px;
-
-            padding: 15px 16px;
-
-            font-family: Arial, "Noto Sans Bengali", sans-serif;
-
-            font-size: 16px;
-            line-height: 1.5;
-
-            outline: none;
-
-            resize: none;
-        }
-
-        .ai-input::placeholder {
-            color: #999999;
-        }
-
-        .ai-input:focus {
-            border-color: #cfcfcf;
-        }
-
-        /* ASK BUTTON */
-
-        .ask-button {
-            background: #d62828;
-            color: #ffffff;
-
-            border: none;
-
-            padding: 0 25px;
-
-            border-radius: 9px;
-
-            font-family: Arial, "Noto Sans Bengali", sans-serif;
-
-            font-size: 16px;
-            font-weight: 700;
-
-            cursor: pointer;
-
-            white-space: nowrap;
-        }
-
-        .ask-button:hover {
-            background: #b71c1c;
-        }
-
-        /* =========================
-           MAIN TITLE
-        ========================== */
-
-        .main-title {
-            text-align: center;
-
-            padding: 38px 20px 50px;
-        }
-
-        .main-title h1 {
-            color: #075f4b;
-
-            font-size: 38px;
-
-            font-weight: 800;
-        }
-
-        /* =========================
-           RESPONSIVE
-        ========================== */
-
-        @media (max-width: 900px) {
-
-            .navigation {
-                justify-content: flex-end;
-                flex-wrap: wrap;
-            }
-
-            .ai-section {
-                margin-top: 25px;
-            }
-        }
-
-        @media (max-width: 600px) {
-
-            .warning {
-                height: 34px;
-                font-size: 11px;
-                gap: 5px;
-            }
-
-            .warning-icon {
-                font-size: 14px;
-            }
-
-            .brand-area {
-                padding: 18px 20px;
-            }
-
-            .brand {
-                font-size: 27px;
-                gap: 7px;
-            }
-
-            .brand-icon {
-                width: 29px;
-                height: 32px;
-                font-size: 16px;
-            }
-
-            .navigation {
-                padding: 10px 15px;
-                gap: 7px;
-            }
-
-            .navigation a {
-                font-size: 13px;
-                padding: 8px 11px;
-                border-radius: 7px;
-            }
-
-            .ai-section {
-                padding: 20px;
-                border-radius: 11px;
-            }
-
-            .ai-title {
-                font-size: 17px;
-                margin-bottom: 16px;
-            }
-
-            .ai-form {
-                gap: 8px;
-            }
-
-            .ai-input {
-                min-height: 52px;
-                border-radius: 8px;
-                font-size: 14px;
-            }
-
-            .ask-button {
-                padding: 0 16px;
-                border-radius: 8px;
-                font-size: 14px;
-            }
-
-            .main-title h1 {
-                font-size: 30px;
-            }
-        }
-
-        @media (max-width: 430px) {
-
-            .ai-form {
-                flex-direction: column;
-            }
-
-            .ai-input {
-                width: 100%;
-                min-height: 70px;
-            }
-
-            .ask-button {
-                min-height: 48px;
-                width: 100%;
-            }
-        }
-                /* PORTAL SECTION */
-        .portal-section {
-            width: calc(100% - 40px);
-            max-width: 1100px;
-
-            margin: 0 auto 30px;
-
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-
-        .portal-box {
-            min-height: 150px;
-
-            background: #ffffff;
-
-            border: 2px solid #075f4b;
-
-            border-radius: 16px;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            text-decoration: none;
-
-            color: #075f4b;
-
-            font-size: 23px;
-            font-weight: 700;
-
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
-        }
-
-        .portal-box:hover {
-            background: #f2faf7;
-        }
-
-        /* SERVICE BOX SECTION */
-        .service-section {
-            width: calc(100% - 40px);
-            max-width: 1100px;
-
-            margin: 0 auto 50px;
-
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-
-            gap: 16px;
-        }
-
-        .service-box {
-            min-height: 130px;
-
-            background: #ffffff;
-
-            border: 1px solid #d7d7d7;
-
-            border-radius: 16px;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            text-align: center;
-
-            padding: 20px;
-
-            color: #075f4b;
-
-            font-size: 17px;
-            font-weight: 700;
-
-            text-decoration: none;
-
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
-        }
-
-        .service-box:hover {
-            border-color: #075f4b;
-        }
-
-        @media (max-width: 800px) {
-
-            .portal-section {
-                grid-template-columns: 1fr;
-            }
-
-            .service-section {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-
-        @media (max-width: 500px) {
-
-            .portal-section,
-            .service-section {
-                width: calc(100% - 30px);
-            }
-
-            .portal-box {
-                min-height: 125px;
-                font-size: 20px;
-            }
-
-            .service-section {
-                grid-template-columns: 1fr;
-            }
-
-            .service-box {
-                min-height: 100px;
-            }
-        }
-    </style>
+/* DROPDOWN */
+.dropdown{
+    position:relative;
+}
+
+.dropdown-content{
+    display:none;
+    position:absolute;
+    top:45px;
+    right:0;
+    min-width:230px;
+    background:white;
+    border-radius:10px;
+    box-shadow:0 7px 20px rgba(0,0,0,.18);
+    overflow:hidden;
+    z-index:1000;
+}
+
+.dropdown-content a{
+    display:block;
+    color:#18323d;
+    padding:13px 17px;
+    text-decoration:none;
+    border-bottom:1px solid #eee;
+}
+
+.dropdown-content a:hover{
+    background:#eaf8fa;
+    color:#087f8c;
+}
+
+.dropdown:hover .dropdown-content{
+    display:block;
+}
+
+/* HERO */
+.hero{
+    text-align:center;
+    padding:65px 20px;
+    background:linear-gradient(135deg,#e6f8fa,#ffffff);
+}
+
+.hero h1{
+    font-size:40px;
+    color:#087f8c;
+    margin-bottom:15px;
+}
+
+.hero p{
+    font-size:18px;
+    max-width:750px;
+    margin:auto;
+    line-height:1.7;
+}
+
+.hero button{
+    margin-top:25px;
+    padding:13px 25px;
+    border:none;
+    border-radius:8px;
+    background:#087f8c;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+}
+
+/* PORTAL */
+.portal-section{
+    padding:40px 6%;
+}
+
+.portal-container{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:25px;
+    max-width:1000px;
+    margin:auto;
+}
+
+.portal{
+    background:white;
+    border-radius:15px;
+    padding:30px;
+    text-align:center;
+    box-shadow:0 4px 15px rgba(0,0,0,.08);
+    border:1px solid #e2eeee;
+}
+
+.portal h2{
+    color:#087f8c;
+    margin-bottom:12px;
+}
+
+.portal p{
+    line-height:1.6;
+    color:#52666e;
+}
+
+.portal button{
+    margin-top:20px;
+    padding:11px 22px;
+    border:0;
+    border-radius:7px;
+    background:#087f8c;
+    color:white;
+    cursor:pointer;
+}
+
+/* SERVICE BOXES */
+.services{
+    padding:30px 6% 55px;
+}
+
+.services h2,
+.health-section h2{
+    text-align:center;
+    color:#087f8c;
+    margin-bottom:25px;
+}
+
+.service-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+    max-width:1200px;
+    margin:auto;
+}
+
+.service-box{
+    background:white;
+    padding:25px 15px;
+    text-align:center;
+    border-radius:15px;
+    border:1px solid #e2eeee;
+    box-shadow:0 4px 12px rgba(0,0,0,.07);
+    cursor:pointer;
+    transition:.2s;
+}
+
+.service-box:hover{
+    transform:translateY(-4px);
+    box-shadow:0 7px 18px rgba(0,0,0,.12);
+}
+
+.service-icon{
+    font-size:38px;
+    margin-bottom:12px;
+}
+
+.service-box h3{
+    color:#087f8c;
+    margin-bottom:8px;
+}
+
+.service-box p{
+    font-size:14px;
+    color:#63767c;
+    line-height:1.5;
+}
+
+/* HEALTH INFORMATION */
+.health-section{
+    padding:50px 6%;
+    background:#edf8fa;
+}
+
+.health-container{
+    max-width:1100px;
+    margin:auto;
+}
+
+.health-category{
+    background:white;
+    margin-bottom:15px;
+    border-radius:12px;
+    overflow:hidden;
+    box-shadow:0 3px 10px rgba(0,0,0,.07);
+}
+
+.health-title{
+    padding:18px 22px;
+    font-size:18px;
+    font-weight:bold;
+    color:#087f8c;
+    cursor:pointer;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.health-content{
+    display:none;
+    padding:5px 22px 22px;
+}
+
+.health-content.open{
+    display:block;
+}
+
+.topic{
+    border:1px solid #dcebed;
+    border-radius:9px;
+    margin-top:10px;
+    overflow:hidden;
+}
+
+.topic-title{
+    padding:14px;
+    background:#f6fbfc;
+    cursor:pointer;
+    font-weight:bold;
+    color:#24505a;
+}
+
+.topic-content{
+    display:none;
+    padding:15px;
+    line-height:1.7;
+    color:#52666e;
+}
+
+.topic-content.open{
+    display:block;
+}
+
+.topic-content ul{
+    margin-left:20px;
+    margin-top:8px;
+}
+
+.topic-content li{
+    margin-bottom:5px;
+}
+
+/* VIDEO */
+.video-box{
+    margin-top:12px;
+    padding:18px;
+    background:#eef9fb;
+    border-radius:10px;
+}
+
+.video-box iframe{
+    width:100%;
+    height:250px;
+    border:0;
+    border-radius:8px;
+    margin-top:12px;
+}
+
+/* FOOTER */
+footer{
+    background:#073f48;
+    color:white;
+    text-align:center;
+    padding:25px;
+    margin-top:20px;
+}
+
+footer p{
+    margin:5px;
+}
+
+/* MOBILE */
+@media(max-width:850px){
+    .service-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .portal-container{
+        grid-template-columns:1fr;
+    }
+
+    header{
+        justify-content:center;
+        gap:15px;
+    }
+}
+
+@media(max-width:550px){
+    .service-grid{
+        grid-template-columns:1fr;
+    }
+
+    .hero h1{
+        font-size:30px;
+    }
+
+    nav{
+        justify-content:center;
+    }
+
+    .dropdown-content{
+        right:auto;
+        left:0;
+    }
+}
+</style>
 </head>
 
 <body>
 
-    <!-- TOP WARNING -->
-    <div class="warning">
-        <span class="warning-icon">⚠️</span>
-        <span>
-            এন্টিবায়োটিক নিজে থেকে ব্যবহার করবেন না প্রয়োজন হলে ডাক্তারের পরামর্শ নিন
-        </span>
+<!-- HEADER -->
+<header>
+
+<div class="logo">
+    🏥 HealthCare Bangladesh
+</div>
+
+<nav>
+
+<a href="#home">Home</a>
+
+<a href="#portals">Portals</a>
+
+<div class="dropdown">
+    <button class="dropbtn">স্বাস্থ্য তথ্য ▾</button>
+
+    <div class="dropdown-content">
+        <a href="#healthy">সুস্থ থাকা</a>
+        <a href="#child">শিশু স্বাস্থ্য</a>
+        <a href="#pregnancy">গর্ভবতী ও প্রসূতি</a>
+        <a href="#autism">অটিজম ও প্রতিবন্ধিতা</a>
+        <a href="#mental">মানসিক স্বাস্থ্য</a>
     </div>
+</div>
 
-    <!-- MEDISAFE BD -->
-    <div class="brand-area">
-        <div class="brand">
+<a href="#services">Services</a>
 
-            <div class="brand-icon">
-                🛡
-            </div>
-
-            <div class="brand-text">
-                <span class="medi">Medi</span><span class="safe">Safe</span>
-                <span class="bd"> BD</span>
-            </div>
-
-        </div>
-    </div>
-
-    <!-- NAVIGATION -->
-    <nav class="navigation">
-        <a href="#">হোম</a>
-        <a href="#">ডাক্তার</a>
-        <a href="#">রোগী</a>
-        <a href="#">ডাক্তার খুঁজুন</a>
-       <div class="health-dropdown">
-
-    <a href="#" class="health-button">
-        স্বাস্থ্য তথ্য
-        <span class="dropdown-arrow">⌄</span>
-    </a>
-
-    <div class="health-menu">
-
-        <a href="#">সুস্থ থাকা</a>
-
-        <a href="#">শিশু স্বাস্থ্য</a>
-
-        <a href="#">গর্ভবতী ও প্রসূতি</a>
-
-        <a href="#">অটিজম ও প্রতিবন্ধিতা</a>
+</nav>
+</header>
 
 
+<!-- HERO -->
+<section class="hero" id="home">
 
-    </div>
+<h1>আপনার স্বাস্থ্য, আমাদের অগ্রাধিকার</h1>
+
+<p>
+একটি সহজ ও ব্যবহারবান্ধব স্বাস্থ্যসেবা প্ল্যাটফর্ম,
+যেখানে প্রয়োজনীয় স্বাস্থ্য তথ্য ও বিভিন্ন স্বাস্থ্যসেবা
+এক জায়গায় পাওয়া যাবে।
+</p>
+
+<button onclick="document.getElementById('services').scrollIntoView()">
+সেবা দেখুন
+</button>
+
+</section>
+
+
+<!-- PORTALS -->
+<section class="portal-section" id="portals">
+
+<div class="portal-container">
+
+<div class="portal">
+    <h2>👨‍⚕️ Doctor Portal</h2>
+    <p>
+        ডাক্তারদের জন্য আলাদা পোর্টাল।
+        রোগীর তথ্য দেখা, রোগীর সাথে যোগাযোগ
+        এবং প্রয়োজনীয় স্বাস্থ্যসেবা পরিচালনার জন্য।
+    </p>
+    <button onclick="doctorPortal()">Doctor Portal</button>
+</div>
+
+<div class="portal">
+    <h2>🧑‍🦽 Patient Portal</h2>
+    <p>
+        রোগীদের জন্য সহজ পোর্টাল।
+        স্বাস্থ্যসেবা খোঁজা এবং প্রয়োজনীয়
+        সেবা গ্রহণের জন্য ব্যবহার করা যাবে।
+    </p>
+    <button onclick="patientPortal()">Patient Portal</button>
+</div>
 
 </div>
-        <a href="#">আমাদের সম্পর্কে</a>
-    </nav>
 
-    <!-- AI HEALTH QUESTION -->
-    <section class="ai-section">
-
-        <div class="ai-title">
-            AI আপনার স্বাস্থ্য সমস্যা সম্পর্কে কিছু জিজ্ঞাসা করুন
-        </div>
-
-        <div class="ai-form">
-
-            <textarea
-                class="ai-input"
-                placeholder="আপনার স্বাস্থ্য সমস্যা এখানে লিখুন..."
-            ></textarea>
-
-            <button class="ask-button">
-                জিজ্ঞাসা করুন
-            </button>
-
-        </div>
-
-    </section>
-
-    <!-- MAIN TITLE -->
-    <section class="main-title">
-        <h1>স্বাস্থ্য সুরক্ষা সিস্টেম</h1>    <!-- DOCTOR AND PATIENT PORTAL -->
-    <section class="portal-section">
-
-        <a href="#" class="portal-box">
-            ডাক্তার পোর্টাল
-        </a>
-
-        <a href="#" class="portal-box">
-            পেশেন্ট পোর্টাল
-        </a>
-
-    </section>
+</section>
 
 
-    <!-- HEALTHCARE SERVICES -->
-    <section class="service-section">
+<!-- SERVICES -->
+<section class="services" id="services">
 
-        <a href="#" class="service-box">
-            ব্লাড ডোনার খুঁজুন
-        </a>
+<h2>প্রধান সেবা</h2>
 
-        <a href="#" class="service-box">
-            লাইফ ট্রাকিং সিস্টেম
-        </a>
+<div class="service-grid">
 
-        <a href="#" class="service-box">
-            ফ্রি টিকা কোথায়?
-        </a>
+<div class="service-box" onclick="findBloodDonor()">
+    <div class="service-icon">🩸</div>
+    <h3>ব্লাড ডোনার খুঁজুন</h3>
+    <p>প্রয়োজনীয় রক্তের গ্রুপের ডোনার খুঁজে পাওয়ার সুবিধা।</p>
+</div>
 
-        <a href="#" class="service-box">
-            হাসপাতাল ও সেবা খুঁজুন
-        </a>
+<div class="service-box" onclick="liveTracking()">
+    <div class="service-icon">📍</div>
+    <h3>লাইভ ট্র্যাকিং সিস্টেম</h3>
+    <p>রক্ত, অ্যাম্বুলেন্স ও অন্যান্য জরুরি সেবার অবস্থান ট্র্যাক করার ব্যবস্থা।</p>
+</div>
 
-    </section>
-    </section>
+<div class="service-box" onclick="freeTicket()">
+    <div class="service-icon">🎫</div>
+    <h3>ফ্রি টিকিট</h3>
+    <p>স্বাস্থ্যসেবা গ্রহণের জন্য প্রয়োজনীয় টিকিট বা সহায়তা।</p>
+</div>
+
+<div class="service-box" onclick="ambulance()">
+    <div class="service-icon">🚑</div>
+    <h3>অ্যাম্বুলেন্স</h3>
+    <p>জরুরি প্রয়োজনে অ্যাম্বুলেন্স সেবা খুঁজে পাওয়ার ব্যবস্থা।</p>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- HEALTH INFORMATION -->
+<section class="health-section">
+
+<h2>স্বাস্থ্য তথ্য</h2>
+
+<div class="health-container">
+
+
+<!-- 1 HEALTHY -->
+<div class="health-category" id="healthy">
+
+<div class="health-title" onclick="toggleHealth('healthyContent')">
+    <span>🌿 সুস্থ থাকা</span>
+    <span>＋</span>
+</div>
+
+<div class="health-content" id="healthyContent">
+
+<div class="topic">
+<div class="topic-title" onclick="toggleTopic(this)">
+    স্বাস্থ্যকর জীবনযাপন
+</div>
+
+<div class="topic-content">
+<p>
+সুস্থ থাকার জন্য নিয়মিত ঘুম, সুষম খাবার,
+পর্যাপ্ত পানি পান এবং নিয়মিত শারীরিক কার্যক্রম গুরুত্বপূর্ণ।
+</p>
+
+<ul>
+<li>সুষম খাদ্য গ্রহণ</li>
+<li>পর্যাপ্ত পানি পান</li>
+<li>নিয়মিত হাঁটা বা ব্যায়াম</li>
+<li>পর্যাপ্ত ঘুম</li>
+<li>পরিচ্ছন্নতা বজায় রাখা</li>
+</ul>
+</div>
+</div>
+
+
+<div class="topic">
+<div class="topic-title" onclick="toggleTopic(this)">
+    খাবার ও পুষ্টি
+</div>
+
+<div class="topic-content">
+<p>
+শরীরের প্রয়োজন অনুযায়ী বিভিন্ন ধরনের পুষ্টিকর খাবার
+গ্রহণ করা গুরুত্বপূর্ণ।
+</p>
+
+<ul>
+<li>প্রোটিন</li>
+<li>কার্বোহাইড্রেট</li>
+<li>ভিটামিন ও মিনারেল</li>
+<li>পানি</li>
+<li>সুষম খাদ্য পরিকল্পনা</li>
+</ul>
+</div>
+</div>
+
+
+<div class="topic">
+<div class="topic-title" onclick="toggleTopic(this)">
+    ব্যায়াম ও শারীরিক সুস্থতা
+</div>
+
+<div class="topic-content">
+<p>
+নিয়মিত শারীরিক কার্যক্রম শরীরকে সক্রিয় রাখতে সাহায্য করে।
+</p>
+
+<ul>
+<li>হাঁটা</li>
+<li>স্ট্রেচিং</li>
+<li>হালকা ব্যায়াম</li>
+<li>দৈনন্দিন শারীরিক কার্যক্রম</li>
+</ul>
+</div>
+</div>
+
+</div>
+</div>
+
+
+<!-- 2 CHILD -->
+<div class="health-category" id="child">
+
+<div class="health-title" onclick="toggleHealth('childContent')">
+    <span>👶 শিশু স্বাস্থ্য</span>
+    <span>＋</span>
+</div>
+
+<div class="health-content" id="childContent">
+
+<div class="topic">
+<div class="topic-title" onclick="toggleTopic(this)">
+    👨‍👩‍👧 শিশু লালন-পালন
+</div>
+
+<div class="topic-content">
+
+<p>
+শিশুর বয়স অনুযায়ী যত্ন, খাবার, ঘুম, পরিচ্ছন্নতা,
+নিরাপত্তা, মানসিক বিকাশ ও পারিবারিক পরিবেশ সম্পর্কে
+বিস্তারিত তথ্য এখানে রাখা যাবে।
+</p>
+
+<ul>
+<li>নবজাতকের যত্ন</li>
+<li>শিশুকে খাওয়ানোর নিয়ম</li>
+<li>শিশুর ঘুম</li>
+<li>শিশুর পরিচ্ছন্নতা</li>
+<li>শিশুর নিরাপত্তা</li>
+<li>শিশুর আচরণ ও বিকাশ</li>
+<li>বয়স অনুযায়ী শিশুর যত্ন</li>
+<li>অভিভাবকের করণীয়</li>
+</ul>
+
+<div class="video-box">
+
+<strong>🎥 শিশু লালন-পালনের ভিডিও</strong>
+
+<p>
+শিশুর যত্ন ও লালন-পালন সম্পর্কে ভিডিও
+এই অংশের মধ্যেই থাকবে।
+</p>
+
+<!-- এখানে ভবিষ্যতে আসল ভিডিওর YouTube embed বসানো যাবে -->
+
+<iframe
+src="https://www.youtube.com/embed/ScMzIvxBSi4"
+title="শিশু লালন-পালনের ভিডিও"
+allowfullscreen>
+</iframe>
+
+</div>
+
+</div>
+</div>
+
+
+<div class="topic">
+<div class="topic-title" onclick="toggleTopic(this)">
+    🍼 শিশুর খাবার ও পুষ্টি
+</div>
+
+<div class="topic-content">
+<ul>
+<li>বয়স অনুযায়ী খাবার</li>
+<li>শিশুর পুষ্টি</li>
+<li>খাবার দেওয়ার নিয়ম</li>
+<li>পুষ্টির ঘাটতি</li>
+<li>স্বাস্থ্যকর খাবারের অভ্যাস</li>
+</ul>
+</div>
+</div>
+
+
+<div class="topic">
+<div class="topic-title" onclick="toggleTopic(this)">
+    💉 টিকা
+</div>
+
+<div class="topic-content">
+<ul>
+<li>শিশুর টিকা</li>
+<li>টিকার সময়সূচি</li>
+<li>টিকার প্রয়োজনীয়তা</li>
+<li>টিকার পর সাধারণ যত্ন</li>
+</ul>
+</div>
+</div>
+
+
+<div class="topic">
+<div class="topic-title" onclick="toggleTopic(this)">
+    📈 শিশুর বৃদ্ধি ও বিকাশ
+</div>
+
+<div class="topic-content">
+<ul>
+<li>শারীরিক বৃদ্ধি</li>
+<li>মানসিক বিকাশ</li>
+<li>ভাষার বিকাশ</li>
+<li>সামাজিক বিকাশ</li>
+<li>বয়স অনুযায়ী developmental milestones</li>
+</ul>
+</div>
+</div>
+
+
+<div class="topic">
+<div class="topic-title" onclick="toggleTopic(this)">
+    🩺 শিশুর সাধারণ স্বাস্থ্য সমস্যা
+</div>
+
+<div class="topic-content">
+<ul>
+<li>জ্বর</li>
+<li>সর্দি-কাশি</li>
+<li>ডায়রিয়া</li>
+<li>পেটের সমস্যা</li>
+<li>শ্বাসকষ্ট</li>
+<li>কখন চিকিৎসকের পরামর্শ প্রয়োজন</li>
+</ul>
+</div>
+</div>
+
+</div>
+</div>
+
+
+<!-- 3 PREGNANCY -->
+<div class="health-category" id="pregnancy">
+
+<div class="health-title" onclick="toggleHealth('pregnancyContent')">
+    <span>🤰 গর্ভবতী ও প্রসূতি</span>
+    <span>＋</span>
+</div>
+
+<div class="health-content" id="pregnancyContent">
+
+<div class="topic">
+<div class="topic-title" onclick="toggleTopic(this)">
+    গর্ভাবস্থার যত্ন
+</div>
+
+<div class="topic-content">
+<ul>
+<li>গর্ভাবস্থায় স্বাস্থ্যকর খাবার</li>
+<li>নিয়মিত চিকিৎসা পরীক্ষা</li>
+<li>বিশ্রাম ও ঘুম</li>
+<li>শারীরিক কার্যক্রম</li>
+<li>গর্ভাবস্থায় সতর্কতা</li>
+</ul>
+</div>
+</div>
+
+
+<div class="topic">
+<div class="topic-title" onclick="toggleTopic(this)">
+    গর্ভাবস্থার বিভিন্ন পর্যায়
+</div>
+
+<div class="topic-content">
+<ul>
+<li>প্রথম পর্যায়</li>
+<li>দ্বিতীয় পর্যায়</li>
+<li>তৃতীয় পর্যায়</li>
+<li>প্রতিটি পর্যায়ের প্রয়োজনীয় যত্ন</li>
+</ul>
+</div>
+</div>
+
+
+<div class="topic">
+<div class="topic-title" onclick="toggleTopic(this)">
+    প্রসবের প্রস্তুতি
+</div>
+
+<div class="topic-content">
+<ul>
+<li>হাসপাতাল প্রস্তুতি</li>
+<li>প্রয়োজনীয় জিনিসপত্র</li>
+<li>জরুরি পরিস্থিতির প্রস্তুতি</li>
+<li>প্রসবের পরের যত্ন</li>
+</ul>
+</div>
+</div>
+
+
+<div class="topic">
+<div class="topic-title" onclick="toggleTopic(this)">
+    প্রসবের পর মায়ের যত্ন
+</div>
+
+<div class="topic-content">
+<ul>
+<li>পুষ্টি</li>
+<li>বিশ্রাম</li>
+<li>শারীরিক যত্ন</li>
+<li>মানসিক সুস্থতা</li>
+<li>শিশুকে বুকের দুধ খাওয়ানো</li>
+</ul>
+</div>
+</div>
+
+</div>
+</div>
+
+
+<!-- 4 AUTISM -->
+<div class="health-category" id="autism">
+
+<div class="health-title" onclick="toggleHealth('autismContent')">
+    <span>🧩 অটিজম ও প্রতিবন্ধিতা</span>
+    <span>＋</span>
+</div>
+
+<div class="health-content" id="autismContent">
+
+<div class="topic">
+<div class="topic-title" onclick="toggleTopic(this)">
+    অটিজম সম্পর্কে জানা
+</div>
+
+<div class="topic-content">
+<ul>
+<li>অটিজম কী</li>
+<li>শিশুর আচরণ ও বিকাশ</li>
+<li>প্রাথমিক লক্ষণ</li>
+<li>মূল্যায়ন ও বিশেষজ্ঞের পরামর্শ</li>
+</ul>
+</div>
+</div>
+
+
+<div class="topic">
+<div class="topic-title" onclick="toggleTopic(this)">
+    শিশুর বিকাশ ও সহায়তা
+</div>
+
+<div class="topic-content">
+<ul>
+<li>যোগাযোগের দক্ষতা</li>
+<li>সামাজিক দক্ষতা</li>
+<li>দৈনন্দিন কাজ শেখানো</li>
+<li>অভিভাবকের ভূমিকা</li>
+</ul>
+</div>
+</div>
+
+
+<div class="topic">
+<div class="topic-title" onclick="toggleTopic(this)">
+    প্রতিবন্ধিতা ও সহায়তা
+</div>
+
+<div class="topic-content">
+<ul>
+<li>শারীরিক প্রতিবন্ধিতা</li>
+<li>দৃষ্টিজনিত প্রতিবন্ধিতা</li>
+<li>শ্রবণজনিত প্রতিবন্ধিতা</li>
+<li>শিক্ষা ও পুনর্বাসন</li>
+<li>পরিবারের সহায়তা</li>
+</ul>
+</div>
+</div>
+
+</div>
+</div>
+
+
+<!-- 5 MENTAL -->
+<div class="health-category" id="mental">
+
+<div class="health-title" onclick="toggleHealth('mentalContent')">
+    <span>🧠 মানসিক স্বাস্থ্য</span>
+    <span>＋</span>
+</div>
+
+<div class="health-content" id="mentalContent">
+
+<div class="topic">
+<div class="topic-title" onclick="toggleTopic(this)">
+    মানসিক সুস্থতা
+</div>
+
+<div class="topic-content">
+<ul>
+<li>মানসিক সুস্থতা কী</li>
+<li>নিজের যত্ন</li>
+<li>স্বাস্থ্যকর দৈনন্দিন অভ্যাস</li>
+<li>সামাজিক যোগাযোগ</li>
+</ul>
+</div>
+</div>
+
+
+<div class="topic">
+<div class="topic-title" onclick="toggleTopic(this)">
+    স্ট্রেস ও উদ্বেগ
+</div>
+
+<div class="topic-content">
+<ul>
+<li>স্ট্রেস কী</li>
+<li>উদ্বেগের সাধারণ লক্ষণ</li>
+<li>স্ট্রেস ব্যবস্থাপনা</li>
+<li>বিশ্রাম ও relaxation</li>
+<li>কখন বিশেষজ্ঞের সাহায্য নেওয়া উচিত</li>
+</ul>
+</div>
+</div>
+
+
+<div class="topic">
+<div class="topic-title" onclick="toggleTopic(this)">
+    মানসিক স্বাস্থ্য সহায়তা
+</div>
+
+<div class="topic-content">
+<ul>
+<li>কাউন্সেলিং</li>
+<li>মানসিক স্বাস্থ্য বিশেষজ্ঞ</li>
+<li>পরিবারের সহায়তা</li>
+<li>জরুরি সহায়তার প্রয়োজন হলে করণীয়</li>
+</ul>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+</section>
+
+
+<!-- FOOTER -->
+<footer>
+
+<p>🏥 HealthCare Bangladesh</p>
+<p>স্বাস্থ্যসেবা ও স্বাস্থ্য তথ্য মানুষের কাছে সহজভাবে পৌঁছে দেওয়ার একটি প্ল্যাটফর্ম।</p>
+
+</footer>
+
+
+<script>
+
+/* HEALTH CATEGORY OPEN/CLOSE */
+
+function toggleHealth(id){
+
+    const content = document.getElementById(id);
+
+    content.classList.toggle("open");
+
+}
+
+
+/* INNER TOPIC OPEN/CLOSE */
+
+function toggleTopic(element){
+
+    const content = element.nextElementSibling;
+
+    content.classList.toggle("open");
+
+}
+
+
+/* PORTALS */
+
+function doctorPortal(){
+
+    alert("Doctor Portal শীঘ্রই চালু হবে।");
+
+}
+
+function patientPortal(){
+
+    alert("Patient Portal শীঘ্রই চালু হবে।");
+
+}
+
+
+/* SERVICES */
+
+function findBloodDonor(){
+
+    alert("Blood Donor Search চালু হবে।");
+
+}
+
+
+function freeTicket(){
+
+    alert("Free Ticket Service চালু হবে।");
+
+}
+
+function ambulance(){
+
+    alert("Ambulance Service চালু হবে।");
+
+}
+
+</script>
 
 </body>
 </html>
