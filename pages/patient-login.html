@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Patient Login | MediSafe BD</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, "Noto Sans Bengali", sans-serif;
+    background: #f4f8f8;
+    color: #18332d;
+}
+
+.warning {
+    background: #d52626;
+    color: white;
+    text-align: center;
+    padding: 9px;
+    font-size: 14px;
+}
+
+header {
+    background: #292b2d;
+    padding: 15px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    color: #168066;
+    font-size: 23px;
+    font-weight: bold;
+}
+
+.home {
+    color: white;
+    text-decoration: none;
+    border: 2px solid #73787a;
+    padding: 9px 20px;
+    border-radius: 20px;
+}
+
+.page {
+    min-height: calc(100vh - 130px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+}
+
+.login-card {
+    width: 100%;
+    max-width: 520px;
+    background: white;
+    padding: 32px;
+    border-radius: 20px;
+    box-shadow: 0 5px 25px rgba(0,0,0,.12);
+    border-top: 5px solid #087458;
+}
+
+h1 {
+    color: #125d4b;
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    color: #718086;
+    margin-bottom: 25px;
+    line-height: 1.6;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin: 15px 0 6px;
+}
+
+input {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #ccd5d5;
+    border-radius: 8px;
+    font-size: 15px;
+}
+
+input:focus {
+    outline: none;
+    border-color: #087458;
+}
+
+.login-btn {
+    width: 100%;
+    margin-top: 24px;
+    padding: 14px;
+    border: none;
+    border-radius: 9px;
+    background: #087458;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.register {
+    text-align: center;
+    margin-top: 20px;
+    color: #66767b;
+}
+
+.register a {
+    color: #087458;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.demo {
+    margin-top: 22px;
+    padding: 13px;
+    background: #fff5d8;
+    border-left: 4px solid #f0a400;
+    color: #705b20;
+    font-size: 13px;
+    line-height: 1.6;
+    border-radius: 5px;
+}
+
+footer {
+    background: #07503d;
+    color: white;
+    text-align: center;
+    padding: 22px;
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="warning">
+
+⚠️ Antibiotic নিজে থেকে শুরু করবেন না —
+প্রয়োজনে নিবন্ধিত চিকিৎসকের পরামর্শ নিন।
+
+</div>
+
+
+<header>
+
+<div class="logo">
+🛡️ MediSafe BD
+</div>
+
+<a href="../index.html" class="home">
+হোম
+</a>
+
+</header>
+
+
+<div class="page">
+
+<div class="login-card">
+
+<h1>
+👤 Patient Login
+</h1>
+
+<p class="subtitle">
+
+আপনার MediSafe BD Patient Portal-এ প্রবেশ করুন।
+
+</p>
+
+
+<form onsubmit="patientLogin(event)">
+
+
+<label>
+Patient ID / NID / Birth Certificate
+</label>
+
+<input
+type="text"
+id="patientId"
+placeholder="Patient ID / NID / Birth Certificate"
+required
+>
+
+
+<label>
+Password
+</label>
+
+<input
+type="password"
+id="password"
+placeholder="Password"
+required
+>
+
+
+<button
+type="submit"
+class="login-btn">
+
+🔐 Patient Login
+
+</button>
+
+</form>
+
+
+<div class="register">
+
+নতুন Patient?
+
+<a href="patient-register.html">
+Patient Registration
+</a>
+
+</div>
+
+
+<div class="demo">
+
+⚠️ <b>Demo Mode:</b>
+
+বর্তমানে যেকোনো Patient ID এবং Password
+দিয়ে demonstration login করা যাবে।
+Official NID/Birth Certificate verification
+পরবর্তীতে যুক্ত করা হবে।
+
+</div>
+
+
+</div>
+
+</div>
+
+
+<footer>
+
+🛡️ MediSafe BD — স্বাস্থ্য সুরক্ষা সিস্টেম
+
+</footer>
+
+
+<script>
+
+function patientLogin(event) {
+
+    event.preventDefault();
+
+    const patientId =
+        document.getElementById("patientId").value;
+
+    localStorage.setItem(
+        "patientId",
+        patientId
+    );
+
+    localStorage.setItem(
+        "patientLoggedIn",
+        "true"
+    );
+
+    window.location.href =
+        "patient-dashboard.html";
+}
+
+</script>
+
+
+</body>
+</html>
