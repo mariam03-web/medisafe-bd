@@ -1,2 +1,2 @@
 # medisafe-bd
-MediSafe BD Healthcare Plateform
+MediSafe BD Healthcare Platform
