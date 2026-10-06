@@ -1,294 +1,289 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 
 <head>
 
 <meta charset="UTF-8">
 
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Doctor Dashboard | MediSafe BD</title>
 
-
 <style>
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial, sans-serif;
 }
 
-body {
-
-    font-family:
-    Arial,
-    "Noto Sans Bengali",
-    sans-serif;
-
-    background: #f4f8f8;
-
-    color: #18332d;
+body{
+    background:#f4f8fb;
+    color:#1d2b36;
 }
-
 
 /* HEADER */
 
-header {
-
-    background: #292b2d;
-
-    padding: 15px 5%;
-
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: center;
-
+header{
+    background:#0b6e69;
+    color:white;
+    padding:16px 25px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
 }
 
-.logo {
-
-    color: #168066;
-
-    font-size: 23px;
-
-    font-weight: bold;
-
+.logo{
+    font-size:22px;
+    font-weight:bold;
 }
 
-.logout {
-
-    background: #d52626;
-
-    color: white;
-
-    border: none;
-
-    padding: 10px 18px;
-
-    border-radius: 8px;
-
-    cursor: pointer;
-
+.logout-btn{
+    background:#e74c3c;
+    color:white;
+    border:none;
+    padding:9px 18px;
+    border-radius:7px;
+    cursor:pointer;
+    font-weight:bold;
 }
 
+.logout-btn:hover{
+    background:#c0392b;
+}
 
 /* MAIN */
 
-.container {
-
-    width: 92%;
-
-    max-width: 1200px;
-
-    margin: auto;
-
-    padding: 30px 0;
-
+.container{
+    width:90%;
+    max-width:1100px;
+    margin:40px auto;
 }
 
+/* TITLE */
 
-/* WELCOME */
-
-.welcome {
-
-    background:
-    linear-gradient(
-        100deg,
-        #075941,
-        #126850
-    );
-
-    color: white;
-
-    padding: 25px;
-
-    border-radius: 18px;
-
-    margin-bottom: 25px;
-
+.title{
+    text-align:center;
+    margin-bottom:30px;
 }
 
-.welcome h1 {
-
-    margin-bottom: 8px;
-
+.title h1{
+    color:#0b6e69;
+    font-size:32px;
+    margin-bottom:8px;
 }
 
-
-/* CARDS */
-
-.grid {
-
-    display: grid;
-
-    grid-template-columns:
-    repeat(3, 1fr);
-
-    gap: 18px;
-
+.title p{
+    color:#667781;
 }
 
+/* DOCTOR INFO */
 
-.card {
-
-    background: white;
-
-    padding: 23px;
-
-    border-radius: 16px;
-
-    box-shadow:
-    0 4px 16px
-    rgba(0,0,0,.08);
-
-    border-top: 4px solid #087458;
-
+.doctor-info{
+    background:white;
+    padding:20px;
+    border-radius:12px;
+    margin-bottom:30px;
+    text-align:center;
+    box-shadow:0 4px 15px rgba(0,0,0,0.08);
 }
 
-.card h2 {
-
-    margin-bottom: 10px;
-
-    color: #125d4b;
-
+.doctor-info h3{
+    color:#164e63;
+    margin-bottom:8px;
 }
 
-.card p {
+/* MENU */
 
-    color: #718086;
-
-    line-height: 1.6;
-
+.menu-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
 }
 
-.card button {
-
-    margin-top: 15px;
-
-    padding: 10px 16px;
-
-    border: none;
-
-    border-radius: 8px;
-
-    background: #087458;
-
-    color: white;
-
-    cursor: pointer;
-
+.menu-card{
+    background:white;
+    min-height:155px;
+    border-radius:15px;
+    padding:25px;
+    text-align:center;
+    cursor:pointer;
+    box-shadow:0 4px 15px rgba(0,0,0,0.08);
+    transition:0.2s;
 }
 
-
-/* PATIENT SEARCH */
-
-.search-box {
-
-    background: white;
-
-    margin-top: 25px;
-
-    padding: 25px;
-
-    border-radius: 17px;
-
-    box-shadow:
-    0 4px 16px
-    rgba(0,0,0,.08);
-
+.menu-card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 7px 20px rgba(0,0,0,0.12);
 }
 
-.search-box h2 {
-
-    color: #125d4b;
-
-    margin-bottom: 15px;
-
+.menu-icon{
+    font-size:40px;
+    margin-bottom:10px;
 }
 
-.search-box input {
-
-    width: 70%;
-
-    padding: 13px;
-
-    border:
-    1px solid #ccd5d5;
-
-    border-radius: 8px;
-
+.menu-card h3{
+    color:#0b6e69;
+    margin-bottom:8px;
 }
 
-.search-btn {
-
-    padding: 13px 18px;
-
-    border: none;
-
-    border-radius: 8px;
-
-    background: #087458;
-
-    color: white;
-
-    cursor: pointer;
-
+.menu-card p{
+    color:#71808a;
+    font-size:14px;
 }
 
+/* CONTENT AREA */
+
+.content-area{
+    display:none;
+    margin-top:30px;
+    background:white;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0 4px 15px rgba(0,0,0,0.08);
+}
+
+.content-area.active{
+    display:block;
+}
+
+.content-area h2{
+    color:#0b6e69;
+    margin-bottom:20px;
+}
+
+.back-btn{
+    background:#0b6e69;
+    color:white;
+    border:none;
+    padding:10px 18px;
+    border-radius:7px;
+    cursor:pointer;
+    margin-bottom:20px;
+}
+
+/* SEARCH */
+
+.search-row{
+    display:flex;
+    gap:10px;
+    margin-bottom:20px;
+}
+
+.search-row select,
+.search-row input{
+    padding:12px;
+    border:1px solid #ccd6dc;
+    border-radius:7px;
+}
+
+.search-row select{
+    width:200px;
+}
+
+.search-row input{
+    flex:1;
+}
+
+.search-btn{
+    background:#0b6e69;
+    color:white;
+    border:none;
+    padding:12px 20px;
+    border-radius:7px;
+    cursor:pointer;
+}
 
 /* PATIENT RESULT */
 
-#patientResult {
-
-    margin-top: 20px;
-
+.patient-result{
+    display:none;
+    background:#f4f8fb;
+    padding:20px;
+    border-radius:10px;
 }
 
-
-/* ALERT */
-
-.alert {
-
-    margin-top: 25px;
-
-    padding: 20px;
-
-    border-radius: 12px;
-
-    background: #ffe2e2;
-
-    border-left: 6px solid #d52626;
-
+.patient-result h3{
+    color:#164e63;
+    margin-bottom:15px;
 }
 
-.alert h3 {
-
-    color: #b51717;
-
-    margin-bottom: 8px;
-
+.patient-info{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
 }
 
+.info{
+    background:white;
+    padding:14px;
+    border-radius:7px;
+}
 
-/* RESPONSIVE */
+.info span{
+    display:block;
+    font-size:13px;
+    color:#71808a;
+    margin-bottom:5px;
+}
 
-@media(max-width:800px) {
+/* RECORD BUTTONS */
 
-    .grid {
+.record-buttons{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
+    margin-top:20px;
+}
 
-        grid-template-columns: 1fr;
+.record-btn{
+    background:#e8f5f3;
+    border:none;
+    padding:16px;
+    border-radius:9px;
+    color:#075e58;
+    font-weight:bold;
+    cursor:pointer;
+}
 
+.record-btn:hover{
+    background:#d4eeea;
+}
+
+/* DEMO */
+
+.demo-notice{
+    margin-top:30px;
+    padding:13px 15px;
+    background:#fff8df;
+    border-left:5px solid #e5ad00;
+    border-radius:6px;
+    color:#705900;
+}
+
+/* MOBILE */
+
+@media(max-width:750px){
+
+    .menu-grid{
+        grid-template-columns:1fr;
     }
 
-    .search-box input {
+    .search-row{
+        flex-direction:column;
+    }
 
-        width: 100%;
+    .search-row select{
+        width:100%;
+    }
 
-        margin-bottom: 10px;
+    .patient-info{
+        grid-template-columns:1fr;
+    }
 
+    .record-buttons{
+        grid-template-columns:1fr;
     }
 
 }
@@ -301,22 +296,21 @@ header {
 <body>
 
 
+<!-- HEADER -->
+
 <header>
 
-<div class="logo">
+    <div class="logo">
+        🛡️ MediSafe BD
+    </div>
 
-🛡️ MediSafe BD
+    <button
+        class="logout-btn"
+        onclick="logout()">
 
-</div>
+        Logout
 
-
-<button
-class="logout"
-onclick="logout()">
-
-Logout
-
-</button>
+    </button>
 
 </header>
 
@@ -325,239 +319,644 @@ Logout
 <div class="container">
 
 
-<!-- WELCOME -->
+    <!-- TITLE -->
 
-<div class="welcome">
+    <div class="title">
 
-<h1 id="doctorName">
-👨‍⚕️ Welcome Doctor
-</h1>
+        <h1>
+            👨‍⚕️ Doctor Dashboard
+        </h1>
 
-<p>
+        <p>
+            MediSafe BD Doctor Portal
+        </p>
 
-Doctor Portal — Patient records,
-prescription এবং health information
-management system।
+    </div>
 
-</p>
+
+
+    <!-- DOCTOR INFORMATION -->
+
+    <div class="doctor-info">
+
+        <h3 id="doctorName">
+            Doctor
+        </h3>
+
+        <p>
+            BM&DC Registration:
+            <span id="doctorBMDC">
+                Not Available
+            </span>
+        </p>
+
+    </div>
+
+
+
+    <!-- =========================
+         MAIN MENU
+    ========================= -->
+
+    <div class="menu-grid">
+
+
+        <!-- PATIENT SEARCH -->
+
+        <div
+            class="menu-card"
+            onclick="showSection('patientSearch')">
+
+            <div class="menu-icon">
+                🔎
+            </div>
+
+            <h3>
+                Patient Search
+            </h3>
+
+            <p>
+                Search patient by ID, NID,
+                Birth Certificate or Temporary ID
+            </p>
+
+        </div>
+
+
+
+        <!-- PATIENT RECORDS -->
+
+        <div
+            class="menu-card"
+            onclick="showSection('patientRecords')">
+
+            <div class="menu-icon">
+                👤
+            </div>
+
+            <h3>
+                Patient Records
+            </h3>
+
+            <p>
+                View authorized patient records
+            </p>
+
+        </div>
+
+
+
+        <!-- MEDICAL HISTORY -->
+
+        <div
+            class="menu-card"
+            onclick="showSection('medicalHistory')">
+
+            <div class="menu-icon">
+                📋
+            </div>
+
+            <h3>
+                Medical History
+            </h3>
+
+            <p>
+                View patient's medical history
+            </p>
+
+        </div>
+
+
+
+        <!-- ANTIBIOTIC HISTORY -->
+
+        <div
+            class="menu-card"
+            onclick="showSection('antibioticHistory')">
+
+            <div class="menu-icon">
+                💊
+            </div>
+
+            <h3>
+                Antibiotic History
+            </h3>
+
+            <p>
+                View previous antibiotic records
+            </p>
+
+        </div>
+
+
+
+        <!-- PRESCRIPTION -->
+
+        <div
+            class="menu-card"
+            onclick="showSection('prescription')">
+
+            <div class="menu-icon">
+                📄
+            </div>
+
+            <h3>
+                Prescription
+            </h3>
+
+            <p>
+                Create and manage prescriptions
+            </p>
+
+        </div>
+
+
+
+        <!-- TEST REPORTS -->
+
+        <div
+            class="menu-card"
+            onclick="showSection('testReports')">
+
+            <div class="menu-icon">
+                🧪
+            </div>
+
+            <h3>
+                Test Reports
+            </h3>
+
+            <p>
+                View authorized test reports
+            </p>
+
+        </div>
+
+
+
+        <!-- PATIENT NOTES -->
+
+        <div
+            class="menu-card"
+            onclick="showSection('patientNotes')">
+
+            <div class="menu-icon">
+                📝
+            </div>
+
+            <h3>
+                Patient Notes
+            </h3>
+
+            <p>
+                View patient's submitted notes
+            </p>
+
+        </div>
+
+
+
+        <!-- FULL PROFILE -->
+
+        <div
+            class="menu-card"
+            onclick="showSection('fullProfile')">
+
+            <div class="menu-icon">
+                🧑
+            </div>
+
+            <h3>
+                Full Patient Profile
+            </h3>
+
+            <p>
+                View complete patient profile
+            </p>
+
+        </div>
+
+
+
+        <!-- ANTIBIOTIC SAFETY -->
+
+        <div
+            class="menu-card"
+            onclick="showSection('safetyAlert')">
+
+            <div class="menu-icon">
+                🛡️
+            </div>
+
+            <h3>
+                Antibiotic Safety Alert
+            </h3>
+
+            <p>
+                Review patient history alerts
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- ==================================================
+         PATIENT SEARCH SECTION
+    ================================================== -->
+
+    <div
+        class="content-area"
+        id="patientSearch">
+
+        <button
+            class="back-btn"
+            onclick="backToDashboard()">
+
+            ← Back to Dashboard
+
+        </button>
+
+        <h2>
+            🔎 Patient Search
+        </h2>
+
+        <div class="search-row">
+
+            <select id="searchType">
+
+                <option>
+                    Patient ID
+                </option>
+
+                <option>
+                    NID
+                </option>
+
+                <option>
+                    Birth Certificate
+                </option>
+
+                <option>
+                    Temporary ID
+                </option>
+
+            </select>
+
+            <input
+                type="text"
+                id="searchValue"
+                placeholder="Enter identification number">
+
+            <button
+                class="search-btn"
+                onclick="searchPatient()">
+
+                Search
+
+            </button>
+
+        </div>
+
+
+        <div
+            class="patient-result"
+            id="patientResult">
+
+            <h3>
+                👤 Demo Patient Found
+            </h3>
+
+            <div class="patient-info">
+
+                <div class="info">
+
+                    <span>
+                        Patient ID
+                    </span>
+
+                    <strong>
+                        MSBD-P-10001
+                    </strong>
+
+                </div>
+
+
+                <div class="info">
+
+                    <span>
+                        Patient Name
+                    </span>
+
+                    <strong>
+                        Demo Patient
+                    </strong>
+
+                </div>
+
+
+                <div class="info">
+
+                    <span>
+                        Date of Birth
+                    </span>
+
+                    <strong>
+                        01 January 2000
+                    </strong>
+
+                </div>
+
+
+                <div class="info">
+
+                    <span>
+                        Blood Group
+                    </span>
+
+                    <strong>
+                        O+
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ==================================================
+         PATIENT RECORDS
+    ================================================== -->
+
+    <div
+        class="content-area"
+        id="patientRecords">
+
+        <button
+            class="back-btn"
+            onclick="backToDashboard()">
+
+            ← Back to Dashboard
+
+        </button>
+
+        <h2>
+            👤 Patient Records
+        </h2>
+
+        <p>
+            Search for a patient first to access
+            authorized patient records.
+        </p>
+
+    </div>
+
+
+
+    <!-- ==================================================
+         MEDICAL HISTORY
+    ================================================== -->
+
+    <div
+        class="content-area"
+        id="medicalHistory">
+
+        <button
+            class="back-btn"
+            onclick="backToDashboard()">
+
+            ← Back to Dashboard
+
+        </button>
+
+        <h2>
+            📋 Medical History
+        </h2>
+
+        <p>
+            Patient medical history will appear
+            here after selecting an authorized patient.
+        </p>
+
+    </div>
+
+
+
+    <!-- ==================================================
+         ANTIBIOTIC HISTORY
+    ================================================== -->
+
+    <div
+        class="content-area"
+        id="antibioticHistory">
+
+        <button
+            class="back-btn"
+            onclick="backToDashboard()">
+
+            ← Back to Dashboard
+
+        </button>
+
+        <h2>
+            💊 Antibiotic History
+        </h2>
+
+        <p>
+            Previous antibiotic records will appear
+            here after selecting an authorized patient.
+        </p>
+
+    </div>
+
+
+
+    <!-- ==================================================
+         PRESCRIPTION
+    ================================================== -->
+
+    <div
+        class="content-area"
+        id="prescription">
+
+        <button
+            class="back-btn"
+            onclick="backToDashboard()">
+
+            ← Back to Dashboard
+
+        </button>
+
+        <h2>
+            📄 Prescription
+        </h2>
+
+        <p>
+            Prescription management will be available
+            here for authorized patients.
+        </p>
+
+    </div>
+
+
+
+    <!-- ==================================================
+         TEST REPORTS
+    ================================================== -->
+
+    <div
+        class="content-area"
+        id="testReports">
+
+        <button
+            class="back-btn"
+            onclick="backToDashboard()">
+
+            ← Back to Dashboard
+
+        </button>
+
+        <h2>
+            🧪 Test Reports
+        </h2>
+
+        <p>
+            Authorized patient test reports will appear
+            here.
+        </p>
+
+    </div>
+
+
+
+    <!-- ==================================================
+         PATIENT NOTES
+    ================================================== -->
+
+    <div
+        class="content-area"
+        id="patientNotes">
+
+        <button
+            class="back-btn"
+            onclick="backToDashboard()">
+
+            ← Back to Dashboard
+
+        </button>
+
+        <h2>
+            📝 Patient Notes
+        </h2>
+
+        <p>
+            Patient-submitted notes and symptom
+            information will appear here.
+        </p>
+
+    </div>
+
+
+
+    <!-- ==================================================
+         FULL PATIENT PROFILE
+    ================================================== -->
+
+    <div
+        class="content-area"
+        id="fullProfile">
+
+        <button
+            class="back-btn"
+            onclick="backToDashboard()">
+
+            ← Back to Dashboard
+
+        </button>
+
+        <h2>
+            🧑 Full Patient Profile
+        </h2>
+
+        <p>
+            The complete authorized patient profile
+            will be displayed here.
+        </p>
+
+    </div>
+
+
+
+    <!-- ==================================================
+         ANTIBIOTIC SAFETY ALERT
+    ================================================== -->
+
+    <div
+        class="content-area"
+        id="safetyAlert">
+
+        <button
+            class="back-btn"
+            onclick="backToDashboard()">
+
+            ← Back to Dashboard
+
+        </button>
+
+        <h2>
+            🛡️ Antibiotic Safety Alert
+        </h2>
+
+        <p>
+            This section will review available patient
+            history and show safety-related alerts
+            for the doctor to review.
+        </p>
+
+    </div>
+
+
+
+    <!-- DEMO NOTICE -->
+
+    <div class="demo-notice">
+
+        ⚠️
+
+        <strong>Demo Mode:</strong>
+
+        This Doctor Dashboard is a course-project
+        prototype. Real patient information will require
+        secure authentication, authorization and a
+        protected backend.
+
+    </div>
+
 
 </div>
 
 
 
-<!-- DASHBOARD CARDS -->
-
-<div class="grid">
-
-
-<div class="card">
-
-<h2>
-👤 Patient Records
-</h2>
-
-<p>
-Patient-এর health information,
-medical history এবং previous records
-দেখুন।
-</p>
-
-<button onclick="focusSearch()">
-
-Search Patient
-
-</button>
-
-</div>
-
-
-
-<div class="card">
-
-<h2>
-💊 Antibiotic Records
-</h2>
-
-<p>
-Patient-এর পূর্বের antibiotic course
-এবং বর্তমান medication history
-দেখুন।
-</p>
-
-<button onclick="demoFeature('Antibiotic Records')">
-
-Open Records
-
-</button>
-
-</div>
-
-
-
-<div class="card">
-
-<h2>
-📄 Prescription
-</h2>
-
-<p>
-Typed অথবা handwritten prescription
-তৈরি ও সংরক্ষণ করা যাবে।
-</p>
-
-<button onclick="demoFeature('Prescription')">
-
-Open Prescription
-
-</button>
-
-</div>
-
-
-
-<div class="card">
-
-<h2>
-🧪 Test Reports
-</h2>
-
-<p>
-Patient-এর test report দেখুন এবং
-নতুন report সংযুক্ত করুন।
-</p>
-
-<button onclick="demoFeature('Test Reports')">
-
-View Reports
-
-</button>
-
-</div>
-
-
-
-<div class="card">
-
-<h2>
-📋 Medical History
-</h2>
-
-<p>
-Patient-এর জন্ম থেকে medical history
-timeline আকারে দেখা যাবে।
-</p>
-
-<button onclick="demoFeature('Medical History')">
-
-View History
-
-</button>
-
-</div>
-
-
-
-<div class="card">
-
-<h2>
-🔴 Safety Review
-
-</h2>
-
-<p>
-Antibiotic prescription-এর আগে stored
-history review করার জন্য warning system।
-</p>
-
-<button onclick="demoFeature('Safety Review')">
-
-Review
-
-</button>
-
-</div>
-
-
-</div>
-
-
-
-<!-- PATIENT SEARCH -->
-
-<div
-class="search-box"
-id="patientSearch">
-
-<h2>
-🔎 Search Patient
-</h2>
-
-<p style="color:#718086;margin-bottom:15px">
-
-Patient ID / NID / Birth Certificate /
-Temporary ID দিয়ে patient খুঁজুন।
-
-</p>
-
-
-<input
-id="patientId"
-placeholder="যেমন: MSBD-00001"
->
-
-
-<button
-class="search-btn"
-onclick="searchPatient()">
-
-Search
-
-</button>
-
-
-<div id="patientResult">
-
-</div>
-
-</div>
-
-
-
-<!-- DEMO ALERT -->
-
-<div class="alert">
-
-<h3>
-🔴 Antibiotic Safety Review Alert
-</h3>
-
-<p>
-
-Patient-এর পূর্বের medication এবং
-antibiotic history review করে prescription
-finalize করুন।
-
-</p>
-
-</div>
-
-
-</div>
-
-
+<!-- =========================
+     JAVASCRIPT
+========================= -->
 
 <script>
 
 
-/* CHECK LOGIN */
+/* LOGIN CHECK */
 
-const loggedIn =
-localStorage.getItem(
-    "doctorLoggedIn"
-);
-
-
-if (loggedIn !== "true") {
+if(
+    localStorage.getItem("doctorLoggedIn")
+    !==
+    "true"
+){
 
     window.location.href =
         "doctor-login.html";
@@ -568,31 +967,55 @@ if (loggedIn !== "true") {
 
 /* DOCTOR NAME */
 
-const name =
-localStorage.getItem(
-    "doctorName"
-);
+const savedDoctorName =
+    localStorage.getItem("doctorName");
 
 
-if (name) {
+const savedDoctorBMDC =
+    localStorage.getItem("doctorBMDC");
 
-    document.getElementById(
-        "doctorName"
-    ).innerText =
-        "👨‍⚕️ Welcome Dr. " + name;
+
+if(savedDoctorName){
+
+    document.getElementById("doctorName").innerText =
+        "👨‍⚕️ Dr. " + savedDoctorName;
+
+}
+
+
+if(savedDoctorBMDC){
+
+    document.getElementById("doctorBMDC").innerText =
+        savedDoctorBMDC;
 
 }
 
 
 
-/* SEARCH */
+/* =========================
+   SHOW SECTION
+========================= */
 
-function focusSearch() {
+function showSection(sectionId){
+
+    const sections =
+        document.querySelectorAll(".content-area");
+
+
+    sections.forEach(function(section){
+
+        section.classList.remove("active");
+
+    });
+
 
     document
-        .getElementById(
-            "patientSearch"
-        )
+        .getElementById(sectionId)
+        .classList.add("active");
+
+
+    document
+        .getElementById(sectionId)
         .scrollIntoView({
             behavior:"smooth"
         });
@@ -601,20 +1024,52 @@ function focusSearch() {
 
 
 
-/* DEMO PATIENT SEARCH */
+/* =========================
+   BACK TO DASHBOARD
+========================= */
 
-function searchPatient() {
+function backToDashboard(){
 
-    const id =
-        document.getElementById(
-            "patientId"
-        ).value;
+    const sections =
+        document.querySelectorAll(".content-area");
 
 
-    if (!id) {
+    sections.forEach(function(section){
+
+        section.classList.remove("active");
+
+    });
+
+
+    window.scrollTo({
+
+        top:0,
+
+        behavior:"smooth"
+
+    });
+
+}
+
+
+
+/* =========================
+   PATIENT SEARCH
+========================= */
+
+function searchPatient(){
+
+    const value =
+        document
+        .getElementById("searchValue")
+        .value
+        .trim();
+
+
+    if(value === ""){
 
         alert(
-            "Patient ID লিখুন।"
+            "Please enter a patient identification number."
         );
 
         return;
@@ -622,83 +1077,19 @@ function searchPatient() {
     }
 
 
-    document.getElementById(
-        "patientResult"
-    ).innerHTML = `
-
-    <div style="
-        margin-top:20px;
-        padding:20px;
-        background:#eef8f4;
-        border-radius:12px;
-        border-left:5px solid #087458;
-    ">
-
-        <h3>
-        👤 Demo Patient Found
-        </h3>
-
-        <br>
-
-        <b>Patient ID:</b>
-        ${id}
-
-        <br><br>
-
-        <b>Name:</b>
-        Demo Patient
-
-        <br><br>
-
-        <b>Blood Group:</b>
-        O+
-
-        <br><br>
-
-        <b>Medical History:</b>
-        Available
-
-        <br><br>
-
-        <button
-        onclick="demoFeature('Patient Profile')"
-        style="
-            padding:10px 15px;
-            border:none;
-            border-radius:7px;
-            background:#087458;
-            color:white;
-        ">
-
-        Open Patient Profile
-
-        </button>
-
-    </div>
-
-    `;
+    document
+        .getElementById("patientResult")
+        .style.display = "block";
 
 }
 
 
 
-/* DEMO BUTTON */
+/* =========================
+   LOGOUT
+========================= */
 
-function demoFeature(feature) {
-
-    alert(
-        "📌 " +
-        feature +
-        "\n\nএই module-এর full database functionality পরের ধাপে যুক্ত করা হবে।"
-    );
-
-}
-
-
-
-/* LOGOUT */
-
-function logout() {
+function logout(){
 
     localStorage.removeItem(
         "doctorLoggedIn"
@@ -712,11 +1103,20 @@ function logout() {
         "doctorBMDC"
     );
 
+    localStorage.removeItem(
+        "doctorSpecialty"
+    );
+
+    localStorage.removeItem(
+        "doctorHospital"
+    );
+
 
     window.location.href =
         "../index.html";
 
 }
+
 
 </script>
 
