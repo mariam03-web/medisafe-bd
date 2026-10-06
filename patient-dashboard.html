@@ -1,252 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>MediSafe BD - Patient Portal</title>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Patient Portal - MediSafe BD</title>
 <style>
-*{box-sizing:border-box}
-body{margin:0;font-family:Arial;background:#f4f7fb;color:#222}
-header{background:#0b5ed7;color:white;padding:18px 6%;display:flex;justify-content:space-between;align-items:center}
-header h2{margin:0}
-button{border:0;padding:10px 16px;border-radius:6px;background:#0b5ed7;color:white;cursor:pointer}
-.logout{background:#dc3545}
-main{max-width:1000px;margin:30px auto;padding:0 20px}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
-.card,.box,.record{background:white;padding:20px;border-radius:10px;box-shadow:0 2px 10px #ddd;margin-bottom:15px}
-.card{cursor:pointer}
-.card:hover{transform:translateY(-2px)}
-.section{display:none}
-input,textarea,select{width:100%;padding:10px;margin:7px 0 14px;border:1px solid #ccc;border-radius:6px}
-textarea{min-height:150px}
-.back{background:#777;margin-bottom:15px}
-h1,h2,h3{color:#0b5ed7}
-header h2{color:white}
-</style>
-</head>
-
-<body>
-
-<header>
-<h2>MediSafe BD | Patient Portal</h2>
-<button class="logout" onclick="logout()">Logout</button>
-</header>
-
+*{box-sizing:border-box}body{margin:0;font-family:Arial;background:#f4f7fb;color:#222}header{background:#0b5ed7;color:#fff;padding:18px 6%;display:flex;justify-content:space-between;align-items:center}header h2{margin:0;color:#fff}
+main{max-width:1050px;margin:25px auto;padding:0 20px}.box,.card,.record{background:#fff;padding:18px;border-radius:10px;box-shadow:0 2px 10px #ddd;margin-bottom:15px}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}.card{cursor:pointer}.card:hover{transform:translateY(-2px)}
+button{border:0;padding:10px 15px;border-radius:6px;background:#0b5ed7;color:#fff;cursor:pointer}.logout{background:#dc3545}.back{background:#777;margin-bottom:15px}.section{display:none}
+textarea,input{width:100%;padding:10px;margin:7px 0 14px;border:1px solid #ccc;border-radius:6px}textarea{min-height:150px}h2,h3{color:#0b5ed7}
+</style></head><body>
+<header><h2>MediSafe BD | Patient Portal</h2><button class="logout" onclick="logout()">Logout</button></header>
 <main>
+<div id="home"><h2>Welcome, <span id="pname"></span></h2><div class="cards">
+<div class="card" onclick="openPage('problem')"><h3>My Health Problem</h3><p>Submit symptoms/problems.</p></div>
+<div class="card" onclick="openPage('antibiotic')"><h3>Antibiotic History</h3><p>View doctor-managed records.</p></div>
+<div class="card" onclick="openPage('reports')"><h3>Test Reports</h3><p>Upload and view reports.</p></div>
+<div class="card" onclick="openPage('prescription')"><h3>Prescriptions</h3><p>View doctor prescriptions.</p></div>
+<div class="card" onclick="openPage('specialist')"><h3>Specialist খুঁজুন আপনার সমস্যার ভিত্তিতে</h3><p>Get a demo specialist suggestion.</p></div>
+</div></div>
 
-<div id="home">
-<h2>Welcome, <span id="patientName"></span></h2>
+<section id="problem" class="section"><button class="back" onclick="back()">← Back</button><h2>My Health Problem</h2><textarea id="problemText" placeholder="Write your symptoms or health problem..."></textarea><p id="saveTime"></p></section>
 
-<div class="cards">
+<section id="antibiotic" class="section"><button class="back" onclick="back()">← Back</button><h2>Antibiotic History</h2><div id="antibioticList"></div></section>
 
-<div class="card" onclick="openPage('problem')">
-<h3>My Health Problem</h3>
-<p>Write your symptoms or health problems.</p>
-</div>
+<section id="reports" class="section"><button class="back" onclick="back()">← Back</button><h2>Test Reports</h2><input type="date" id="reportDate"><input type="file" id="reportFile"><button onclick="addReport()">Upload Report</button><div id="reportList"></div></section>
 
-<div class="card" onclick="openPage('antibiotic')">
-<h3>Antibiotic History</h3>
-<p>View your antibiotic records.</p>
-</div>
+<section id="prescription" class="section"><button class="back" onclick="back()">← Back</button><h2>My Prescriptions</h2><div id="prescriptionList"></div></section>
 
-<div class="card" onclick="openPage('reports')">
-<h3>Test Reports</h3>
-<p>Upload and view your test reports.</p>
-</div>
-
-<div class="card" onclick="openPage('prescription')">
-<h3>Prescriptions</h3>
-<p>View prescriptions given by doctors.</p>
-</div>
-
-<div class="card" onclick="openPage('specialist')">
-<h3>Specialist খুঁজুন আপনার সমস্যার ভিত্তিতে</h3>
-<p>Get a suitable specialist suggestion.</p>
-</div>
-
-</div>
-</div>
-
-
-<!-- Health Problem -->
-<section id="problem" class="section">
-<button class="back" onclick="backHome()">← Back</button>
-<h2>My Health Problem</h2>
-
-<textarea id="problemText"
-placeholder="Write your symptoms or health problem..."></textarea>
-
-<p id="saveTime"></p>
-</section>
-
-
-<!-- Antibiotic -->
-<section id="antibiotic" class="section">
-<button class="back" onclick="backHome()">← Back</button>
-<h2>Antibiotic History</h2>
-<div id="antibioticList"></div>
-</section>
-
-
-<!-- Reports -->
-<section id="reports" class="section">
-<button class="back" onclick="backHome()">← Back</button>
-<h2>Test Reports</h2>
-
-<input type="date" id="reportDate">
-<input type="file" id="reportFile">
-<button onclick="addReport()">Upload Report</button>
-
-<div id="reportList"></div>
-</section>
-
-
-<!-- Prescription -->
-<section id="prescription" class="section">
-<button class="back" onclick="backHome()">← Back</button>
-<h2>My Prescriptions</h2>
-<div id="prescriptionList"></div>
-</section>
-
-
-<!-- Specialist -->
-<section id="specialist" class="section">
-<button class="back" onclick="backHome()">← Back</button>
-<h2>Specialist খুঁজুন আপনার সমস্যার ভিত্তিতে</h2>
-
-<input id="specialistProblem"
-placeholder="Enter your main problem">
-
-<button onclick="findSpecialist()">Find Specialist</button>
-
-<div id="specialistResult" class="box"></div>
-</section>
-
+<section id="specialist" class="section"><button class="back" onclick="back()">← Back</button><h2>Specialist খুঁজুন আপনার সমস্যার ভিত্তিতে</h2><input id="sp" placeholder="Enter your main problem"><button onclick="findSpecialist()">Find Specialist</button><div class="box" id="spResult"></div></section>
 </main>
-
 <script>
-
-if(localStorage.getItem("patientLoggedIn")!=="true")
-location.href="pages/patient-login.html";
-
-patientName.innerText=localStorage.getItem("patientName")||"Patient";
-
-
-function openPage(p){
-home.style.display="none";
-document.querySelectorAll(".section").forEach(x=>x.style.display="none");
-document.getElementById(p).style.display="block";
-
-if(p==="problem")loadProblem();
-if(p==="antibiotic")loadAntibiotic();
-if(p==="reports")loadReports();
-if(p==="prescription")loadPrescription();
-}
-
-
-function backHome(){
-document.querySelectorAll(".section").forEach(x=>x.style.display="none");
-home.style.display="block";
-}
-
-
-/* Health Problem */
-function loadProblem(){
-problemText.value=localStorage.getItem("patientHealthProblem")||"";
-saveTime.innerText=localStorage.getItem("patientHealthProblemDate")||"";
-}
-
-problemText.addEventListener("input",()=>{
-localStorage.setItem("patientHealthProblem",problemText.value);
-let t="Auto-saved: "+new Date().toLocaleString();
-localStorage.setItem("patientHealthProblemDate",t);
-saveTime.innerText=t;
-});
-
-
-/* Antibiotic History */
-function loadAntibiotic(){
-let a=JSON.parse(localStorage.getItem("antibioticHistory")||"[]");
-
-antibioticList.innerHTML=a.length?a.map(x=>`
-<div class="record">
-<h3>${x.name}</h3>
-<p>Dose: ${x.dose}</p>
-<p>Frequency: ${x.frequency}</p>
-<p>Start: ${x.startDate}</p>
-<p>End: ${x.endDate}</p>
-<p>Reason: ${x.reason}</p>
-<p>Doctor: ${x.doctor}</p>
-<p>Status: ${x.status}</p>
-</div>`).join(""):"<div class='box'>No antibiotic history available.</div>";
-}
-
-
-/* Test Reports */
-function addReport(){
-let f=reportFile.files[0],d=reportDate.value;
-if(!f||!d)return alert("Select date and report.");
-
-let r=new FileReader();
-r.onload=()=>{
-let a=JSON.parse(localStorage.getItem("testReports")||"[]");
-a.push({date:d,name:f.name,file:r.result});
-localStorage.setItem("testReports",JSON.stringify(a));
-reportFile.value="";
-loadReports();
-};
-r.readAsDataURL(f);
-}
-
-function loadReports(){
-let a=JSON.parse(localStorage.getItem("testReports")||"[]");
-
-reportList.innerHTML=a.length?a.map(x=>`
-<div class="record">
-<p><b>Date:</b> ${x.date}</p>
-<p><b>Report:</b> ${x.name}</p>
-<a href="${x.file}" target="_blank">View Report</a>
-</div>`).join(""):"<div class='box'>No test reports available.</div>";
-}
-
-
-/* Prescription */
-function loadPrescription(){
-let a=JSON.parse(localStorage.getItem("prescriptions")||"[]");
-
-prescriptionList.innerHTML=a.length?a.map(x=>`
-<div class="record">
-<h3>${x.medicine}</h3>
-<p>Dose: ${x.dose}</p>
-<p>Frequency: ${x.frequency}</p>
-<p>Duration: ${x.duration}</p>
-<p>Instructions: ${x.notes||"N/A"}</p>
-<p>Doctor: ${x.doctor}</p>
-<p>Date: ${x.date}</p>
-</div>`).join(""):"<div class='box'>No prescriptions available.</div>";
-}
-
-
-/* Specialist */
-function findSpecialist(){
-let p=specialistProblem.value.toLowerCase(),s="General Physician";
-
-if(p.includes("heart")||p.includes("chest"))s="Cardiologist";
-else if(p.includes("skin")||p.includes("rash"))s="Dermatologist";
-else if(p.includes("child")||p.includes("baby"))s="Pediatrician";
-else if(p.includes("eye")||p.includes("vision"))s="Ophthalmologist";
-
-specialistResult.innerHTML="<h3>Suggested Specialist</h3><p>"+s+"</p>";
-}
-
-
-/* Logout */
-function logout(){
-localStorage.removeItem("patientLoggedIn");
-location.href="index.html";
-}
-
-</script>
-
-</body>
-</html>
+if(localStorage.getItem("patientLoggedIn")!=="true")location.href="patient-login.html";
+pname.innerText=localStorage.getItem("patientName")||"Patient";
+function openPage(p){home.style.display="none";document.querySelectorAll(".section").forEach(x=>x.style.display="none");document.getElementById(p).style.display="block";if(p==="problem")loadProblem();if(p==="antibiotic")loadAntibiotic();if(p==="reports")loadReports();if(p==="prescription")loadPrescription()}
+function back(){document.querySelectorAll(".section").forEach(x=>x.style.display="none");home.style.display="block"}
+function loadProblem(){problemText.value=localStorage.getItem("patientHealthProblem")||"";saveTime.innerText=localStorage.getItem("patientHealthProblemDate")||""}
+problemText.addEventListener("input",()=>{localStorage.setItem("patientHealthProblem",problemText.value);let t="Auto-saved: "+new Date().toLocaleString();localStorage.setItem("patientHealthProblemDate",t);saveTime.innerText=t})
+function loadAntibiotic(){let a=JSON.parse(localStorage.getItem("antibioticHistory")||"[]");antibioticList.innerHTML=a.length?a.map(x=>`<div class="record"><h3>${x.name}</h3><p>Dose: ${x.dose}</p><p>Frequency: ${x.frequency}</p><p>Start: ${x.startDate}</p><p>End: ${x.endDate}</p><p>Reason: ${x.reason}</p><p>Doctor: ${x.doctor}</p><p>Status: ${x.status}</p></div>`).join(""):"<div class='box'>No antibiotic history available.</div>"}
+function addReport(){let f=reportFile.files[0],d=reportDate.value;if(!f||!d)return alert("Select date and report.");let r=new FileReader();r.onload=()=>{let a=JSON.parse(localStorage.getItem("testReports")||"[]");a.push({date:d,name:f.name,file:r.result});localStorage.setItem("testReports",JSON.stringify(a));reportFile.value="";loadReports()};r.readAsDataURL(f)}
+function loadReports(){let a=JSON.parse(localStorage.getItem("testReports")||"[]");reportList.innerHTML=a.length?a.map(x=>`<div class="record"><p><b>Date:</b> ${x.date}</p><p><b>Report:</b> ${x.name}</p><a href="${x.file}" target="_blank">View Report</a></div>`).join(""):"<div class='box'>No test reports available.</div>"}
+function loadPrescription(){let a=JSON.parse(localStorage.getItem("prescriptions")||"[]");prescriptionList.innerHTML=a.length?a.map(x=>`<div class="record"><h3>${x.medicine}</h3><p>Dose: ${x.dose}</p><p>Frequency: ${x.frequency}</p><p>Duration: ${x.duration}</p><p>Instructions: ${x.notes||"N/A"}</p><p>Doctor: ${x.doctor}</p><p>Date: ${x.date}</p></div>`).join(""):"<div class='box'>No prescriptions available.</div>"}
+function findSpecialist(){let p=sp.value.toLowerCase(),s="General Physician";if(/heart|chest/.test(p))s="Cardiologist";else if(/skin|rash/.test(p))s="Dermatologist";else if(/child|baby/.test(p))s="Pediatrician";else if(/eye|vision/.test(p))s="Ophthalmologist";spResult.innerHTML="<h3>Suggested Specialist</h3><p>"+s+"</p><small>Demo decision-support feature; not a diagnosis.</small>"}
+function logout(){localStorage.removeItem("patientLoggedIn");location.href="index.html"}
+</script></body></html>
