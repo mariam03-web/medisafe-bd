@@ -1,300 +1,248 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Doctor Dashboard - MediSafe BD</title>
 
-    <title>Doctor Dashboard - MediSafe BD</title>
+<style>
+* {
+    box-sizing: border-box;
+}
 
-    <style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f7fb;
+    color: #1f2937;
+}
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-        }
+header {
+    background: #0b5ed7;
+    color: white;
+    padding: 18px 35px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
-        body {
-            background: #f4f7fb;
-            color: #222;
-        }
+header h1 {
+    margin: 0;
+    font-size: 25px;
+}
 
-        header {
-            background: #0b5ed7;
-            color: white;
-            padding: 18px 35px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+header button {
+    background: white;
+    color: #0b5ed7;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
 
-        header h1 {
-            font-size: 25px;
-        }
+.container {
+    width: 92%;
+    max-width: 1200px;
+    margin: 30px auto;
+}
 
-        .logout-btn {
-            background: white;
-            color: #0b5ed7;
-            border: none;
-            padding: 10px 18px;
-            border-radius: 7px;
-            cursor: pointer;
-            font-weight: bold;
-        }
+.welcome-box {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    margin-bottom: 25px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+}
 
-        .container {
-            width: 92%;
-            max-width: 1200px;
-            margin: 30px auto;
-        }
+.welcome-box h2 {
+    margin-top: 0;
+    color: #0b5ed7;
+}
 
-        .doctor-info {
-            background: white;
-            padding: 22px;
-            border-radius: 12px;
-            margin-bottom: 25px;
-            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
-        }
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 18px;
+}
 
-        .doctor-info h2 {
-            color: #0b5ed7;
-            margin-bottom: 8px;
-        }
+.menu-card {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    cursor: pointer;
+    border: 1px solid #dce3ec;
+    transition: 0.2s;
+}
 
-        .dashboard-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 18px;
-        }
+.menu-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
 
-        .menu-card {
-            background: white;
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
-            cursor: pointer;
-            transition: 0.2s;
-        }
+.menu-card h3 {
+    color: #0b5ed7;
+    margin-top: 0;
+}
 
-        .menu-card:hover {
-            transform: translateY(-4px);
-        }
+.section {
+    display: none;
+}
 
-        .menu-card h3 {
-            color: #0b5ed7;
-            margin-bottom: 8px;
-        }
+.section.active {
+    display: block;
+}
 
-        .menu-card p {
-            color: #666;
-            font-size: 14px;
-        }
+.section h2 {
+    color: #0b5ed7;
+}
 
-        .section {
-            display: none;
-            background: white;
-            padding: 30px;
-            border-radius: 12px;
-            margin-top: 25px;
-            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
-        }
+.back-btn {
+    background: #6c757d;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
 
-        .section h2 {
-            color: #0b5ed7;
-            margin-bottom: 20px;
-        }
+.form-box,
+.record-box,
+.profile-box,
+.note-box,
+.alert-box {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    margin-top: 15px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+}
 
-        .back-btn {
-            background: #6c757d;
-            color: white;
-            border: none;
-            padding: 9px 16px;
-            border-radius: 6px;
-            cursor: pointer;
-            margin-bottom: 20px;
-        }
+.form-box input,
+.form-box select,
+.form-box textarea {
+    width: 100%;
+    padding: 11px;
+    margin: 7px 0 15px;
+    border: 1px solid #ccd5df;
+    border-radius: 6px;
+}
 
-        input,
-        select,
-        textarea {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 7px;
-            margin-top: 7px;
-            margin-bottom: 15px;
-        }
+.form-box textarea {
+    min-height: 100px;
+    resize: vertical;
+}
 
-        textarea {
-            min-height: 100px;
-            resize: vertical;
-        }
+.form-box label {
+    font-weight: bold;
+}
 
-        .primary-btn {
-            background: #0b5ed7;
-            color: white;
-            border: none;
-            padding: 11px 20px;
-            border-radius: 7px;
-            cursor: pointer;
-            font-weight: bold;
-        }
+.primary-btn {
+    background: #0b5ed7;
+    color: white;
+    border: none;
+    padding: 11px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+}
 
-        .danger-btn {
-            background: #dc3545;
-            color: white;
-            border: none;
-            padding: 8px 13px;
-            border-radius: 6px;
-            cursor: pointer;
-        }
+.edit-btn {
+    background: #f0ad4e;
+    color: white;
+    border: none;
+    padding: 9px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+}
 
-        .edit-btn {
-            background: #198754;
-            color: white;
-            border: none;
-            padding: 8px 13px;
-            border-radius: 6px;
-            cursor: pointer;
-        }
+.danger-btn {
+    background: #dc3545;
+    color: white;
+    border: none;
+    padding: 9px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+}
 
-        .patient-result {
-            background: #f7f9fc;
-            border: 1px solid #ddd;
-            padding: 22px;
-            border-radius: 10px;
-            margin-top: 20px;
-            display: none;
-        }
+.record-card,
+.medical-card,
+.antibiotic-card {
+    background: white;
+    border: 1px solid #d9e2ef;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 15px;
+    line-height: 1.8;
+}
 
-        .patient-result h3 {
-            color: #0b5ed7;
-            margin-bottom: 15px;
-        }
+.medical-card {
+    border-left: 5px solid #0b5ed7;
+}
 
-        .patient-details {
-            line-height: 1.8;
-        }
+.antibiotic-card {
+    border-left: 5px solid #198754;
+}
 
-        .record-buttons {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 10px;
-            margin-top: 20px;
-        }
+.record-actions,
+.medical-actions {
+    margin-top: 15px;
+    display: flex;
+    gap: 10px;
+}
 
-        .record-btn {
-            background: #e8f1ff;
-            color: #0b5ed7;
-            border: 1px solid #b8d2ff;
-            padding: 11px;
-            border-radius: 7px;
-            cursor: pointer;
-            font-weight: bold;
-        }
+.profile-row {
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
 
-        .record-box {
-            background: #f7f9fc;
-            border: 1px solid #ddd;
-            padding: 22px;
-            border-radius: 10px;
-            margin-top: 15px;
-        }
+.note-content {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    white-space: pre-wrap;
+}
 
-        .antibiotic-card {
-            background: white;
-            border: 1px solid #d9e2ef;
-            border-left: 5px solid #0b5ed7;
-            padding: 20px;
-            border-radius: 10px;
-            margin-top: 15px;
-        }
+.alert-box {
+    border-left: 5px solid #dc3545;
+}
 
-        .antibiotic-card h3 {
-            color: #0b5ed7;
-            margin-bottom: 12px;
-        }
+.empty-message {
+    color: #777;
+    padding: 15px 0;
+}
 
-        .antibiotic-actions {
-            margin-top: 15px;
-            display: flex;
-            gap: 10px;
-        }
-
-        .form-box {
-            background: #f8fbff;
-            border: 1px solid #d7e5f5;
-            padding: 22px;
-            border-radius: 10px;
-            margin-bottom: 25px;
-        }
-
-        .form-box h3 {
-            color: #0b5ed7;
-            margin-bottom: 15px;
-        }
-
-        .note-box {
-            background: white;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            padding: 20px;
-            margin-top: 15px;
-            line-height: 1.7;
-        }
-
-        .empty-message {
-            color: #777;
-            font-style: italic;
-        }
-
-    </style>
-
+.info-box {
+    background: #eaf3ff;
+    border-left: 5px solid #0b5ed7;
+    padding: 15px;
+    border-radius: 6px;
+    margin-top: 15px;
+}
+</style>
 </head>
 
 <body>
 
 <header>
-
-    <h1>MediSafe BD</h1>
-
-    <button class="logout-btn" onclick="logout()">
-        Logout
-    </button>
-
+    <h1>MediSafe BD - Doctor Portal</h1>
+    <button onclick="logout()">Logout</button>
 </header>
-
 
 <div class="container">
 
-    <div class="doctor-info">
+    <div id="dashboardHome">
 
-        <h2>Doctor Dashboard</h2>
-
-        <p>
-            <strong>Doctor Name:</strong>
-            <span id="doctorName">Doctor</span>
-        </p>
-
-        <p>
-            <strong>BMDC Number:</strong>
-            <span id="doctorBMDC">Not available</span>
-        </p>
-
-    </div>
-
-
-    <!-- DASHBOARD -->
-
-    <div id="dashboard">
+        <div class="welcome-box">
+            <h2>Welcome, Dr. <span id="doctorName">Doctor</span></h2>
+            <p>BMDC Registration: <span id="doctorBMDC">N/A</span></p>
+        </div>
 
         <div class="dashboard-grid">
 
             <div class="menu-card" onclick="showSection('patientSearch')">
                 <h3>Patient Search</h3>
-                <p>Search and access registered patient information.</p>
+                <p>Search and access a patient's profile.</p>
             </div>
 
             <div class="menu-card" onclick="showSection('patientRecords')">
@@ -304,41 +252,40 @@
 
             <div class="menu-card" onclick="showSection('medicalHistory')">
                 <h3>Medical History</h3>
-                <p>View patient's diseases and medical history.</p>
+                <p>Add, edit and manage medical conditions.</p>
             </div>
 
             <div class="menu-card" onclick="showSection('antibioticHistory')">
                 <h3>Antibiotic History</h3>
-                <p>Add, edit and manage antibiotic records.</p>
+                <p>Manage patient's complete antibiotic history.</p>
             </div>
 
             <div class="menu-card" onclick="showSection('prescription')">
                 <h3>Prescription</h3>
-                <p>Manage patient prescriptions.</p>
+                <p>Create and manage prescriptions.</p>
             </div>
 
             <div class="menu-card" onclick="showSection('testReports')">
                 <h3>Test Reports</h3>
-                <p>View and manage patient test reports.</p>
+                <p>View and manage test reports.</p>
             </div>
 
             <div class="menu-card" onclick="showSection('patientNotes')">
                 <h3>Patient Notes</h3>
-                <p>View symptoms and problems submitted by the patient.</p>
+                <p>View symptoms and problems submitted by patient.</p>
             </div>
 
             <div class="menu-card" onclick="showSection('fullPatientProfile')">
                 <h3>Full Patient Profile</h3>
-                <p>View complete patient information.</p>
+                <p>View complete registered patient information.</p>
             </div>
 
             <div class="menu-card" onclick="showSection('antibioticAlert')">
-                <h3>Antibiotic Safety Alert</h3>
-                <p>Check antibiotic safety and resistance warnings.</p>
+                <h3>Antibiotic Resistance & Prescription Safety Alert</h3>
+                <p>Review antibiotic safety information.</p>
             </div>
 
         </div>
-
     </div>
 
 
@@ -346,118 +293,27 @@
 
     <section id="patientSearch" class="section">
 
-        <button class="back-btn" onclick="backToDashboard()">
-            ← Back to Dashboard
-        </button>
+        <button class="back-btn" onclick="backToDashboard()">← Back to Dashboard</button>
 
         <h2>Patient Search</h2>
 
-        <label>Search By</label>
+        <div class="form-box">
 
-        <select id="searchType">
+            <label>Patient ID / Name</label>
 
-            <option value="patientID">Patient ID</option>
-            <option value="nid">NID</option>
-            <option value="birthCertificate">Birth Certificate</option>
-            <option value="temporaryID">Temporary ID</option>
-
-        </select>
-
-        <label>Search Value</label>
-
-        <input
-            type="text"
-            id="searchValue"
-            placeholder="Enter patient information"
-        >
-
-        <button class="primary-btn" onclick="searchPatient()">
-            Search Patient
-        </button>
-
-
-        <div id="patientResult" class="patient-result">
-
-            <h3>Patient Found</h3>
-
-            <div class="patient-details">
-
-                <p>
-                    <strong>Name:</strong>
-                    <span id="resultName"></span>
-                </p>
-
-                <p>
-                    <strong>Patient ID:</strong>
-                    <span id="resultID"></span>
-                </p>
-
-                <p>
-                    <strong>Date of Birth:</strong>
-                    <span id="resultDOB"></span>
-                </p>
-
-                <p>
-                    <strong>Gender:</strong>
-                    <span id="resultGender"></span>
-                </p>
-
-                <p>
-                    <strong>Phone:</strong>
-                    <span id="resultPhone"></span>
-                </p>
-
-                <p>
-                    <strong>NID:</strong>
-                    <span id="resultNID"></span>
-                </p>
-
-            </div>
-
-            <button
-                class="primary-btn"
-                onclick="openPatientProfile()"
-                style="margin-top:15px;"
+            <input
+                type="text"
+                id="patientSearchInput"
+                placeholder="Enter Patient ID or Name"
             >
-                Open Full Patient Profile
+
+            <button class="primary-btn" onclick="searchPatient()">
+                Search Patient
             </button>
 
-            <div class="record-buttons">
-
-                <button class="record-btn"
-                    onclick="showPatientRecord('medicalRecord')">
-                    Medical History
-                </button>
-
-                <button class="record-btn"
-                    onclick="showPatientRecord('antibioticRecord')">
-                    Antibiotic History
-                </button>
-
-                <button class="record-btn"
-                    onclick="showPatientRecord('prescriptionRecord')">
-                    Prescriptions
-                </button>
-
-                <button class="record-btn"
-                    onclick="showPatientRecord('testRecord')">
-                    Test Reports
-                </button>
-
-                <button class="record-btn"
-                    onclick="showPatientRecord('notesRecord')">
-                    Patient Notes
-                </button>
-
-            </div>
-
-            <div
-                id="patientRecordContent"
-                class="record-box"
-                style="display:none;"
-            ></div>
-
         </div>
+
+        <div id="searchResult"></div>
 
     </section>
 
@@ -466,17 +322,17 @@
 
     <section id="patientRecords" class="section">
 
-        <button class="back-btn" onclick="backToDashboard()">
-            ← Back to Dashboard
-        </button>
+        <button class="back-btn" onclick="backToDashboard()">← Back to Dashboard</button>
 
         <h2>Patient Records</h2>
 
         <div class="record-box">
 
-            <p>
-                Complete patient records will be available here.
-            </p>
+            <div class="info-box">
+                Search for a patient first to load the patient's complete records.
+            </div>
+
+            <div id="patientRecordDisplay"></div>
 
         </div>
 
@@ -487,26 +343,90 @@
 
     <section id="medicalHistory" class="section">
 
-        <button class="back-btn" onclick="backToDashboard()">
-            ← Back to Dashboard
-        </button>
+        <button class="back-btn" onclick="backToDashboard()">← Back to Dashboard</button>
 
         <h2>Medical History</h2>
 
+        <div class="form-box">
+
+            <h3 id="medicalFormTitle">
+                Add Medical History Record
+            </h3>
+
+            <input type="hidden" id="editMedicalIndex">
+
+            <label>Disease / Condition</label>
+
+            <input
+                type="text"
+                id="medicalCondition"
+                placeholder="Enter disease or condition"
+            >
+
+            <label>Diagnosis Date</label>
+
+            <input
+                type="date"
+                id="diagnosisDate"
+            >
+
+            <label>Status</label>
+
+            <select id="medicalStatus">
+
+                <option value="Ongoing">Ongoing</option>
+                <option value="Recovered">Recovered</option>
+                <option value="Chronic">Chronic</option>
+
+            </select>
+
+            <label>Treatment</label>
+
+            <input
+                type="text"
+                id="medicalTreatment"
+                placeholder="Treatment / management"
+            >
+
+            <label>Doctor</label>
+
+            <input
+                type="text"
+                id="medicalDoctor"
+                placeholder="Doctor name"
+            >
+
+            <label>Doctor's Notes</label>
+
+            <textarea
+                id="medicalNotes"
+                placeholder="Additional notes..."
+            ></textarea>
+
+            <button
+                class="primary-btn"
+                onclick="saveMedicalRecord()"
+                id="saveMedicalBtn"
+            >
+                Add Medical Record
+            </button>
+
+            <button
+                class="back-btn"
+                onclick="clearMedicalForm()"
+                style="margin-left:10px;"
+            >
+                Clear
+            </button>
+
+        </div>
+
+
         <div class="record-box">
 
-            <h3>Patient Medical History</h3>
+            <h3>Medical History Records</h3>
 
-            <p class="empty-message">
-                Medical history records will be displayed here.
-            </p>
-
-            <br>
-
-            <p>
-                Doctors will be able to add and update disease,
-                condition and treatment history.
-            </p>
+            <div id="medicalList"></div>
 
         </div>
 
@@ -517,14 +437,9 @@
 
     <section id="antibioticHistory" class="section">
 
-        <button class="back-btn" onclick="backToDashboard()">
-            ← Back to Dashboard
-        </button>
+        <button class="back-btn" onclick="backToDashboard()">← Back to Dashboard</button>
 
         <h2>Antibiotic History</h2>
-
-
-        <!-- ADD / EDIT FORM -->
 
         <div class="form-box">
 
@@ -532,20 +447,15 @@
                 Add Antibiotic Record
             </h3>
 
-            <input
-                type="hidden"
-                id="editAntibioticIndex"
-            >
-
+            <input type="hidden" id="editAntibioticIndex">
 
             <label>Antibiotic Name</label>
 
             <input
                 type="text"
                 id="antibioticName"
-                placeholder="Enter antibiotic name"
+                placeholder="Example: Amoxicillin"
             >
-
 
             <label>Dose</label>
 
@@ -555,15 +465,13 @@
                 placeholder="Example: 500 mg"
             >
 
-
             <label>Frequency</label>
 
             <input
                 type="text"
                 id="antibioticFrequency"
-                placeholder="Example: 2 times daily"
+                placeholder="Example: 3 times daily"
             >
-
 
             <label>Start Date</label>
 
@@ -572,7 +480,6 @@
                 id="antibioticStartDate"
             >
 
-
             <label>End Date</label>
 
             <input
@@ -580,51 +487,38 @@
                 id="antibioticEndDate"
             >
 
-
-            <label>Reason / Condition</label>
+            <label>Reason</label>
 
             <input
                 type="text"
                 id="antibioticReason"
-                placeholder="Reason for antibiotic use"
+                placeholder="Reason for prescription"
             >
 
-
-            <label>Prescribing Doctor</label>
+            <label>Doctor</label>
 
             <input
                 type="text"
-                id="prescribingDoctor"
+                id="antibioticDoctor"
                 placeholder="Doctor name"
             >
-
 
             <label>Status</label>
 
             <select id="antibioticStatus">
 
-                <option value="Completed">
-                    Completed
-                </option>
-
-                <option value="Ongoing">
-                    Ongoing
-                </option>
-
-                <option value="Stopped">
-                    Stopped
-                </option>
+                <option value="Completed">Completed</option>
+                <option value="Ongoing">Ongoing</option>
+                <option value="Stopped">Stopped</option>
 
             </select>
 
-
-            <label>Doctor's Notes</label>
+            <label>Notes</label>
 
             <textarea
                 id="antibioticNotes"
                 placeholder="Additional notes..."
             ></textarea>
-
 
             <button
                 class="primary-btn"
@@ -633,7 +527,6 @@
             >
                 Add Antibiotic Record
             </button>
-
 
             <button
                 class="back-btn"
@@ -645,8 +538,6 @@
 
         </div>
 
-
-        <!-- HISTORY LIST -->
 
         <div class="record-box">
 
@@ -663,18 +554,14 @@
 
     <section id="prescription" class="section">
 
-        <button class="back-btn" onclick="backToDashboard()">
-            ← Back to Dashboard
-        </button>
+        <button class="back-btn" onclick="backToDashboard()">← Back to Dashboard</button>
 
         <h2>Prescription</h2>
 
         <div class="record-box">
 
-            <h3>Patient Prescriptions</h3>
-
-            <p class="empty-message">
-                Prescription records will be displayed here.
+            <p>
+                Prescription management module will be connected next.
             </p>
 
         </div>
@@ -686,18 +573,14 @@
 
     <section id="testReports" class="section">
 
-        <button class="back-btn" onclick="backToDashboard()">
-            ← Back to Dashboard
-        </button>
+        <button class="back-btn" onclick="backToDashboard()">← Back to Dashboard</button>
 
         <h2>Test Reports</h2>
 
         <div class="record-box">
 
-            <h3>Patient Test Reports</h3>
-
-            <p class="empty-message">
-                Test reports will be displayed here.
+            <p>
+                Test report management module will be connected next.
             </p>
 
         </div>
@@ -709,44 +592,21 @@
 
     <section id="patientNotes" class="section">
 
-        <button class="back-btn" onclick="backToDashboard()">
-            ← Back to Dashboard
-        </button>
+        <button class="back-btn" onclick="backToDashboard()">← Back to Dashboard</button>
 
         <h2>Patient Health Notes</h2>
 
-        <div class="record-box">
-
-            <h3 id="notesPatientName">
-                Patient
-            </h3>
+        <div class="note-box">
 
             <p>
-                <strong>Patient ID:</strong>
-                <span id="notesPatientID">
-                    Not selected
-                </span>
+                Symptoms or problems submitted by the patient:
             </p>
 
-            <hr style="margin:20px 0;">
-
-            <h3>
-                Symptoms / Problems Reported by Patient
-            </h3>
-
-            <div
-                id="doctorHealthNote"
-                class="note-box"
-            >
-                <p class="empty-message">
-                    No health note submitted by the patient yet.
-                </p>
+            <div id="patientHealthNoteDisplay" class="note-content">
+                No health note submitted yet.
             </div>
 
-            <p
-                id="healthNoteDate"
-                style="color:#777; margin-top:10px;"
-            ></p>
+            <p id="patientHealthNoteDate"></p>
 
         </div>
 
@@ -757,67 +617,14 @@
 
     <section id="fullPatientProfile" class="section">
 
-        <button class="back-btn" onclick="backToDashboard()">
-            ← Back to Dashboard
-        </button>
+        <button class="back-btn" onclick="backToDashboard()">← Back to Dashboard</button>
 
         <h2>Full Patient Profile</h2>
 
-        <div class="record-box">
+        <div class="profile-box" id="fullProfileDisplay">
 
             <p>
-                <strong>Name:</strong>
-                <span id="fullName">Not available</span>
-            </p>
-
-            <p>
-                <strong>Patient ID:</strong>
-                <span id="fullID">Not available</span>
-            </p>
-
-            <p>
-                <strong>Date of Birth:</strong>
-                <span id="fullDOB">Not available</span>
-            </p>
-
-            <p>
-                <strong>Gender:</strong>
-                <span id="fullGender">Not available</span>
-            </p>
-
-            <p>
-                <strong>Phone:</strong>
-                <span id="fullPhone">Not available</span>
-            </p>
-
-            <p>
-                <strong>NID:</strong>
-                <span id="fullNID">Not available</span>
-            </p>
-
-            <p>
-                <strong>Birth Certificate:</strong>
-                <span id="fullBirthCertificate">Not available</span>
-            </p>
-
-            <p>
-                <strong>Temporary ID:</strong>
-                <span id="fullTemporaryID">Not available</span>
-            </p>
-
-            <p>
-                <strong>Email:</strong>
-                <span id="fullEmail">Not available</span>
-            </p>
-
-            <p>
-                <strong>Emergency Contact:</strong>
-                <span id="fullEmergency">Not available</span>
-            </p>
-
-            <p>
-                <strong>Address:</strong>
-                <span id="fullAddress">Not available</span>
+                Search for a patient first.
             </p>
 
         </div>
@@ -829,22 +636,20 @@
 
     <section id="antibioticAlert" class="section">
 
-        <button class="back-btn" onclick="backToDashboard()">
-            ← Back to Dashboard
-        </button>
+        <button class="back-btn" onclick="backToDashboard()">← Back to Dashboard</button>
 
-        <h2>
-            Antibiotic Resistance & Prescription Safety Alert
-        </h2>
+        <h2>Antibiotic Resistance & Prescription Safety Alert</h2>
 
-        <div class="record-box">
+        <div class="alert-box">
 
-            <h3>Antibiotic Safety Monitoring</h3>
+            <h3>Safety Alert</h3>
 
             <p>
-                This module will analyze antibiotic usage history
-                and prescription information to identify potential
-                safety concerns.
+                Review previous antibiotic use before creating a new prescription.
+            </p>
+
+            <p>
+                This demo module is intended to support prescription-safety review.
             </p>
 
         </div>
@@ -856,509 +661,1308 @@
 
 <script>
 
+/* =========================
+   DOCTOR LOGIN CHECK
+========================= */
 
-    // ==============================
-    // DOCTOR LOGIN CHECK
-    // ==============================
+const doctorLoggedIn =
+    localStorage.getItem("doctorLoggedIn");
 
-    if (localStorage.getItem("doctorLoggedIn") !== "true") {
+if (doctorLoggedIn !== "true") {
 
-        window.location.href = "doctor-login.html";
+    window.location.href = "doctor-login.html";
 
-    }
-
-
-    // ==============================
-    // DOCTOR INFORMATION
-    // ==============================
-
-    document.getElementById("doctorName").innerText =
-        localStorage.getItem("doctorName") || "Doctor";
-
-    document.getElementById("doctorBMDC").innerText =
-        localStorage.getItem("doctorBMDC") || "Not available";
+}
 
 
-    // ==============================
-    // SHOW SECTION
-    // ==============================
+/* =========================
+   DOCTOR INFORMATION
+========================= */
 
-    function showSection(sectionID) {
+document.getElementById("doctorName").innerText =
+    localStorage.getItem("doctorName") || "Doctor";
 
-        document.querySelectorAll(".section").forEach(
-            function(section) {
-                section.style.display = "none";
-            }
-        );
-
-        document.getElementById("dashboard").style.display =
-            "none";
-
-        document.getElementById(sectionID).style.display =
-            "block";
+document.getElementById("doctorBMDC").innerText =
+    localStorage.getItem("doctorBMDC") || "N/A";
 
 
-        if (sectionID === "patientNotes") {
-            loadPatientHealthNote();
-        }
+/* =========================
+   SECTION CONTROL
+========================= */
+
+function showSection(sectionId) {
+
+    document.getElementById("dashboardHome").style.display = "none";
+
+    const sections =
+        document.querySelectorAll(".section");
+
+    sections.forEach(function(section) {
+
+        section.classList.remove("active");
+
+    });
+
+    document.getElementById(sectionId)
+        .classList.add("active");
 
 
-        if (sectionID === "fullPatientProfile") {
-            loadFullPatientProfile();
-        }
+    if (sectionId === "medicalHistory") {
 
-
-        if (sectionID === "antibioticHistory") {
-            loadAntibioticHistory();
-        }
+        loadMedicalHistory();
 
     }
 
-
-    // ==============================
-    // BACK TO DASHBOARD
-    // ==============================
-
-    function backToDashboard() {
-
-        document.querySelectorAll(".section").forEach(
-            function(section) {
-                section.style.display = "none";
-            }
-        );
-
-        document.getElementById("dashboard").style.display =
-            "block";
-
-    }
-
-
-    // ==============================
-    // SEARCH PATIENT
-    // ==============================
-
-    function searchPatient() {
-
-        const searchValue =
-            document.getElementById("searchValue").value.trim();
-
-
-        if (searchValue === "") {
-
-            alert("Please enter patient information.");
-
-            return;
-
-        }
-
-
-        const demoPatient = {
-
-            patientName: "Demo Patient",
-
-            patientID: "MSBD-P-10001",
-
-            patientDOB: "01 January 2000",
-
-            patientGender: "Female",
-
-            patientPhone: "01XXXXXXXXX",
-
-            patientNID: "199XXXXXXXXXX",
-
-            patientBirthCertificate: "2000XXXXXXXX",
-
-            patientTemporaryID: "TEMP-10001",
-
-            patientEmail: "demo@example.com",
-
-            patientEmergency: "01XXXXXXXXX",
-
-            patientAddress: "Dhaka, Bangladesh"
-
-        };
-
-
-        localStorage.setItem(
-            "patientName",
-            demoPatient.patientName
-        );
-
-        localStorage.setItem(
-            "patientID",
-            demoPatient.patientID
-        );
-
-        localStorage.setItem(
-            "patientDOB",
-            demoPatient.patientDOB
-        );
-
-        localStorage.setItem(
-            "patientGender",
-            demoPatient.patientGender
-        );
-
-        localStorage.setItem(
-            "patientPhone",
-            demoPatient.patientPhone
-        );
-
-        localStorage.setItem(
-            "patientNID",
-            demoPatient.patientNID
-        );
-
-        localStorage.setItem(
-            "patientBirthCertificate",
-            demoPatient.patientBirthCertificate
-        );
-
-        localStorage.setItem(
-            "patientTemporaryID",
-            demoPatient.patientTemporaryID
-        );
-
-        localStorage.setItem(
-            "patientEmail",
-            demoPatient.patientEmail
-        );
-
-        localStorage.setItem(
-            "patientEmergency",
-            demoPatient.patientEmergency
-        );
-
-        localStorage.setItem(
-            "patientAddress",
-            demoPatient.patientAddress
-        );
-
-
-        document.getElementById("resultName").innerText =
-            demoPatient.patientName;
-
-        document.getElementById("resultID").innerText =
-            demoPatient.patientID;
-
-        document.getElementById("resultDOB").innerText =
-            demoPatient.patientDOB;
-
-        document.getElementById("resultGender").innerText =
-            demoPatient.patientGender;
-
-        document.getElementById("resultPhone").innerText =
-            demoPatient.patientPhone;
-
-        document.getElementById("resultNID").innerText =
-            demoPatient.patientNID;
-
-
-        document.getElementById("patientResult").style.display =
-            "block";
-
-    }
-
-
-    // ==============================
-    // PATIENT PROFILE
-    // ==============================
-
-    function openPatientProfile() {
-
-        window.location.href = "patient-profile.html";
-
-    }
-
-
-    // ==============================
-    // PATIENT RECORD BUTTONS
-    // ==============================
-
-    function showPatientRecord(recordId) {
-
-        const content =
-            document.getElementById("patientRecordContent");
-
-        content.style.display = "block";
-
-
-        if (recordId === "medicalRecord") {
-
-            content.innerHTML = `
-                <h3>Medical History</h3>
-                <p>Medical history records will appear here.</p>
-            `;
-
-        }
-
-
-        else if (recordId === "antibioticRecord") {
-
-            loadAntibioticHistory();
-
-            content.innerHTML = `
-                <h3>Antibiotic History</h3>
-                <p>Open the Antibiotic History module
-                to manage antibiotic records.</p>
-            `;
-
-        }
-
-
-        else if (recordId === "prescriptionRecord") {
-
-            content.innerHTML = `
-                <h3>Prescription History</h3>
-                <p>Patient prescriptions will appear here.</p>
-            `;
-
-        }
-
-
-        else if (recordId === "testRecord") {
-
-            content.innerHTML = `
-                <h3>Test Reports</h3>
-                <p>Patient test reports will appear here.</p>
-            `;
-
-        }
-
-
-        else if (recordId === "notesRecord") {
-
-            const note =
-                localStorage.getItem("patientHealthNote");
-
-
-            if (note && note.trim() !== "") {
-
-                content.innerHTML = `
-                    <h3>Patient Health Note</h3>
-                    <div class="note-box">
-                        ${escapeHTML(note)}
-                    </div>
-                `;
-
-            } else {
-
-                content.innerHTML = `
-                    <h3>Patient Health Note</h3>
-                    <p class="empty-message">
-                        No health note submitted by the patient yet.
-                    </p>
-                `;
-
-            }
-
-        }
-
-    }
-
-
-    // ==============================
-    // ANTIBIOTIC HISTORY
-    // ==============================
-
-    function getAntibioticHistory() {
-
-        const saved =
-            localStorage.getItem("antibioticHistory");
-
-        if (!saved) {
-            return [];
-        }
-
-        try {
-            return JSON.parse(saved);
-        }
-
-        catch (error) {
-            return [];
-        }
-
-    }
-
-
-    function saveAntibioticRecord() {
-
-        const name =
-            document.getElementById("antibioticName").value.trim();
-
-        const dose =
-            document.getElementById("antibioticDose").value.trim();
-
-        const frequency =
-            document.getElementById("antibioticFrequency").value.trim();
-
-        const startDate =
-            document.getElementById("antibioticStartDate").value;
-
-        const endDate =
-            document.getElementById("antibioticEndDate").value;
-
-        const reason =
-            document.getElementById("antibioticReason").value.trim();
-
-        const doctor =
-            document.getElementById("prescribingDoctor").value.trim();
-
-        const status =
-            document.getElementById("antibioticStatus").value;
-
-        const notes =
-            document.getElementById("antibioticNotes").value.trim();
-
-
-        if (
-            name === "" ||
-            dose === "" ||
-            frequency === "" ||
-            startDate === "" ||
-            endDate === "" ||
-            reason === "" ||
-            doctor === ""
-        ) {
-
-            alert("Please fill in all required fields.");
-
-            return;
-
-        }
-
-
-        let history = getAntibioticHistory();
-
-
-        const editIndex =
-            document.getElementById("editAntibioticIndex").value;
-
-
-        const record = {
-
-            name: name,
-
-            dose: dose,
-
-            frequency: frequency,
-
-            startDate: startDate,
-
-            endDate: endDate,
-
-            reason: reason,
-
-            doctor: doctor,
-
-            status: status,
-
-            notes: notes
-
-        };
-
-
-        if (editIndex !== "") {
-
-            history[Number(editIndex)] = record;
-
-            alert("Antibiotic record updated successfully.");
-
-        }
-
-        else {
-
-            history.push(record);
-
-            alert("Antibiotic record added successfully.");
-
-        }
-
-
-        localStorage.setItem(
-            "antibioticHistory",
-            JSON.stringify(history)
-        );
-
-
-        clearAntibioticForm();
+    if (sectionId === "antibioticHistory") {
 
         loadAntibioticHistory();
 
     }
 
+    if (sectionId === "patientNotes") {
 
-    function loadAntibioticHistory() {
+        loadPatientHealthNote();
 
-        const history =
-            getAntibioticHistory();
+    }
 
-        const list =
-            document.getElementById("antibioticList");
+    if (sectionId === "fullPatientProfile") {
 
+        loadFullPatientProfile();
 
-        if (history.length === 0) {
+    }
 
-            list.innerHTML = `
-                <p class="empty-message">
-                    No antibiotic records added yet.
-                </p>
-            `;
-
-            return;
-
-        }
+}
 
 
-        list.innerHTML = "";
+function backToDashboard() {
+
+    document
+        .querySelectorAll(".section")
+        .forEach(function(section) {
+
+            section.classList.remove("active");
+
+        });
+
+    document.getElementById("dashboardHome")
+        .style.display = "block";
+
+}
 
 
-        history.forEach(
-            function(record, index) {
+/* =========================
+   PATIENT SEARCH
+========================= */
 
-                const card =
-                    document.createElement("div");
+function searchPatient() {
 
-                card.className =
-                    "antibiotic-card";
+    const search =
+        document.getElementById("patientSearchInput")
+        .value
+        .trim();
+
+    if (!search) {
+
+        alert("Please enter Patient ID or Name.");
+
+        return;
+
+    }
 
 
-                card.innerHTML = `
+    const patient = {
 
-                    <h3>
-                        ${escapeHTML(record.name)}
-                    </h3>
+        patientName: "Demo Patient",
 
-                    <p>
-                        <strong>Dose:</strong>
-                        ${escapeHTML(record.dose)}
-                    </p>
+        patientID: "MSBD-P-10001",
 
-                    <p>
-                        <strong>Frequency:</strong>
-                        ${escapeHTML(record.frequency)}
-                    </p>
+        patientDOB: "01 January 2000",
 
-                    <p>
-                        <strong>Start Date:</strong>
-                        ${escapeHTML(record.startDate)}
-                    </p>
+        patientGender: "Female",
 
-                    <p>
-                        <strong>End Date:</strong>
-                        ${escapeHTML(record.endDate)}
-                    </p>
+        patientPhone: "01XXXXXXXXX",
 
-                    <p>
-                        <strong>Reason:</strong>
-                        ${escapeHTML(record.reason)}
-                    </p>
+        patientNID: "199XXXXXXXXXX",
 
-                    <p>
-                        <strong>Prescribing Doctor:</strong>
-                        ${escapeHTML(record.doctor)}
-                    </p>
+        patientBirthCertificate: "2000XXXXXXXX",
 
-                    <p>
-                        <strong>Status:</strong>
-                       
+        patientTemporaryID: "TEMP-10001",
+
+        patientEmail: "demo@example.com",
+
+        patientEmergency: "01XXXXXXXXX",
+
+        patientAddress: "Dhaka, Bangladesh"
+
+    };
+
+
+    localStorage.setItem(
+        "patientName",
+        patient.patientName
+    );
+
+    localStorage.setItem(
+        "patientID",
+        patient.patientID
+    );
+
+    localStorage.setItem(
+        "patientDOB",
+        patient.patientDOB
+    );
+
+    localStorage.setItem(
+        "patientGender",
+        patient.patientGender
+    );
+
+    localStorage.setItem(
+        "patientPhone",
+        patient.patientPhone
+    );
+
+    localStorage.setItem(
+        "patientNID",
+        patient.patientNID
+    );
+
+    localStorage.setItem(
+        "patientBirthCertificate",
+        patient.patientBirthCertificate
+    );
+
+    localStorage.setItem(
+        "patientTemporaryID",
+        patient.patientTemporaryID
+    );
+
+    localStorage.setItem(
+        "patientEmail",
+        patient.patientEmail
+    );
+
+    localStorage.setItem(
+        "patientEmergency",
+        patient.patientEmergency
+    );
+
+    localStorage.setItem(
+        "patientAddress",
+        patient.patientAddress
+    );
+
+
+    document.getElementById("searchResult").innerHTML = `
+
+        <div class="record-card">
+
+            <h3>Patient Found</h3>
+
+            <p>
+                <strong>Name:</strong>
+                ${escapeHTML(patient.patientName)}
+            </p>
+
+            <p>
+                <strong>Patient ID:</strong>
+                ${escapeHTML(patient.patientID)}
+            </p>
+
+            <p>
+                <strong>Date of Birth:</strong>
+                ${escapeHTML(patient.patientDOB)}
+            </p>
+
+            <p>
+                <strong>Gender:</strong>
+                ${escapeHTML(patient.patientGender)}
+            </p>
+
+            <button
+                class="primary-btn"
+                onclick="openPatientProfile()"
+            >
+                Open Patient Profile
+            </button>
+
+        </div>
+
+    `;
+
+}
+
+
+function openPatientProfile() {
+
+    showSection("fullPatientProfile");
+
+}
+
+
+/* =========================
+   PATIENT RECORDS
+========================= */
+
+function showPatientRecord() {
+
+    const name =
+        localStorage.getItem("patientName") ||
+        "No patient selected";
+
+    document.getElementById(
+        "patientRecordDisplay"
+    ).innerHTML = `
+
+        <div class="record-card">
+
+            <h3>${escapeHTML(name)}</h3>
+
+            <p>
+                Complete patient records are connected
+                with the following modules:
+            </p>
+
+            <ul>
+
+                <li>Medical History</li>
+
+                <li>Antibiotic History</li>
+
+                <li>Prescriptions</li>
+
+                <li>Test Reports</li>
+
+                <li>Patient Health Notes</li>
+
+            </ul>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================
+   MEDICAL HISTORY
+========================= */
+
+function getMedicalHistory() {
+
+    const saved =
+        localStorage.getItem("medicalHistory");
+
+    if (!saved) {
+
+        return [];
+
+    }
+
+    try {
+
+        return JSON.parse(saved);
+
+    } catch (error) {
+
+        return [];
+
+    }
+
+}
+
+
+function saveMedicalRecord() {
+
+    const condition =
+        document.getElementById("medicalCondition")
+        .value
+        .trim();
+
+    const diagnosisDate =
+        document.getElementById("diagnosisDate")
+        .value;
+
+    const status =
+        document.getElementById("medicalStatus")
+        .value;
+
+    const treatment =
+        document.getElementById("medicalTreatment")
+        .value
+        .trim();
+
+    const doctor =
+        document.getElementById("medicalDoctor")
+        .value
+        .trim();
+
+    const notes =
+        document.getElementById("medicalNotes")
+        .value
+        .trim();
+
+
+    if (
+        !condition ||
+        !diagnosisDate ||
+        !treatment ||
+        !doctor
+    ) {
+
+        alert("Please fill in all required fields.");
+
+        return;
+
+    }
+
+
+    let history =
+        getMedicalHistory();
+
+
+    const editIndex =
+        document.getElementById("editMedicalIndex")
+        .value;
+
+
+    const record = {
+
+        condition: condition,
+
+        diagnosisDate: diagnosisDate,
+
+        status: status,
+
+        treatment: treatment,
+
+        doctor: doctor,
+
+        notes: notes
+
+    };
+
+
+    if (editIndex !== "") {
+
+        history[Number(editIndex)] =
+            record;
+
+        alert(
+            "Medical history record updated successfully."
+        );
+
+    } else {
+
+        history.push(record);
+
+        alert(
+            "Medical history record added successfully."
+        );
+
+    }
+
+
+    localStorage.setItem(
+        "medicalHistory",
+        JSON.stringify(history)
+    );
+
+
+    clearMedicalForm();
+
+    loadMedicalHistory();
+
+}
+
+
+function loadMedicalHistory() {
+
+    const history =
+        getMedicalHistory();
+
+    const list =
+        document.getElementById("medicalList");
+
+
+    if (!history.length) {
+
+        list.innerHTML = `
+
+            <p class="empty-message">
+                No medical history records added yet.
+            </p>
+
+        `;
+
+        return;
+
+    }
+
+
+    list.innerHTML = "";
+
+
+    history.forEach(function(record, index) {
+
+        const card =
+            document.createElement("div");
+
+        card.className =
+            "medical-card";
+
+
+        card.innerHTML = `
+
+            <h3>
+                ${escapeHTML(record.condition)}
+            </h3>
+
+            <p>
+                <strong>Diagnosis Date:</strong>
+                ${escapeHTML(record.diagnosisDate)}
+            </p>
+
+            <p>
+                <strong>Status:</strong>
+                ${escapeHTML(record.status)}
+            </p>
+
+            <p>
+                <strong>Treatment:</strong>
+                ${escapeHTML(record.treatment)}
+            </p>
+
+            <p>
+                <strong>Doctor:</strong>
+                ${escapeHTML(record.doctor)}
+            </p>
+
+            <p>
+                <strong>Doctor's Notes:</strong>
+                ${escapeHTML(record.notes || "None")}
+            </p>
+
+            <div class="medical-actions">
+
+                <button
+                    class="edit-btn"
+                    onclick="editMedicalRecord(${index})"
+                >
+                    Edit
+                </button>
+
+                <button
+                    class="danger-btn"
+                    onclick="deleteMedicalRecord(${index})"
+                >
+                    Delete
+                </button>
+
+            </div>
+
+        `;
+
+
+        list.appendChild(card);
+
+    });
+
+}
+
+
+function editMedicalRecord(index) {
+
+    const history =
+        getMedicalHistory();
+
+    const record =
+        history[index];
+
+
+    document.getElementById(
+        "medicalCondition"
+    ).value = record.condition;
+
+
+    document.getElementById(
+        "diagnosisDate"
+    ).value = record.diagnosisDate;
+
+
+    document.getElementById(
+        "medicalStatus"
+    ).value = record.status;
+
+
+    document.getElementById(
+        "medicalTreatment"
+    ).value = record.treatment;
+
+
+    document.getElementById(
+        "medicalDoctor"
+    ).value = record.doctor;
+
+
+    document.getElementById(
+        "medicalNotes"
+    ).value = record.notes || "";
+
+
+    document.getElementById(
+        "editMedicalIndex"
+    ).value = index;
+
+
+    document.getElementById(
+        "medicalFormTitle"
+    ).innerText =
+        "Edit Medical History Record";
+
+
+    document.getElementById(
+        "saveMedicalBtn"
+    ).innerText =
+        "Update Medical Record";
+
+
+    window.scrollTo({
+
+        top: 0,
+
+        behavior: "smooth"
+
+    });
+
+}
+
+
+function deleteMedicalRecord(index) {
+
+    if (
+        !confirm(
+            "Are you sure you want to delete this medical history record?"
+        )
+    ) {
+
+        return;
+
+    }
+
+
+    let history =
+        getMedicalHistory();
+
+
+    history.splice(index, 1);
+
+
+    localStorage.setItem(
+        "medicalHistory",
+        JSON.stringify(history)
+    );
+
+
+    loadMedicalHistory();
+
+}
+
+
+function clearMedicalForm() {
+
+    document.getElementById(
+        "medicalCondition"
+    ).value = "";
+
+
+    document.getElementById(
+        "diagnosisDate"
+    ).value = "";
+
+
+    document.getElementById(
+        "medicalStatus"
+    ).value = "Ongoing";
+
+
+    document.getElementById(
+        "medicalTreatment"
+    ).value = "";
+
+
+    document.getElementById(
+        "medicalDoctor"
+    ).value = "";
+
+
+    document.getElementById(
+        "medicalNotes"
+    ).value = "";
+
+
+    document.getElementById(
+        "editMedicalIndex"
+    ).value = "";
+
+
+    document.getElementById(
+        "medicalFormTitle"
+    ).innerText =
+        "Add Medical History Record";
+
+
+    document.getElementById(
+        "saveMedicalBtn"
+    ).innerText =
+        "Add Medical Record";
+
+}
+
+
+/* =========================
+   ANTIBIOTIC HISTORY
+========================= */
+
+function getAntibioticHistory() {
+
+    const saved =
+        localStorage.getItem("antibioticHistory");
+
+    if (!saved) {
+
+        return [];
+
+    }
+
+    try {
+
+        return JSON.parse(saved);
+
+    } catch (error) {
+
+        return [];
+
+    }
+
+}
+
+
+function saveAntibioticRecord() {
+
+    const name =
+        document.getElementById("antibioticName")
+        .value
+        .trim();
+
+    const dose =
+        document.getElementById("antibioticDose")
+        .value
+        .trim();
+
+    const frequency =
+        document.getElementById("antibioticFrequency")
+        .value
+        .trim();
+
+    const startDate =
+        document.getElementById("antibioticStartDate")
+        .value;
+
+    const endDate =
+        document.getElementById("antibioticEndDate")
+        .value;
+
+    const reason =
+        document.getElementById("antibioticReason")
+        .value
+        .trim();
+
+    const doctor =
+        document.getElementById("antibioticDoctor")
+        .value
+        .trim();
+
+    const status =
+        document.getElementById("antibioticStatus")
+        .value;
+
+    const notes =
+        document.getElementById("antibioticNotes")
+        .value
+        .trim();
+
+
+    if (
+        !name ||
+        !dose ||
+        !frequency ||
+        !startDate ||
+        !reason ||
+        !doctor
+    ) {
+
+        alert("Please fill in all required fields.");
+
+        return;
+
+    }
+
+
+    let history =
+        getAntibioticHistory();
+
+
+    const editIndex =
+        document.getElementById("editAntibioticIndex")
+        .value;
+
+
+    const record = {
+
+        name: name,
+
+        dose: dose,
+
+        frequency: frequency,
+
+        startDate: startDate,
+
+        endDate: endDate,
+
+        reason: reason,
+
+        doctor: doctor,
+
+        status: status,
+
+        notes: notes
+
+    };
+
+
+    if (editIndex !== "") {
+
+        history[Number(editIndex)] =
+            record;
+
+        alert(
+            "Antibiotic record updated successfully."
+        );
+
+    } else {
+
+        history.push(record);
+
+        alert(
+            "Antibiotic record added successfully."
+        );
+
+    }
+
+
+    localStorage.setItem(
+        "antibioticHistory",
+        JSON.stringify(history)
+    );
+
+
+    clearAntibioticForm();
+
+    loadAntibioticHistory();
+
+}
+
+
+function loadAntibioticHistory() {
+
+    const history =
+        getAntibioticHistory();
+
+    const list =
+        document.getElementById("antibioticList");
+
+
+    if (!history.length) {
+
+        list.innerHTML = `
+
+            <p class="empty-message">
+                No antibiotic history records added yet.
+            </p>
+
+        `;
+
+        return;
+
+    }
+
+
+    list.innerHTML = "";
+
+
+    history.forEach(function(record, index) {
+
+        const card =
+            document.createElement("div");
+
+        card.className =
+            "antibiotic-card";
+
+
+        card.innerHTML = `
+
+            <h3>
+                ${escapeHTML(record.name)}
+            </h3>
+
+            <p>
+                <strong>Dose:</strong>
+                ${escapeHTML(record.dose)}
+            </p>
+
+            <p>
+                <strong>Frequency:</strong>
+                ${escapeHTML(record.frequency)}
+            </p>
+
+            <p>
+                <strong>Start Date:</strong>
+                ${escapeHTML(record.startDate)}
+            </p>
+
+            <p>
+                <strong>End Date:</strong>
+                ${escapeHTML(record.endDate || "Not specified")}
+            </p>
+
+            <p>
+                <strong>Reason:</strong>
+                ${escapeHTML(record.reason)}
+            </p>
+
+            <p>
+                <strong>Doctor:</strong>
+                ${escapeHTML(record.doctor)}
+            </p>
+
+            <p>
+                <strong>Status:</strong>
+                ${escapeHTML(record.status)}
+            </p>
+
+            <p>
+                <strong>Notes:</strong>
+                ${escapeHTML(record.notes || "None")}
+            </p>
+
+            <div class="record-actions">
+
+                <button
+                    class="edit-btn"
+                    onclick="editAntibioticRecord(${index})"
+                >
+                    Edit
+                </button>
+
+                <button
+                    class="danger-btn"
+                    onclick="deleteAntibioticRecord(${index})"
+                >
+                    Delete
+                </button>
+
+            </div>
+
+        `;
+
+
+        list.appendChild(card);
+
+    });
+
+}
+
+
+function editAntibioticRecord(index) {
+
+    const history =
+        getAntibioticHistory();
+
+    const record =
+        history[index];
+
+
+    document.getElementById(
+        "antibioticName"
+    ).value = record.name;
+
+
+    document.getElementById(
+        "antibioticDose"
+    ).value = record.dose;
+
+
+    document.getElementById(
+        "antibioticFrequency"
+    ).value = record.frequency;
+
+
+    document.getElementById(
+        "antibioticStartDate"
+    ).value = record.startDate;
+
+
+    document.getElementById(
+        "antibioticEndDate"
+    ).value = record.endDate;
+
+
+    document.getElementById(
+        "antibioticReason"
+    ).value = record.reason;
+
+
+    document.getElementById(
+        "antibioticDoctor"
+    ).value = record.doctor;
+
+
+    document.getElementById(
+        "antibioticStatus"
+    ).value = record.status;
+
+
+    document.getElementById(
+        "antibioticNotes"
+    ).value = record.notes || "";
+
+
+    document.getElementById(
+        "editAntibioticIndex"
+    ).value = index;
+
+
+    document.getElementById(
+        "antibioticFormTitle"
+    ).innerText =
+        "Edit Antibiotic Record";
+
+
+    document.getElementById(
+        "saveAntibioticBtn"
+    ).innerText =
+        "Update Antibiotic Record";
+
+
+    window.scrollTo({
+
+        top: 0,
+
+        behavior: "smooth"
+
+    });
+
+}
+
+
+function deleteAntibioticRecord(index) {
+
+    if (
+        !confirm(
+            "Are you sure you want to delete this antibiotic record?"
+        )
+    ) {
+
+        return;
+
+    }
+
+
+    let history =
+        getAntibioticHistory();
+
+
+    history.splice(index, 1);
+
+
+    localStorage.setItem(
+        "antibioticHistory",
+        JSON.stringify(history)
+    );
+
+
+    loadAntibioticHistory();
+
+}
+
+
+function clearAntibioticForm() {
+
+    document.getElementById(
+        "antibioticName"
+    ).value = "";
+
+
+    document.getElementById(
+        "antibioticDose"
+    ).value = "";
+
+
+    document.getElementById(
+        "antibioticFrequency"
+    ).value = "";
+
+
+    document.getElementById(
+        "antibioticStartDate"
+    ).value = "";
+
+
+    document.getElementById(
+        "antibioticEndDate"
+    ).value = "";
+
+
+    document.getElementById(
+        "antibioticReason"
+    ).value = "";
+
+
+    document.getElementById(
+        "antibioticDoctor"
+    ).value = "";
+
+
+    document.getElementById(
+        "antibioticStatus"
+    ).value = "Completed";
+
+
+    document.getElementById(
+        "antibioticNotes"
+    ).value = "";
+
+
+    document.getElementById(
+        "editAntibioticIndex"
+    ).value = "";
+
+
+    document.getElementById(
+        "antibioticFormTitle"
+    ).innerText =
+        "Add Antibiotic Record";
+
+
+    document.getElementById(
+        "saveAntibioticBtn"
+    ).innerText =
+        "Add Antibiotic Record";
+
+}
+
+
+/* =========================
+   PATIENT HEALTH NOTE
+========================= */
+
+function loadPatientHealthNote() {
+
+    const note =
+        localStorage.getItem("patientHealthNote");
+
+    const date =
+        localStorage.getItem("patientHealthNoteDate");
+
+
+    const display =
+        document.getElementById(
+            "patientHealthNoteDisplay"
+        );
+
+
+    const dateDisplay =
+        document.getElementById(
+            "patientHealthNoteDate"
+        );
+
+
+    if (!note) {
+
+        display.innerText =
+            "No health note submitted yet.";
+
+        dateDisplay.innerText = "";
+
+        return;
+
+    }
+
+
+    display.innerText = note;
+
+
+    if (date) {
+
+        dateDisplay.innerText =
+            "Last updated: " + date;
+
+    }
+
+}
+
+
+/* =========================
+   FULL PATIENT PROFILE
+========================= */
+
+function loadFullPatientProfile() {
+
+    const profile =
+        document.getElementById(
+            "fullProfileDisplay"
+        );
+
+
+    const name =
+        localStorage.getItem("patientName");
+
+    if (!name) {
+
+        profile.innerHTML =
+            "<p>Search for a patient first.</p>";
+
+        return;
+
+    }
+
+
+    profile.innerHTML = `
+
+        <div class="profile-row">
+            <strong>Name:</strong>
+            ${escapeHTML(
+                localStorage.getItem("patientName") || "N/A"
+            )}
+        </div>
+
+        <div class="profile-row">
+            <strong>Patient ID:</strong>
+            ${escapeHTML(
+                localStorage.getItem("patientID") || "N/A"
+            )}
+        </div>
+
+        <div class="profile-row">
+            <strong>Date of Birth:</strong>
+            ${escapeHTML(
+                localStorage.getItem("patientDOB") || "N/A"
+            )}
+        </div>
+
+        <div class="profile-row">
+            <strong>Gender:</strong>
+            ${escapeHTML(
+                localStorage.getItem("patientGender") || "N/A"
+            )}
+        </div>
+
+        <div class="profile-row">
+            <strong>Phone:</strong>
+            ${escapeHTML(
+                localStorage.getItem("patientPhone") || "N/A"
+            )}
+        </div>
+
+        <div class="profile-row">
+            <strong>Email:</strong>
+            ${escapeHTML(
+                localStorage.getItem("patientEmail") || "N/A"
+            )}
+        </div>
+
+        <div class="profile-row">
+            <strong>NID:</strong>
+            ${escapeHTML(
+                localStorage.getItem("patientNID") || "N/A"
+            )}
+        </div>
+
+        <div class="profile-row">
+            <strong>Birth Certificate:</strong>
+            ${escapeHTML(
+                localStorage.getItem("patientBirthCertificate") || "N/A"
+            )}
+        </div>
+
+        <div class="profile-row">
+            <strong>Temporary ID:</strong>
+            ${escapeHTML(
+                localStorage.getItem("patientTemporaryID") || "N/A"
+            )}
+        </div>
+
+        <div class="profile-row">
+            <strong>Emergency Contact:</strong>
+            ${escapeHTML(
+                localStorage.getItem("patientEmergency") || "N/A"
+            )}
+        </div>
+
+        <div class="profile-row">
+            <strong>Address:</strong>
+            ${escapeHTML(
+                localStorage.getItem("patientAddress") || "N/A"
+            )}
+        </div>
+
+    `;
+
+}
+
+
+/* =========================
+   SECURITY
+========================= */
+
+function escapeHTML(text) {
+
+    return String(text)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+}
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+function logout() {
+
+    localStorage.removeItem("doctorLoggedIn");
+
+    localStorage.removeItem("doctorName");
+
+    localStorage.removeItem("doctorBMDC");
+
+    window.location.href =
+        "../index.html";
+
+}
+
+
+/* =========================
+   INITIAL LOAD
+========================= */
+
+showPatientRecord();
+
+</script>
+
+</body>
+</html>
