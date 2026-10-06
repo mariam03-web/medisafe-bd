@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
@@ -228,6 +229,24 @@ header{
     color:#1d2b36;
 }
 
+/* PROFILE BUTTON */
+
+.profile-button{
+    margin-top:20px;
+    background:#0b6e69;
+    color:white;
+    border:none;
+    padding:13px 20px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+    font-size:15px;
+}
+
+.profile-button:hover{
+    background:#095b57;
+}
+
 /* RECORD BUTTONS */
 
 .record-title{
@@ -330,943 +349,850 @@ header{
 
 </head>
 
-
 <body>
-
-
-<!-- HEADER -->
 
 <header>
 
-    <div class="logo">
-        🛡️ MediSafe BD
-    </div>
+```
+<div class="logo">
+    🛡️ MediSafe BD
+</div>
 
-    <button
-        class="logout-btn"
-        onclick="logout()">
+<button
+    class="logout-btn"
+    onclick="logout()">
 
-        Logout
+    Logout
 
-    </button>
+</button>
+```
 
 </header>
 
-
-
 <div class="container">
-
-
-<!-- TITLE -->
 
 <div class="title">
 
-    <h1>
-        👨‍⚕️ Doctor Dashboard
-    </h1>
+```
+<h1>
+    👨‍⚕️ Doctor Dashboard
+</h1>
 
-    <p>
-        MediSafe BD Doctor Portal
-    </p>
+<p>
+    MediSafe BD Doctor Portal
+</p>
+```
 
 </div>
-
-
-
-<!-- DOCTOR INFORMATION -->
 
 <div class="doctor-info">
 
-    <h3 id="doctorName">
-        Doctor
+```
+<h3 id="doctorName">
+    Doctor
+</h3>
+
+<p>
+    BM&DC Registration:
+    <span id="doctorBMDC">
+        Not Available
+    </span>
+</p>
+```
+
+</div>
+
+<!-- DASHBOARD MENU -->
+
+<div class="menu-grid">
+
+```
+<div
+    class="menu-card"
+    onclick="showSection('patientSearch')">
+
+    <div class="menu-icon">
+        🔎
+    </div>
+
+    <h3>
+        Patient Search
     </h3>
 
     <p>
-        BM&DC Registration:
-        <span id="doctorBMDC">
-            Not Available
-        </span>
+        Search patient by identification
     </p>
 
 </div>
 
 
+<div
+    class="menu-card"
+    onclick="showSection('patientRecords')">
 
-<!-- ==================================================
-     DASHBOARD MENU
-================================================== -->
-
-<div class="menu-grid">
-
-
-    <!-- PATIENT SEARCH -->
-
-    <div
-        class="menu-card"
-        onclick="showSection('patientSearch')">
-
-        <div class="menu-icon">
-            🔎
-        </div>
-
-        <h3>
-            Patient Search
-        </h3>
-
-        <p>
-            Search patient by identification
-        </p>
-
+    <div class="menu-icon">
+        👤
     </div>
 
+    <h3>
+        Patient Records
+    </h3>
 
-
-    <!-- PATIENT RECORDS -->
-
-    <div
-        class="menu-card"
-        onclick="showSection('patientRecords')">
-
-        <div class="menu-icon">
-            👤
-        </div>
-
-        <h3>
-            Patient Records
-        </h3>
-
-        <p>
-            Access patient records
-        </p>
-
-    </div>
-
-
-
-    <!-- MEDICAL HISTORY -->
-
-    <div
-        class="menu-card"
-        onclick="showSection('medicalHistory')">
-
-        <div class="menu-icon">
-            📋
-        </div>
-
-        <h3>
-            Medical History
-        </h3>
-
-        <p>
-            View medical history
-        </p>
-
-    </div>
-
-
-
-    <!-- ANTIBIOTIC HISTORY -->
-
-    <div
-        class="menu-card"
-        onclick="showSection('antibioticHistory')">
-
-        <div class="menu-icon">
-            💊
-        </div>
-
-        <h3>
-            Antibiotic History
-        </h3>
-
-        <p>
-            View previous antibiotic records
-        </p>
-
-    </div>
-
-
-
-    <!-- PRESCRIPTION -->
-
-    <div
-        class="menu-card"
-        onclick="showSection('prescription')">
-
-        <div class="menu-icon">
-            📄
-        </div>
-
-        <h3>
-            Prescription
-        </h3>
-
-        <p>
-            Manage prescriptions
-        </p>
-
-    </div>
-
-
-
-    <!-- TEST REPORTS -->
-
-    <div
-        class="menu-card"
-        onclick="showSection('testReports')">
-
-        <div class="menu-icon">
-            🧪
-        </div>
-
-        <h3>
-            Test Reports
-        </h3>
-
-        <p>
-            View test reports
-        </p>
-
-    </div>
-
-
-
-    <!-- PATIENT NOTES -->
-
-    <div
-        class="menu-card"
-        onclick="showSection('patientNotes')">
-
-        <div class="menu-icon">
-            📝
-        </div>
-
-        <h3>
-            Patient Notes
-        </h3>
-
-        <p>
-            View patient notes
-        </p>
-
-    </div>
-
-
-
-    <!-- FULL PROFILE -->
-
-    <div
-        class="menu-card"
-        onclick="showSection('fullProfile')">
-
-        <div class="menu-icon">
-            🧑
-        </div>
-
-        <h3>
-            Full Patient Profile
-        </h3>
-
-        <p>
-            View complete patient profile
-        </p>
-
-    </div>
-
-
-
-    <!-- SAFETY ALERT -->
-
-    <div
-        class="menu-card"
-        onclick="showSection('safetyAlert')">
-
-        <div class="menu-icon">
-            🛡️
-        </div>
-
-        <h3>
-            Antibiotic Safety Alert
-        </h3>
-
-        <p>
-            Review patient history alerts
-        </p>
-
-    </div>
+    <p>
+        Access patient records
+    </p>
 
 </div>
 
 
+<div
+    class="menu-card"
+    onclick="showSection('medicalHistory')">
 
-<!-- ==================================================
-     PATIENT SEARCH
-================================================== -->
+    <div class="menu-icon">
+        📋
+    </div>
+
+    <h3>
+        Medical History
+    </h3>
+
+    <p>
+        View medical history
+    </p>
+
+</div>
+
+
+<div
+    class="menu-card"
+    onclick="showSection('antibioticHistory')">
+
+    <div class="menu-icon">
+        💊
+    </div>
+
+    <h3>
+        Antibiotic History
+    </h3>
+
+    <p>
+        View previous antibiotic records
+    </p>
+
+</div>
+
+
+<div
+    class="menu-card"
+    onclick="showSection('prescription')">
+
+    <div class="menu-icon">
+        📄
+    </div>
+
+    <h3>
+        Prescription
+    </h3>
+
+    <p>
+        Manage prescriptions
+    </p>
+
+</div>
+
+
+<div
+    class="menu-card"
+    onclick="showSection('testReports')">
+
+    <div class="menu-icon">
+        🧪
+    </div>
+
+    <h3>
+        Test Reports
+    </h3>
+
+    <p>
+        View test reports
+    </p>
+
+</div>
+
+
+<div
+    class="menu-card"
+    onclick="showSection('patientNotes')">
+
+    <div class="menu-icon">
+        📝
+    </div>
+
+    <h3>
+        Patient Notes
+    </h3>
+
+    <p>
+        View patient notes
+    </p>
+
+</div>
+
+
+<div
+    class="menu-card"
+    onclick="showSection('fullProfile')">
+
+    <div class="menu-icon">
+        🧑
+    </div>
+
+    <h3>
+        Full Patient Profile
+    </h3>
+
+    <p>
+        View complete patient profile
+    </p>
+
+</div>
+
+
+<div
+    class="menu-card"
+    onclick="showSection('safetyAlert')">
+
+    <div class="menu-icon">
+        🛡️
+    </div>
+
+    <h3>
+        Antibiotic Safety Alert
+    </h3>
+
+    <p>
+        Review patient history alerts
+    </p>
+
+</div>
+```
+
+</div>
+
+<!-- PATIENT SEARCH -->
 
 <div
     class="content-area"
     id="patientSearch">
 
-    <button
-        class="back-btn"
-        onclick="backToDashboard()">
+```
+<button
+    class="back-btn"
+    onclick="backToDashboard()">
 
-        ← Back to Dashboard
+    ← Back to Dashboard
+
+</button>
+
+
+<h2>
+    🔎 Patient Search
+</h2>
+
+
+<div class="search-row">
+
+    <select id="searchType">
+
+        <option value="patientID">
+            Patient ID
+        </option>
+
+        <option value="NID">
+            NID
+        </option>
+
+        <option value="birthCertificate">
+            Birth Certificate
+        </option>
+
+        <option value="temporaryID">
+            Temporary ID
+        </option>
+
+    </select>
+
+
+    <input
+        type="text"
+        id="searchValue"
+        placeholder="Enter identification number">
+
+
+    <button
+        class="search-btn"
+        onclick="searchPatient()">
+
+        Search
 
     </button>
 
-    <h2>
-        🔎 Patient Search
-    </h2>
+</div>
 
 
-    <div class="search-row">
+<!-- PATIENT RESULT -->
 
-        <select id="searchType">
+<div
+    class="patient-result"
+    id="patientResult">
 
-            <option>
+    <h3>
+        ✅ Patient Found
+    </h3>
+
+
+    <div class="patient-info">
+
+        <div class="info">
+
+            <span>
                 Patient ID
-            </option>
+            </span>
 
-            <option>
-                NID
-            </option>
+            <strong id="resultPatientID">
+                MSBD-P-10001
+            </strong>
 
-            <option>
-                Birth Certificate
-            </option>
-
-            <option>
-                Temporary ID
-            </option>
-
-        </select>
+        </div>
 
 
-        <input
-            type="text"
-            id="searchValue"
-            placeholder="Enter identification number">
+        <div class="info">
+
+            <span>
+                Patient Name
+            </span>
+
+            <strong id="resultPatientName">
+                Demo Patient
+            </strong>
+
+        </div>
+
+
+        <div class="info">
+
+            <span>
+                Date of Birth
+            </span>
+
+            <strong id="resultDOB">
+                01 January 2000
+            </strong>
+
+        </div>
+
+
+        <div class="info">
+
+            <span>
+                Gender
+            </span>
+
+            <strong id="resultGender">
+                Not provided
+            </strong>
+
+        </div>
+
+
+        <div class="info">
+
+            <span>
+                Blood Group
+            </span>
+
+            <strong>
+                O+
+            </strong>
+
+        </div>
+
+
+        <div class="info">
+
+            <span>
+                Patient Status
+            </span>
+
+            <strong>
+                Registered
+            </strong>
+
+        </div>
+
+    </div>
+
+
+    <!-- IMPORTANT PROFILE BUTTON -->
+
+    <button
+        class="profile-button"
+        onclick="openPatientProfile()">
+
+        👤 Open Full Patient Profile
+
+    </button>
+
+
+    <h3 class="record-title">
+        Patient Records
+    </h3>
+
+
+    <div class="record-buttons">
 
 
         <button
-            class="search-btn"
-            onclick="searchPatient()">
+            class="record-btn"
+            onclick="showPatientRecord('historyRecord')">
 
-            Search
+            📋 Medical History
+
+        </button>
+
+
+        <button
+            class="record-btn"
+            onclick="showPatientRecord('antibioticRecord')">
+
+            💊 Antibiotic History
+
+        </button>
+
+
+        <button
+            class="record-btn"
+            onclick="showPatientRecord('prescriptionRecord')">
+
+            📄 Prescriptions
+
+        </button>
+
+
+        <button
+            class="record-btn"
+            onclick="showPatientRecord('testRecord')">
+
+            🧪 Test Reports
+
+        </button>
+
+
+        <button
+            class="record-btn"
+            onclick="showPatientRecord('notesRecord')">
+
+            📝 Patient Notes
 
         </button>
 
     </div>
 
 
-
-    <!-- PATIENT RESULT -->
+    <!-- MEDICAL HISTORY -->
 
     <div
-        class="patient-result"
-        id="patientResult">
+        class="record-content"
+        id="historyRecord">
 
         <h3>
-            ✅ Patient Found
+            📋 Medical History
         </h3>
 
+        <div class="record-item">
 
-        <div class="patient-info">
+            <strong>
+                Previous Condition:
+            </strong>
 
-            <div class="info">
-
-                <span>
-                    Patient ID
-                </span>
-
-                <strong>
-                    MSBD-P-10001
-                </strong>
-
-            </div>
-
-
-            <div class="info">
-
-                <span>
-                    Patient Name
-                </span>
-
-                <strong>
-                    Demo Patient
-                </strong>
-
-            </div>
-
-
-            <div class="info">
-
-                <span>
-                    Date of Birth
-                </span>
-
-                <strong>
-                    01 January 2000
-                </strong>
-
-            </div>
-
-
-            <div class="info">
-
-                <span>
-                    Blood Group
-                </span>
-
-                <strong>
-                    O+
-                </strong>
-
-            </div>
-
-
-            <div class="info">
-
-                <span>
-                    Patient Status
-                </span>
-
-                <strong>
-                    Registered
-                </strong>
-
-            </div>
-
-
-            <div class="info">
-
-                <span>
-                    Temporary ID
-                </span>
-
-                <strong>
-                    Not Applicable
-                </strong>
-
-            </div>
+            Demo medical record
 
         </div>
 
+        <div class="record-item">
+
+            <strong>
+                Recorded Date:
+            </strong>
+
+            2026
+
+        </div>
+
+        <div class="record-item">
+
+            <strong>
+                Doctor's Note:
+            </strong>
+
+            Sample information for demonstration.
+
+        </div>
+
+    </div>
 
 
-        <h3 class="record-title">
-            Patient Records
+    <!-- ANTIBIOTIC HISTORY -->
+
+    <div
+        class="record-content"
+        id="antibioticRecord">
+
+        <h3>
+            💊 Antibiotic History
         </h3>
 
+        <div class="record-item">
 
-        <div class="record-buttons">
+            <strong>
+                Antibiotic:
+            </strong>
 
-
-            <button
-                class="record-btn"
-                onclick="showPatientRecord('profileRecord')">
-
-                👤 Full Patient Profile
-
-            </button>
-
-
-            <button
-                class="record-btn"
-                onclick="showPatientRecord('historyRecord')">
-
-                📋 Medical History
-
-            </button>
-
-
-            <button
-                class="record-btn"
-                onclick="showPatientRecord('antibioticRecord')">
-
-                💊 Antibiotic History
-
-            </button>
-
-
-            <button
-                class="record-btn"
-                onclick="showPatientRecord('prescriptionRecord')">
-
-                📄 Prescriptions
-
-            </button>
-
-
-            <button
-                class="record-btn"
-                onclick="showPatientRecord('testRecord')">
-
-                🧪 Test Reports
-
-            </button>
-
-
-            <button
-                class="record-btn"
-                onclick="showPatientRecord('notesRecord')">
-
-                📝 Patient Notes
-
-            </button>
+            Demo antibiotic record
 
         </div>
 
+        <div class="record-item">
 
+            <strong>
+                Date:
+            </strong>
 
-        <!-- FULL PROFILE -->
-
-        <div
-            class="record-content"
-            id="profileRecord">
-
-            <h3>
-                👤 Full Patient Profile
-            </h3>
-
-            <div class="record-item">
-                <strong>Name:</strong>
-                Demo Patient
-            </div>
-
-            <div class="record-item">
-                <strong>Patient ID:</strong>
-                MSBD-P-10001
-            </div>
-
-            <div class="record-item">
-                <strong>Date of Birth:</strong>
-                01 January 2000
-            </div>
-
-            <div class="record-item">
-                <strong>Blood Group:</strong>
-                O+
-            </div>
-
-            <div class="record-item">
-                <strong>Contact:</strong>
-                01XXXXXXXXX
-            </div>
+            2026
 
         </div>
 
+        <div class="record-item">
 
+            <strong>
+                Status:
+            </strong>
 
-        <!-- MEDICAL HISTORY -->
-
-        <div
-            class="record-content"
-            id="historyRecord">
-
-            <h3>
-                📋 Medical History
-            </h3>
-
-            <div class="record-item">
-
-                <strong>
-                    Previous Condition:
-                </strong>
-
-                Demo medical record
-
-            </div>
-
-            <div class="record-item">
-
-                <strong>
-                    Recorded Date:
-                </strong>
-
-                2026
-
-            </div>
-
-            <div class="record-item">
-
-                <strong>
-                    Doctor's Note:
-                </strong>
-
-                Sample information for demonstration.
-
-            </div>
+            Completed / Demo
 
         </div>
 
+    </div>
 
 
-        <!-- ANTIBIOTIC HISTORY -->
+    <!-- PRESCRIPTION -->
 
-        <div
-            class="record-content"
-            id="antibioticRecord">
+    <div
+        class="record-content"
+        id="prescriptionRecord">
 
-            <h3>
-                💊 Antibiotic History
-            </h3>
+        <h3>
+            📄 Prescriptions
+        </h3>
 
-            <div class="record-item">
+        <div class="record-item">
 
-                <strong>
-                    Record:
-                </strong>
+            <strong>
+                Prescription:
+            </strong>
 
-                Previous antibiotic course —
-                Demo Record
-
-            </div>
-
-            <div class="record-item">
-
-                <strong>
-                    Date:
-                </strong>
-
-                2026
-
-            </div>
-
-            <div class="record-item">
-
-                <strong>
-                    Status:
-                </strong>
-
-                Completed / Demo
-
-            </div>
+            Demo prescription record
 
         </div>
 
+        <div class="record-item">
 
+            <strong>
+                Prescribing Doctor:
+            </strong>
 
-        <!-- PRESCRIPTION -->
-
-        <div
-            class="record-content"
-            id="prescriptionRecord">
-
-            <h3>
-                📄 Prescriptions
-            </h3>
-
-            <div class="record-item">
-
-                <strong>
-                    Prescription Record:
-                </strong>
-
-                Demo prescription record
-
-            </div>
-
-            <div class="record-item">
-
-                <strong>
-                    Prescribing Doctor:
-                </strong>
-
-                Demo Doctor
-
-            </div>
+            Demo Doctor
 
         </div>
 
+    </div>
 
 
-        <!-- TEST REPORTS -->
+    <!-- TEST REPORTS -->
 
-        <div
-            class="record-content"
-            id="testRecord">
+    <div
+        class="record-content"
+        id="testRecord">
 
-            <h3>
-                🧪 Test Reports
-            </h3>
+        <h3>
+            🧪 Test Reports
+        </h3>
 
-            <div class="record-item">
+        <div class="record-item">
 
-                <strong>
-                    Report:
-                </strong>
+            <strong>
+                Report:
+            </strong>
 
-                Demo laboratory report
-
-            </div>
-
-            <div class="record-item">
-
-                <strong>
-                    Report Date:
-                </strong>
-
-                2026
-
-            </div>
+            Demo laboratory report
 
         </div>
 
+        <div class="record-item">
+
+            <strong>
+                Report Date:
+            </strong>
+
+            2026
+
+        </div>
+
+    </div>
 
 
-        <!-- PATIENT NOTES -->
+    <!-- PATIENT NOTES -->
 
-        <div
-            class="record-content"
-            id="notesRecord">
+    <div
+        class="record-content"
+        id="notesRecord">
 
-            <h3>
-                📝 Patient Notes
-            </h3>
+        <h3>
+            📝 Patient Notes
+        </h3>
 
-            <div class="record-item">
+        <div class="record-item">
 
-                <strong>
-                    Patient Note:
-                </strong>
+            <strong>
+                Patient Note:
+            </strong>
 
-                Sample symptom information
-                entered by patient.
-
-            </div>
+            Sample symptom information entered by patient.
 
         </div>
 
     </div>
 
 </div>
+```
 
+</div>
 
-
-<!-- ==================================================
-     OTHER DASHBOARD SECTIONS
-================================================== -->
+<!-- OTHER SECTIONS -->
 
 <div
     class="content-area"
     id="patientRecords">
 
-    <button
-        class="back-btn"
-        onclick="backToDashboard()">
+```
+<button
+    class="back-btn"
+    onclick="backToDashboard()">
 
-        ← Back to Dashboard
+    ← Back to Dashboard
 
-    </button>
+</button>
 
-    <h2>
-        👤 Patient Records
-    </h2>
+<h2>
+    👤 Patient Records
+</h2>
 
-    <p>
-        Search for a patient through Patient Search
-        to access their authorized records.
-    </p>
+<p>
+    Search for a patient through Patient Search
+    to access their authorized records.
+</p>
+```
 
 </div>
-
-
 
 <div
     class="content-area"
     id="medicalHistory">
 
-    <button
-        class="back-btn"
-        onclick="backToDashboard()">
+```
+<button
+    class="back-btn"
+    onclick="backToDashboard()">
 
-        ← Back to Dashboard
+    ← Back to Dashboard
 
-    </button>
+</button>
 
-    <h2>
-        📋 Medical History
-    </h2>
+<h2>
+    📋 Medical History
+</h2>
 
-    <p>
-        Select a patient through Patient Search
-        to view medical history.
-    </p>
+<p>
+    Select a patient through Patient Search
+    to view medical history.
+</p>
+```
 
 </div>
-
-
 
 <div
     class="content-area"
     id="antibioticHistory">
 
-    <button
-        class="back-btn"
-        onclick="backToDashboard()">
+```
+<button
+    class="back-btn"
+    onclick="backToDashboard()">
 
-        ← Back to Dashboard
+    ← Back to Dashboard
 
-    </button>
+</button>
 
-    <h2>
-        💊 Antibiotic History
-    </h2>
+<h2>
+    💊 Antibiotic History
+</h2>
 
-    <p>
-        Select a patient through Patient Search
-        to view previous antibiotic records.
-    </p>
+<p>
+    Select a patient through Patient Search
+    to view previous antibiotic records.
+</p>
+```
 
 </div>
-
-
 
 <div
     class="content-area"
     id="prescription">
 
-    <button
-        class="back-btn"
-        onclick="backToDashboard()">
+```
+<button
+    class="back-btn"
+    onclick="backToDashboard()">
 
-        ← Back to Dashboard
+    ← Back to Dashboard
 
-    </button>
+</button>
 
-    <h2>
-        📄 Prescription
-    </h2>
+<h2>
+    📄 Prescription
+</h2>
 
-    <p>
-        Prescription management for authorized
-        patients will appear here.
-    </p>
+<p>
+    Prescription management for authorized patients
+    will appear here.
+</p>
+```
 
 </div>
-
-
 
 <div
     class="content-area"
     id="testReports">
 
-    <button
-        class="back-btn"
-        onclick="backToDashboard()">
+```
+<button
+    class="back-btn"
+    onclick="backToDashboard()">
 
-        ← Back to Dashboard
+    ← Back to Dashboard
 
-    </button>
+</button>
 
-    <h2>
-        🧪 Test Reports
-    </h2>
+<h2>
+    🧪 Test Reports
+</h2>
 
-    <p>
-        Authorized patient test reports will
-        appear here.
-    </p>
+<p>
+    Authorized patient test reports will appear here.
+</p>
+```
 
 </div>
-
-
 
 <div
     class="content-area"
     id="patientNotes">
 
-    <button
-        class="back-btn"
-        onclick="backToDashboard()">
+```
+<button
+    class="back-btn"
+    onclick="backToDashboard()">
 
-        ← Back to Dashboard
+    ← Back to Dashboard
 
-    </button>
+</button>
 
-    <h2>
-        📝 Patient Notes
-    </h2>
+<h2>
+    📝 Patient Notes
+</h2>
 
-    <p>
-        Patient-submitted notes will appear here.
-    </p>
+<p>
+    Patient-submitted notes will appear here.
+</p>
+```
 
 </div>
-
-
 
 <div
     class="content-area"
     id="fullProfile">
 
-    <button
-        class="back-btn"
-        onclick="backToDashboard()">
+```
+<button
+    class="back-btn"
+    onclick="backToDashboard()">
 
-        ← Back to Dashboard
+    ← Back to Dashboard
 
-    </button>
+</button>
 
-    <h2>
-        🧑 Full Patient Profile
-    </h2>
+<h2>
+    🧑 Full Patient Profile
+</h2>
 
-    <p>
-        The complete authorized patient profile
-        will appear here.
-    </p>
+<p>
+    Search for a patient and open the Full Patient Profile
+    from the Patient Search section.
+</p>
+```
 
 </div>
-
-
 
 <div
     class="content-area"
     id="safetyAlert">
 
-    <button
-        class="back-btn"
-        onclick="backToDashboard()">
+```
+<button
+    class="back-btn"
+    onclick="backToDashboard()">
 
-        ← Back to Dashboard
+    ← Back to Dashboard
 
-    </button>
+</button>
 
-    <h2>
-        🛡️ Antibiotic Safety Alert
-    </h2>
+<h2>
+    🛡️ Antibiotic Safety Alert
+</h2>
 
-    <p>
-        This section will review available patient
-        history and show safety-related alerts
-        for doctor review.
-    </p>
+<p>
+    This section will review available patient history
+    and show safety-related alerts for doctor review.
+</p>
+```
 
 </div>
-
-
-
-<!-- DEMO NOTICE -->
 
 <div class="demo-notice">
 
-    ⚠️
+```
+⚠️
 
-    <strong>Demo Mode:</strong>
+<strong>Demo Mode:</strong>
 
-    This is a course-project prototype.
-    The patient information shown is fictional
-    demonstration data.
-
-</div>
-
+This is a course-project prototype.
+The patient information shown is fictional demonstration data.
+```
 
 </div>
 
-
+</div>
 
 <script>
 
@@ -1369,6 +1295,12 @@ function searchPatient(){
         .value
         .trim();
 
+    const searchType =
+        document
+        .getElementById("searchType")
+        .value;
+
+
     if(value === ""){
 
         alert(
@@ -1379,9 +1311,124 @@ function searchPatient(){
 
     }
 
+
+    /*
+        DEMO PATIENT DATA
+    */
+
+    const patientData = {
+
+        patientName:"Demo Patient",
+
+        patientID:"MSBD-P-10001",
+
+        patientDOB:"01 January 2000",
+
+        patientGender:"Not provided",
+
+        patientPhone:"01XXXXXXXXX",
+
+        patientNID:"Not provided",
+
+        patientBirthCertificate:"Not provided",
+
+        patientTemporaryID:"Not Applicable",
+
+        patientEmail:"demo@medisafebd.com",
+
+        patientEmergency:"01XXXXXXXXX",
+
+        patientAddress:"Dhaka, Bangladesh"
+
+    };
+
+
+    /* SAVE PATIENT DATA */
+
+    localStorage.setItem(
+        "patientName",
+        patientData.patientName
+    );
+
+    localStorage.setItem(
+        "patientID",
+        patientData.patientID
+    );
+
+    localStorage.setItem(
+        "patientDOB",
+        patientData.patientDOB
+    );
+
+    localStorage.setItem(
+        "patientGender",
+        patientData.patientGender
+    );
+
+    localStorage.setItem(
+        "patientPhone",
+        patientData.patientPhone
+    );
+
+    localStorage.setItem(
+        "patientNID",
+        patientData.patientNID
+    );
+
+    localStorage.setItem(
+        "patientBirthCertificate",
+        patientData.patientBirthCertificate
+    );
+
+    localStorage.setItem(
+        "patientTemporaryID",
+        patientData.patientTemporaryID
+    );
+
+    localStorage.setItem(
+        "patientEmail",
+        patientData.patientEmail
+    );
+
+    localStorage.setItem(
+        "patientEmergency",
+        patientData.patientEmergency
+    );
+
+    localStorage.setItem(
+        "patientAddress",
+        patientData.patientAddress
+    );
+
+
+    /* SHOW RESULT */
+
+    document.getElementById("resultPatientID").innerText =
+        patientData.patientID;
+
+    document.getElementById("resultPatientName").innerText =
+        patientData.patientName;
+
+    document.getElementById("resultDOB").innerText =
+        patientData.patientDOB;
+
+    document.getElementById("resultGender").innerText =
+        patientData.patientGender;
+
+
     document
         .getElementById("patientResult")
         .style.display = "block";
+
+}
+
+
+/* OPEN FULL PATIENT PROFILE */
+
+function openPatientProfile(){
+
+    window.location.href =
+        "patient-profile.html";
 
 }
 
@@ -1436,7 +1483,6 @@ function logout(){
 }
 
 </script>
-
 
 </body>
 
