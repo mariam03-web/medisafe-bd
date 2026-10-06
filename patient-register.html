@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Patient Registration | MediSafe BD</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f4f8fb;
+    color:#1d2b36;
+}
+
+header{
+    background:#0b6e69;
+    color:white;
+    padding:16px 25px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    font-size:22px;
+    font-weight:bold;
+}
+
+.back-btn{
+    background:white;
+    color:#0b6e69;
+    border:none;
+    padding:9px 16px;
+    border-radius:7px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.container{
+    width:92%;
+    max-width:850px;
+    margin:35px auto;
+}
+
+.title{
+    text-align:center;
+    margin-bottom:25px;
+}
+
+.title h1{
+    color:#0b6e69;
+    font-size:30px;
+    margin-bottom:8px;
+}
+
+.title p{
+    color:#71808a;
+}
+
+.form-box{
+    background:white;
+    padding:30px;
+    border-radius:16px;
+    box-shadow:0 4px 18px rgba(0,0,0,0.08);
+}
+
+.section-title{
+    color:#164e63;
+    margin:25px 0 15px;
+    padding-bottom:8px;
+    border-bottom:1px solid #e0e7eb;
+}
+
+.section-title:first-child{
+    margin-top:0;
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+}
+
+.form-group{
+    display:flex;
+    flex-direction:column;
+}
+
+.full{
+    grid-column:1 / 3;
+}
+
+label{
+    margin-bottom:7px;
+    color:#34495e;
+    font-weight:bold;
+}
+
+input,
+select,
+textarea{
+    width:100%;
+    padding:12px;
+    border:1px solid #ccd6dc;
+    border-radius:8px;
+    font-size:15px;
+    outline:none;
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+    border-color:#0b6e69;
+}
+
+textarea{
+    min-height:90px;
+    resize:vertical;
+}
+
+.id-type{
+    background:#eef8f6;
+    padding:15px;
+    border-radius:9px;
+    margin-bottom:18px;
+}
+
+.id-type p{
+    color:#075e58;
+    font-size:14px;
+    line-height:1.5;
+}
+
+.newborn-box{
+    background:#fff8df;
+    border-left:5px solid #e5ad00;
+    padding:14px;
+    border-radius:7px;
+    margin-bottom:20px;
+}
+
+.newborn-box label{
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.newborn-box input{
+    width:auto;
+}
+
+.temp-id-area{
+    display:none;
+}
+
+.register-btn{
+    width:100%;
+    margin-top:25px;
+    padding:14px;
+    background:#0b6e69;
+    color:white;
+    border:none;
+    border-radius:8px;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.register-btn:hover{
+    background:#095b57;
+}
+
+.login-link{
+    text-align:center;
+    margin-top:18px;
+}
+
+.login-link a{
+    color:#0b6e69;
+    font-weight:bold;
+    text-decoration:none;
+}
+
+.demo{
+    margin-top:20px;
+    padding:13px;
+    background:#fff8df;
+    border-left:5px solid #e5ad00;
+    border-radius:6px;
+    color:#705900;
+    font-size:13px;
+    line-height:1.5;
+}
+
+@media(max-width:700px){
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .full{
+        grid-column:1;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- HEADER -->
+
+<header>
+
+    <div class="logo">
+        🛡️ MediSafe BD
+    </div>
+
+    <button
+        class="back-btn"
+        onclick="goBack()">
+
+        ← Patient Login
+
+    </button>
+
+</header>
+
+
+
+<div class="container">
+
+
+    <!-- TITLE -->
+
+    <div class="title">
+
+        <h1>
+            👤 Patient Registration
+        </h1>
+
+        <p>
+            Create your MediSafe BD patient account
+        </p>
+
+    </div>
+
+
+
+    <div class="form-box">
+
+
+        <!-- BASIC INFORMATION -->
+
+        <h2 class="section-title">
+            Personal Information
+        </h2>
+
+
+        <div class="form-grid">
+
+
+            <div class="form-group">
+
+                <label>
+                    Full Name *
+                </label>
+
+                <input
+                    type="text"
+                    id="fullName"
+                    placeholder="Enter full name">
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Date of Birth *
+                </label>
+
+                <input
+                    type="date"
+                    id="dob">
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Gender *
+                </label>
+
+                <select id="gender">
+
+                    <option value="">
+                        Select Gender
+                    </option>
+
+                    <option value="Male">
+                        Male
+                    </option>
+
+                    <option value="Female">
+                        Female
+                    </option>
+
+                    <option value="Other">
+                        Other
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Phone Number *
+                </label>
+
+                <input
+                    type="tel"
+                    id="phone"
+                    placeholder="01XXXXXXXXX">
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- IDENTIFICATION -->
+
+        <h2 class="section-title">
+            Identification Information
+        </h2>
+
+
+        <div class="id-type">
+
+            <p>
+                <strong>Important:</strong>
+                For normal registration, NID or Birth
+                Certificate can be used. For a newborn
+                who does not yet have these documents,
+                a Temporary ID can be used.
+            </p>
+
+        </div>
+
+
+        <div class="form-grid">
+
+
+            <div class="form-group">
+
+                <label>
+                    NID Number
+                </label>
+
+                <input
+                    type="text"
+                    id="nid"
+                    placeholder="Enter NID number">
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Birth Certificate Number
+                </label>
+
+                <input
+                    type="text"
+                    id="birthCertificate"
+                    placeholder="Enter birth certificate number">
+
+            </div>
+
+
+            <div class="form-group full">
+
+                <div class="newborn-box">
+
+                    <label>
+
+                        <input
+                            type="checkbox"
+                            id="newborn"
+                            onchange="toggleTemporaryID()">
+
+                        Registering a newborn without NID /
+                        Birth Certificate
+
+                    </label>
+
+                </div>
+
+            </div>
+
+
+            <div
+                class="form-group full temp-id-area"
+                id="tempIDArea">
+
+                <label>
+                    Temporary ID
+                </label>
+
+                <input
+                    type="text"
+                    id="temporaryID"
+                    placeholder="Hospital/Doctor generated Temporary ID">
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- CONTACT -->
+
+        <h2 class="section-title">
+            Contact Information
+        </h2>
+
+
+        <div class="form-grid">
+
+
+            <div class="form-group">
+
+                <label>
+                    Email
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="example@email.com">
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Emergency Contact
+                </label>
+
+                <input
+                    type="tel"
+                    id="emergencyContact"
+                    placeholder="Emergency contact number">
+
+            </div>
+
+
+            <div class="form-group full">
+
+                <label>
+                    Address
+                </label>
+
+                <textarea
+                    id="address"
+                    placeholder="Enter your address"></textarea>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- ACCOUNT -->
+
+        <h2 class="section-title">
+            Account Security
+        </h2>
+
+
+        <div class="form-grid">
+
+
+            <div class="form-group">
+
+                <label>
+                    Password *
+                </label>
+
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Create password">
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Confirm Password *
+                </label>
+
+                <input
+                    type="password"
+                    id="confirmPassword"
+                    placeholder="Confirm password">
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- REGISTER -->
+
+        <button
+            class="register-btn"
+            onclick="registerPatient()">
+
+            Create Patient Account
+
+        </button>
+
+
+
+        <div class="login-link">
+
+            Already have an account?
+
+            <a href="patient-login.html">
+                Login here
+            </a>
+
+        </div>
+
+
+
+        <!-- DEMO NOTICE -->
+
+        <div class="demo">
+
+            ⚠️ <strong>Demo Mode:</strong>
+
+            This registration system is currently a
+            course-project prototype. Real NID,
+            Birth Certificate and identity verification
+            will require a secure backend and authorized
+            verification system.
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+
+/* NEWBORN TEMPORARY ID */
+
+function toggleTemporaryID(){
+
+    const checkbox =
+        document.getElementById("newborn");
+
+    const area =
+        document.getElementById("tempIDArea");
+
+
+    if(checkbox.checked){
+
+        area.style.display = "flex";
+
+    }
+    else{
+
+        area.style.display = "none";
+
+    }
+
+}
+
+
+
+/* REGISTER PATIENT */
+
+function registerPatient(){
+
+
+    const name =
+        document
+        .getElementById("fullName")
+        .value
+        .trim();
+
+
+    const dob =
+        document
+        .getElementById("dob")
+        .value;
+
+
+    const gender =
+        document
+        .getElementById("gender")
+        .value;
+
+
+    const phone =
+        document
+        .getElementById("phone")
+        .value
+        .trim();
+
+
+    const nid =
+        document
+        .getElementById("nid")
+        .value
+        .trim();
+
+
+    const birth =
+        document
+        .getElementById("birthCertificate")
+        .value
+        .trim();
+
+
+    const newborn =
+        document
+        .getElementById("newborn")
+        .checked;
+
+
+    const temporaryID =
+        document
+        .getElementById("temporaryID")
+        .value
+        .trim();
+
+
+    const email =
+        document
+        .getElementById("email")
+        .value
+        .trim();
+
+
+    const emergency =
+        document
+        .getElementById("emergencyContact")
+        .value
+        .trim();
+
+
+    const address =
+        document
+        .getElementById("address")
+        .value
+        .trim();
+
+
+    const password =
+        document
+        .getElementById("password")
+        .value;
+
+
+    const confirmPassword =
+        document
+        .getElementById("confirmPassword")
+        .value;
+
+
+
+    /* REQUIRED FIELDS */
+
+    if(name === ""){
+
+        alert("Please enter your full name.");
+
+        return;
+
+    }
+
+
+    if(dob === ""){
+
+        alert("Please select your date of birth.");
+
+        return;
+
+    }
+
+
+    if(gender === ""){
+
+        alert("Please select your gender.");
+
+        return;
+
+    }
+
+
+    if(phone === ""){
+
+        alert("Please enter your phone number.");
+
+        return;
+
+    }
+
+
+
+    /* IDENTIFICATION CHECK */
+
+    if(!newborn && nid === "" && birth === ""){
+
+        alert(
+            "Please enter NID or Birth Certificate number."
+        );
+
+        return;
+
+    }
+
+
+    if(newborn && temporaryID === ""){
+
+        alert(
+            "Please enter the Temporary ID."
+        );
+
+        return;
+
+    }
+
+
+
+    /* PASSWORD CHECK */
+
+    if(password === ""){
+
+        alert(
+            "Please create a password."
+        );
+
+        return;
+
+    }
+
+
+    if(password !== confirmPassword){
+
+        alert(
+            "Password and Confirm Password do not match."
+        );
+
+        return;
+
+    }
+
+
+
+    /* CREATE DEMO PATIENT ID */
+
+    const generatedID =
+        "MSBD-P-" +
+        Math.floor(
+            10000 +
+            Math.random() * 90000
+        );
+
+
+
+    /* SAVE DEMO INFORMATION */
+
+    localStorage.setItem(
+        "patientRegistered",
+        "true"
+    );
+
+
+    localStorage.setItem(
+        "patientID",
+        generatedID
+    );
+
+
+    localStorage.setItem(
+        "patientName",
+        name
+    );
+
+
+    localStorage.setItem(
+        "patientDOB",
+        dob
+    );
+
+
+    localStorage.setItem(
+        "patientGender",
+        gender
+    );
+
+
+    localStorage.setItem(
+        "patientPhone",
+        phone
+    );
+
+
+    localStorage.setItem(
+        "patientNID",
+        nid
+    );
+
+
+    localStorage.setItem(
+        "patientBirthCertificate",
+        birth
+    );
+
+
+    localStorage.setItem(
+        "patientTemporaryID",
+        temporaryID
+    );
+
+
+    localStorage.setItem(
+        "patientEmail",
+        email
+    );
+
+
+    localStorage.setItem(
+        "patientEmergency",
+        emergency
+    );
+
+
+    localStorage.setItem(
+        "patientAddress",
+        address
+    );
+
+
+
+    /* SUCCESS */
+
+    alert(
+        "Patient account created successfully!\n\n" +
+        "Your Patient ID is: " +
+        generatedID
+    );
+
+
+    /* GO TO LOGIN */
+
+    window.location.href =
+        "patient-login.html";
+
+}
+
+
+
+/* BACK */
+
+function goBack(){
+
+    window.location.href =
+        "patient-login.html";
+
+}
+
+</script>
+
+
+</body>
+
+</html>
