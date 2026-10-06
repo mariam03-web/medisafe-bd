@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Patient Dashboard | MediSafe BD</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f4f8fb;
+    color:#1d2b36;
+}
+
+header{
+    background:#0b6e69;
+    color:white;
+    padding:16px 25px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    font-size:22px;
+    font-weight:bold;
+}
+
+.logout-btn{
+    background:#e74c3c;
+    color:white;
+    border:none;
+    padding:9px 18px;
+    border-radius:7px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.container{
+    width:92%;
+    max-width:1100px;
+    margin:35px auto;
+}
+
+.title{
+    text-align:center;
+    margin-bottom:25px;
+}
+
+.title h1{
+    color:#0b6e69;
+    font-size:32px;
+    margin-bottom:8px;
+}
+
+.title p{
+    color:#71808a;
+}
+
+.patient-info{
+    background:white;
+    padding:20px;
+    border-radius:12px;
+    text-align:center;
+    margin-bottom:28px;
+    box-shadow:0 4px 15px rgba(0,0,0,0.08);
+}
+
+.patient-info h3{
+    color:#164e63;
+    margin-bottom:8px;
+}
+
+.menu-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+}
+
+.menu-card{
+    background:white;
+    min-height:155px;
+    border-radius:15px;
+    padding:25px;
+    text-align:center;
+    cursor:pointer;
+    box-shadow:0 4px 15px rgba(0,0,0,0.08);
+    transition:0.2s;
+}
+
+.menu-card:hover{
+    transform:translateY(-4px);
+}
+
+.icon{
+    font-size:40px;
+    margin-bottom:10px;
+}
+
+.menu-card h3{
+    color:#0b6e69;
+    margin-bottom:8px;
+}
+
+.menu-card p{
+    color:#71808a;
+    font-size:14px;
+}
+
+.content{
+    display:none;
+    background:white;
+    margin-top:28px;
+    padding:28px;
+    border-radius:15px;
+    box-shadow:0 4px 15px rgba(0,0,0,0.08);
+}
+
+.content.active{
+    display:block;
+}
+
+.content h2{
+    color:#0b6e69;
+    margin-bottom:15px;
+}
+
+.back-btn{
+    background:#0b6e69;
+    color:white;
+    border:none;
+    padding:10px 17px;
+    border-radius:7px;
+    cursor:pointer;
+    margin-bottom:20px;
+}
+
+.demo{
+    margin-top:28px;
+    padding:13px;
+    background:#fff8df;
+    border-left:5px solid #e5ad00;
+    color:#705900;
+    border-radius:6px;
+}
+
+@media(max-width:750px){
+
+    .menu-grid{
+        grid-template-columns:1fr;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+    <div class="logo">
+        🛡️ MediSafe BD
+    </div>
+
+    <button
+        class="logout-btn"
+        onclick="logout()">
+
+        Logout
+
+    </button>
+
+</header>
+
+
+<div class="container">
+
+
+    <div class="title">
+
+        <h1>
+            👤 Patient Dashboard
+        </h1>
+
+        <p>
+            Your personal health information portal
+        </p>
+
+    </div>
+
+
+    <div class="patient-info">
+
+        <h3 id="patientID">
+            Patient
+        </h3>
+
+        <p>
+            MediSafe BD Patient Account
+        </p>
+
+    </div>
+
+
+    <div class="menu-grid">
+
+
+        <div
+            class="menu-card"
+            onclick="showSection('profile')">
+
+            <div class="icon">
+                👤
+            </div>
+
+            <h3>
+                My Profile
+            </h3>
+
+            <p>
+                View your personal information
+            </p>
+
+        </div>
+
+
+        <div
+            class="menu-card"
+            onclick="showSection('medical')">
+
+            <div class="icon">
+                📋
+            </div>
+
+            <h3>
+                Medical History
+            </h3>
+
+            <p>
+                View your medical history
+            </p>
+
+        </div>
+
+
+        <div
+            class="menu-card"
+            onclick="showSection('antibiotic')">
+
+            <div class="icon">
+                💊
+            </div>
+
+            <h3>
+                Antibiotic History
+            </h3>
+
+            <p>
+                View previous antibiotic records
+            </p>
+
+        </div>
+
+
+        <div
+            class="menu-card"
+            onclick="showSection('prescription')">
+
+            <div class="icon">
+                📄
+            </div>
+
+            <h3>
+                Prescriptions
+            </h3>
+
+            <p>
+                View your prescriptions
+            </p>
+
+        </div>
+
+
+        <div
+            class="menu-card"
+            onclick="showSection('reports')">
+
+            <div class="icon">
+                🧪
+            </div>
+
+            <h3>
+                Test Reports
+            </h3>
+
+            <p>
+                View uploaded test reports
+            </p>
+
+        </div>
+
+
+        <div
+            class="menu-card"
+            onclick="showSection('notes')">
+
+            <div class="icon">
+                📝
+            </div>
+
+            <h3>
+                My Health Notes
+            </h3>
+
+            <p>
+                Add symptoms or health information
+            </p>
+
+        </div>
+
+
+        <div
+            class="menu-card"
+            onclick="showSection('specialist')">
+
+            <div class="icon">
+                🤖
+            </div>
+
+            <h3>
+                Specialist Assistant
+            </h3>
+
+            <p>
+                Get guidance about which specialist
+                may be relevant
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- PROFILE -->
+
+    <div
+        class="content"
+        id="profile">
+
+        <button
+            class="back-btn"
+            onclick="backToDashboard()">
+
+            ← Back
+
+        </button>
+
+        <h2>
+            👤 My Profile
+        </h2>
+
+        <p>
+            Your personal information will appear here.
+        </p>
+
+    </div>
+
+
+    <!-- MEDICAL HISTORY -->
+
+    <div
+        class="content"
+        id="medical">
+
+        <button
+            class="back-btn"
+            onclick="backToDashboard()">
+
+            ← Back
+
+        </button>
+
+        <h2>
+            📋 Medical History
+        </h2>
+
+        <p>
+            Your authorized medical history will
+            appear here.
+        </p>
+
+    </div>
+
+
+    <!-- ANTIBIOTIC HISTORY -->
+
+    <div
+        class="content"
+        id="antibiotic">
+
+        <button
+            class="back-btn"
+            onclick="backToDashboard()">
+
+            ← Back
+
+        </button>
+
+        <h2>
+            💊 Antibiotic History
+        </h2>
+
+        <p>
+            Your previous antibiotic records will
+            appear here.
+        </p>
+
+    </div>
+
+
+    <!-- PRESCRIPTION -->
+
+    <div
+        class="content"
+        id="prescription">
+
+        <button
+            class="back-btn"
+            onclick="backToDashboard()">
+
+            ← Back
+
+        </button>
+
+        <h2>
+            📄 Prescriptions
+        </h2>
+
+        <p>
+            Your prescriptions will appear here.
+        </p>
+
+    </div>
+
+
+    <!-- TEST REPORTS -->
+
+    <div
+        class="content"
+        id="reports">
+
+        <button
+            class="back-btn"
+            onclick="backToDashboard()">
+
+            ← Back
+
+        </button>
+
+        <h2>
+            🧪 Test Reports
+        </h2>
+
+        <p>
+            Your uploaded test reports will appear here.
+        </p>
+
+    </div>
+
+
+    <!-- HEALTH NOTES -->
+
+    <div
+        class="content"
+        id="notes">
+
+        <button
+            class="back-btn"
+            onclick="backToDashboard()">
+
+            ← Back
+
+        </button>
+
+        <h2>
+            📝 My Health Notes
+        </h2>
+
+        <p>
+            You will be able to enter symptoms and
+            health-related notes here.
+        </p>
+
+    </div>
+
+
+    <!-- SPECIALIST -->
+
+    <div
+        class="content"
+        id="specialist">
+
+        <button
+            class="back-btn"
+            onclick="backToDashboard()">
+
+            ← Back
+
+        </button>
+
+        <h2>
+            🤖 Specialist Assistant
+        </h2>
+
+        <p>
+            This assistant will help organize your
+            symptoms and provide general guidance about
+            which type of specialist may be relevant.
+        </p>
+
+        <br>
+
+        <p>
+            This feature is a prototype and does not
+            replace a doctor's diagnosis.
+        </p>
+
+    </div>
+
+
+    <div class="demo">
+
+        ⚠️ <strong>Demo Mode:</strong>
+        This Patient Portal is currently a
+        course-project prototype using demonstration
+        data.
+
+    </div>
+
+
+</div>
+
+
+<script>
+
+
+/* LOGIN CHECK */
+
+if(
+    localStorage.getItem("patientLoggedIn")
+    !==
+    "true"
+){
+
+    window.location.href =
+        "patient-login.html";
+
+}
+
+
+/* PATIENT ID */
+
+const savedID =
+    localStorage.getItem("patientID");
+
+
+if(savedID){
+
+    document
+    .getElementById("patientID")
+    .innerText =
+        "👤 Patient ID: " + savedID;
+
+}
+
+
+/* SHOW SECTION */
+
+function showSection(sectionID){
+
+    const sections =
+        document.querySelectorAll(".content");
+
+    sections.forEach(function(section){
+
+        section.classList.remove("active");
+
+    });
+
+    document
+        .getElementById(sectionID)
+        .classList.add("active");
+
+    document
+        .getElementById(sectionID)
+        .scrollIntoView({
+            behavior:"smooth"
+        });
+
+}
+
+
+/* BACK */
+
+function backToDashboard(){
+
+    const sections =
+        document.querySelectorAll(".content");
+
+    sections.forEach(function(section){
+
+        section.classList.remove("active");
+
+    });
+
+    window.scrollTo({
+
+        top:0,
+
+        behavior:"smooth"
+
+    });
+
+}
+
+
+/* LOGOUT */
+
+function logout(){
+
+    localStorage.removeItem(
+        "patientLoggedIn"
+    );
+
+    localStorage.removeItem(
+        "patientID"
+    );
+
+    window.location.href =
+        "../index.html";
+
+}
+
+</script>
+
+
+</body>
+
+</html>
