@@ -7,21 +7,19 @@
 <style>
 *{box-sizing:border-box}
 body{margin:0;font-family:Arial;background:#f4f7fb;color:#222}
-header{background:#0b5ed7;color:white;padding:18px 6%;display:flex;justify-content:space-between;align-items:center}
-header h2{margin:0;color:white}
+header{background:#0b5ed7;color:#fff;padding:18px 6%;display:flex;justify-content:space-between;align-items:center}
+header h2{margin:0;color:#fff}
 main{max-width:1050px;margin:25px auto;padding:0 20px}
-.box,.card,.record{background:white;padding:18px;border-radius:10px;box-shadow:0 2px 10px #ddd;margin-bottom:15px}
+.box,.card,.record{background:#fff;padding:18px;border-radius:10px;box-shadow:0 2px 10px #ddd;margin-bottom:15px}
 .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:15px}
-.card{cursor:pointer}
-.card:hover{transform:translateY(-2px)}
+.card{cursor:pointer}.card:hover{transform:translateY(-2px)}
 input,textarea{width:100%;padding:10px;margin:7px 0 12px;border:1px solid #ccc;border-radius:6px}
-textarea{min-height:100px}
-button{border:0;padding:10px 15px;border-radius:6px;background:#0b5ed7;color:white;cursor:pointer}
-.logout{background:#dc3545}
-.back{background:#777;margin-bottom:15px}
+textarea{min-height:90px}
+button{border:0;padding:10px 15px;border-radius:6px;background:#0b5ed7;color:#fff;cursor:pointer;margin:3px}
+.logout,.delete{background:#dc3545}.edit{background:#198754}.back{background:#777}
 .section{display:none}
 h2,h3{color:#0b5ed7}
-header h2{color:white}
+header h2{color:#fff}
 </style>
 </head>
 
@@ -61,42 +59,13 @@ header h2{color:white}
 </div>
 
 <div class="cards">
-
-<div class="card" onclick="openPage('medical')">
-<h3>Medical History</h3>
-<p>View and manage medical history.</p>
-</div>
-
-<div class="card" onclick="openPage('antibiotic')">
-<h3>Antibiotic History</h3>
-<p>View and manage antibiotic records.</p>
-</div>
-
-<div class="card" onclick="openPage('prescription')">
-<h3>Prescription</h3>
-<p>Create patient prescription.</p>
-</div>
-
-<div class="card" onclick="openPage('reports')">
-<h3>Test Reports</h3>
-<p>View patient uploaded reports.</p>
-</div>
-
-<div class="card" onclick="openPage('problem')">
-<h3>Patient Health Problem</h3>
-<p>View patient's submitted problem.</p>
-</div>
-
-<div class="card" onclick="openPage('profile')">
-<h3>Full Patient Profile</h3>
-<p>View complete patient information.</p>
-</div>
-
-<div class="card" onclick="openPage('alert')">
-<h3>Antibiotic Resistance & Prescription Safety Alert</h3>
-<p>Check prescription safety.</p>
-</div>
-
+<div class="card" onclick="openPage('medical')"><h3>Medical History</h3><p>Manage medical history.</p></div>
+<div class="card" onclick="openPage('antibiotic')"><h3>Antibiotic History</h3><p>Manage antibiotic records.</p></div>
+<div class="card" onclick="openPage('prescription')"><h3>Prescription</h3><p>Create prescription.</p></div>
+<div class="card" onclick="openPage('reports')"><h3>Test Reports</h3><p>View uploaded reports.</p></div>
+<div class="card" onclick="openPage('problem')"><h3>Patient Health Problem</h3><p>View patient's problem.</p></div>
+<div class="card" onclick="openPage('profile')"><h3>Full Patient Profile</h3><p>View full profile.</p></div>
+<div class="card" onclick="openPage('alert')"><h3>Antibiotic Resistance & Prescription Safety Alert</h3><p>Review safety.</p></div>
 </div>
 </div>
 </div>
@@ -113,7 +82,7 @@ header h2{color:white}
 <input id="status" placeholder="Status">
 <input id="treatment" placeholder="Treatment">
 <textarea id="medicalNotes" placeholder="Notes"></textarea>
-<button onclick="addMedical()">Add Medical History</button>
+<button onclick="saveMedical()">Save Medical History</button>
 </div>
 
 <div id="medicalList"></div>
@@ -134,7 +103,7 @@ header h2{color:white}
 <input id="abReason" placeholder="Reason">
 <input id="abStatus" placeholder="Status">
 <textarea id="abNotes" placeholder="Notes"></textarea>
-<button onclick="addAntibiotic()">Add Antibiotic Record</button>
+<button onclick="saveAntibiotic()">Save Antibiotic Record</button>
 </div>
 
 <div id="antibioticList"></div>
@@ -178,7 +147,7 @@ header h2{color:white}
 </section>
 
 
-<!-- Full Profile -->
+<!-- Profile -->
 <section id="profile" class="section">
 <button class="back" onclick="back()">← Back</button>
 <h2>Full Patient Profile</h2>
@@ -199,7 +168,7 @@ header h2{color:white}
 </section>
 
 
-<!-- Safety Alert -->
+<!-- Alert -->
 <section id="alert" class="section">
 <button class="back" onclick="back()">← Back</button>
 <h2>Antibiotic Resistance & Prescription Safety Alert</h2>
@@ -215,6 +184,8 @@ location.href="doctor-login.html";
 
 doctorName.innerText=localStorage.getItem("doctorName")||"Doctor";
 doctorBMDC.innerText=localStorage.getItem("doctorBMDC")||"Not Available";
+
+let medicalEdit=-1, antibioticEdit=-1;
 
 
 function searchPatient(){
@@ -232,7 +203,6 @@ function openPage(p){
 home.style.display="none";
 document.querySelectorAll(".section").forEach(x=>x.style.display="none");
 document.getElementById(p).style.display="block";
-
 if(p==="medical")loadMedical();
 if(p==="antibiotic")loadAntibiotic();
 if(p==="prescription")loadPrescription();
@@ -249,27 +219,32 @@ home.style.display="block";
 
 
 /* Medical History */
-function addMedical(){
+function saveMedical(){
 let a=JSON.parse(localStorage.getItem("medicalHistory")||"[]");
 
-a.push({
+let x={
 condition:condition.value,
 diagnosisDate:diagnosisDate.value,
 status:status.value,
 treatment:treatment.value,
 doctor:doctorName.innerText,
 notes:medicalNotes.value
-});
+};
+
+if(!condition.value)return alert("Enter condition.");
+
+if(medicalEdit<0)a.push(x);
+else{a[medicalEdit]=x;medicalEdit=-1}
 
 localStorage.setItem("medicalHistory",JSON.stringify(a));
-condition.value=diagnosisDate.value=status.value=treatment.value=medicalNotes.value="";
+clearMedical();
 loadMedical();
 }
 
 function loadMedical(){
 let a=JSON.parse(localStorage.getItem("medicalHistory")||"[]");
 
-medicalList.innerHTML=a.length?a.map(x=>`
+medicalList.innerHTML=a.length?a.map((x,i)=>`
 <div class="record">
 <h3>${x.condition}</h3>
 <p>Diagnosis Date: ${x.diagnosisDate}</p>
@@ -277,15 +252,44 @@ medicalList.innerHTML=a.length?a.map(x=>`
 <p>Treatment: ${x.treatment}</p>
 <p>Doctor: ${x.doctor}</p>
 <p>Notes: ${x.notes}</p>
+<button class="edit" onclick="editMedical(${i})">Edit</button>
+<button class="delete" onclick="deleteMedical(${i})">Delete</button>
 </div>`).join(""):"<div class='box'>No medical history.</div>";
 }
 
+function editMedical(i){
+let x=JSON.parse(localStorage.getItem("medicalHistory"))[i];
+condition.value=x.condition;
+diagnosisDate.value=x.diagnosisDate;
+status.value=x.status;
+treatment.value=x.treatment;
+medicalNotes.value=x.notes;
+medicalEdit=i;
+}
 
-/* Antibiotic */
-function addAntibiotic(){
+function deleteMedical(i){
+if(confirm("Delete this medical record?")){
+let a=JSON.parse(localStorage.getItem("medicalHistory"));
+a.splice(i,1);
+localStorage.setItem("medicalHistory",JSON.stringify(a));
+loadMedical();
+}
+}
+
+function clearMedical(){
+condition.value="";
+diagnosisDate.value="";
+status.value="";
+treatment.value="";
+medicalNotes.value="";
+}
+
+
+/* Antibiotic History */
+function saveAntibiotic(){
 let a=JSON.parse(localStorage.getItem("antibioticHistory")||"[]");
 
-a.push({
+let x={
 name:abName.value,
 dose:abDose.value,
 frequency:abFrequency.value,
@@ -295,17 +299,22 @@ reason:abReason.value,
 doctor:doctorName.innerText,
 status:abStatus.value,
 notes:abNotes.value
-});
+};
+
+if(!abName.value)return alert("Enter antibiotic name.");
+
+if(antibioticEdit<0)a.push(x);
+else{a[antibioticEdit]=x;antibioticEdit=-1}
 
 localStorage.setItem("antibioticHistory",JSON.stringify(a));
-abName.value=abDose.value=abFrequency.value=abStart.value=abEnd.value=abReason.value=abStatus.value=abNotes.value="";
+clearAntibiotic();
 loadAntibiotic();
 }
 
 function loadAntibiotic(){
 let a=JSON.parse(localStorage.getItem("antibioticHistory")||"[]");
 
-antibioticList.innerHTML=a.length?a.map(x=>`
+antibioticList.innerHTML=a.length?a.map((x,i)=>`
 <div class="record">
 <h3>${x.name}</h3>
 <p>Dose: ${x.dose}</p>
@@ -316,7 +325,42 @@ antibioticList.innerHTML=a.length?a.map(x=>`
 <p>Doctor: ${x.doctor}</p>
 <p>Status: ${x.status}</p>
 <p>Notes: ${x.notes}</p>
+<button class="edit" onclick="editAntibiotic(${i})">Edit</button>
+<button class="delete" onclick="deleteAntibiotic(${i})">Delete</button>
 </div>`).join(""):"<div class='box'>No antibiotic history.</div>";
+}
+
+function editAntibiotic(i){
+let x=JSON.parse(localStorage.getItem("antibioticHistory"))[i];
+abName.value=x.name;
+abDose.value=x.dose;
+abFrequency.value=x.frequency;
+abStart.value=x.startDate;
+abEnd.value=x.endDate;
+abReason.value=x.reason;
+abStatus.value=x.status;
+abNotes.value=x.notes;
+antibioticEdit=i;
+}
+
+function deleteAntibiotic(i){
+if(confirm("Delete this antibiotic record?")){
+let a=JSON.parse(localStorage.getItem("antibioticHistory"));
+a.splice(i,1);
+localStorage.setItem("antibioticHistory",JSON.stringify(a));
+loadAntibiotic();
+}
+}
+
+function clearAntibiotic(){
+abName.value="";
+abDose.value="";
+abFrequency.value="";
+abStart.value="";
+abEnd.value="";
+abReason.value="";
+abStatus.value="";
+abNotes.value="";
 }
 
 
@@ -386,7 +430,7 @@ let a=JSON.parse(localStorage.getItem("antibioticHistory")||"[]");
 
 alertBox.innerHTML=a.length?
 "<h3>⚠ Antibiotic Safety Review</h3><p>Previous antibiotic records exist. Review antibiotic name, dose, duration and reason before creating a new prescription.</p><p><b>Total Records:</b> "+a.length+"</p>":
-"<h3>✓ No Previous Antibiotic Record</h3><p>No previous antibiotic history is available for this patient.</p>";
+"<h3>✓ No Previous Antibiotic Record</h3><p>No previous antibiotic history is available.</p>";
 }
 
 
@@ -399,6 +443,5 @@ location.href="doctor-login.html";
 }
 
 </script>
-
 </body>
 </html>
